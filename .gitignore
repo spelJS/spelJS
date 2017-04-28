@@ -1,3 +1,3 @@
 node_modules/
-build/index.js
-build/index.css
+build/main.js
+build/main.css

@@ -2,10 +2,10 @@
   "name": "speljs",
   "version": "1.0.0",
   "scripts": {
-    "build:js": "browserify -t babelify src/scripts/index.js | uglifyjs > build/index.js",
-    "watch:js": "watchify -d -t babelify -o build/index.js src/scripts/index.js",
-    "build:css": "NODE_ENV=production postcss src/css/index.css --no-map -c postcss.config.js -o build/index.css",
-    "watch:css": "postcss src/css/index.css -w -c postcss.config.js -o build/index.css",
+    "build:js": "browserify -t babelify src/scripts/main.js | uglifyjs > build/main.js",
+    "watch:js": "watchify -d -t babelify -o build/main.js src/scripts/main.js",
+    "build:css": "node-sass src/scss/main.scss --output-style compressed | postcss -u autoprefixer --no-map -o build/main.css",
+    "watch:css": "node-sass src/scss/main.scss -w -o build --source-map-embed",
     "build": "npm run build:js && npm run build:css",
     "watch": "npm run watch:js & npm run watch:css",
     "start": "http-serve build"
@@ -26,13 +26,8 @@
     "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
     "http-serve": "^1.0.1",
-    "normalize.css": "^6.0.0",
-    "postcss-cli": "^3.1.1",
-    "postcss-csso": "^2.0.0",
-    "postcss-custom-media": "^5.0.1",
-    "postcss-custom-properties": "^5.0.2",
-    "postcss-import": "^9.1.0",
-    "postcss-url": "^6.0.4",
+    "node-sass": "^4.5.2",
+    "postcss-cli": "^3.2.0",
     "uglify-js": "^2.8.22",
     "watchify": "^3.9.0"
   }
