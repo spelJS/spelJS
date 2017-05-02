@@ -1,3 +1,5 @@
 import initGame from './game';
-console.log('hello');
-const horse = 1;
+import { connect } from './socket';
+
+// Connect to the websocket server
+connect();

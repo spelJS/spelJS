@@ -2,10 +2,29 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const FacebookStrategy = require('passport-facebook').Strategy;
-const { clientID, clientSecret, callbackURL } = require('./credentials.js');
+
+const { clientID, clientSecret, callbackURL } = require('./credentials');
+const mainView = require('./views/main');
+const notFound = require('./views/404');
 
 // Set up an instance of express
 const app = express();
+
+/*------------------------------------------------------------------------------
+  SETUP OF WEBSOCKET USING SOCKET.IO
+------------------------------------------------------------------------------*/
+
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+// This is not used at the moment.
+io.on('connection', (socket) => {
+  console.log('A user is connected');
+});
+
+// This is just for testing purposes.
+let count = 0;
+setInterval(() => io.emit('count', (count += 1)), 30000);
 
 /*------------------------------------------------------------------------------
   SESSION SUPPORT
@@ -60,27 +79,18 @@ app.get('/callback',
   }
 );
 
-// If no other page is specified, this is what's going to be shown.
+// Use folder 'build' for static files.
+app.use(express.static('build'));
+
+// Redirect to main page
+app.get('/', (req, res) => {
+  res.send(mainView(req));
+});
+
+// If no other page is specified or found, 404 is shown.
 app.get('*', (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>spelJS</title>
-    </head>
-    <body>
-      <h1>Hello!</h1>
-      ${!req.isAuthenticated() ?
-        '<a href="/login">Logga in</a>' :
-        `<pre>${JSON.stringify(req.user, null, 2)}</pre>`
-      }
-    </body>
-    </html>
-  `);
+  res.send(notFound());
 });
 
 // Listen on http://localhost:3000/
-app.listen(3000);
+server.listen(3000);
