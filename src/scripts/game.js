@@ -10,7 +10,8 @@ export default function initGame() {
     movY = 0,
     scoreSpan = document.querySelector('.scoreSpan'),
     score = 0,
-    pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'];
+    pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'],
+    monsters = document.querySelectorAll('.monster');
 
   function jump() {
     time += 1;
@@ -29,12 +30,11 @@ export default function initGame() {
     requestAnimationFrame(render);
     frame = (frame + 1) % 8;
     player.style.backgroundPosition = pos[frame];
-    // Det som fungerar med jQuery
-    $('.monster').each(function () {
-      var item = $(this);
-      var posX = item.position().left;
+    // Removes the monster and gives a score (Obs! Funkar inte ännu)
+    for (var i = 0; i < monsters.length; i++) {
+      var posX = monsters[i].position().left;
       if (posX < 10) {
-        item.remove();
+        monsters[i].remove();
         score += 1;
         scoreSpan.textContent = score;
         return;
@@ -44,8 +44,7 @@ export default function initGame() {
         scoreSpan.textContent = '0';
         score = 0;
       }
-    });
-    // Slut på det som fungerar med jQuery
+    }
   }
   document.addEventListener('keydown', function (e) {
     e.preventDefault();
