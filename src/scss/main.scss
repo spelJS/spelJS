@@ -27,6 +27,12 @@ body {
   height: 50px;
   display: block;
   background-color: red;
+  animation: monsterAnimation 20s;
+  animation-timing-function: linear;
+}
+@keyframes monsterAnimation {
+  from {left: 100vw;}
+  to {left: -5vw;}
 }
 h1 {
   display: flex;
