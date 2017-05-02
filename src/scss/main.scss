@@ -1,5 +1,33 @@
 @import "normalize";
 
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  position: absolute;
+  overflow: hidden;
+}
+.player {
+  width: 56px;
+  background-color: blue;
+  height: 96px;
+  position: absolute;
+  top: 158px;
+  left: 150px;
+  display: block;
+  z-index: -1;
+  transform: scaleX(-1);
+  background-position: -56px;
+}
+.monster {
+  position: absolute;
+  left: 100vw;
+  top: 200px;
+  width: 30px;
+  height: 50px;
+  display: block;
+  background-color: red;
+}
 h1 {
   display: flex;
   color: blue;
