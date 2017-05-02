@@ -7,22 +7,15 @@ const { clientID, clientSecret, callbackURL } = require('./credentials.js');
 // Set up an instance of express
 const app = express();
 
-// Initialize Passport (required since we are using Express)
-app.use(passport.initialize());
-
 /*------------------------------------------------------------------------------
   SESSION SUPPORT
 ------------------------------------------------------------------------------*/
 
-// FIXME: Are we going to use this? If not, remove completely.
 app.use(session({
   secret: 'cool dino friend',
   resave: false,
   saveUninitialized: false
 }));
-
-// Needed for persistent login sessions
-app.use(passport.session());
 
 /*------------------------------------------------------------------------------
   USE PASSPORT TO HANDLE AUTHENTICATION
@@ -45,6 +38,12 @@ passport.use(new FacebookStrategy({
   return done(null, profile);
 }));
 
+// Initialize Passport (required since we are using Express)
+app.use(passport.initialize());
+
+// Needed for persistent login sessions
+app.use(passport.session());
+
 /*------------------------------------------------------------------------------
   REDIRECTS HANDLED BY EXPRESS
 ------------------------------------------------------------------------------*/
@@ -55,7 +54,10 @@ app.get('/login', passport.authenticate('facebook', { scope: 'user_friends' }));
 // If authentication is successful, user is redirected home.
 app.get('/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
-  (req, res) => res.redirect('/')
+  (req, res) => {
+    // res.send(req.user);
+    res.redirect('/');
+  }
 );
 
 // If no other page is specified, this is what's going to be shown.
@@ -71,7 +73,10 @@ app.get('*', (req, res) => {
     </head>
     <body>
       <h1>Hello!</h1>
-      <a href="/login">Logga in</a>
+      ${!req.isAuthenticated() ?
+        '<a href="/login">Logga in</a>' :
+        `<pre>${JSON.stringify(req.user, null, 2)}</pre>`
+      }
     </body>
     </html>
   `);
