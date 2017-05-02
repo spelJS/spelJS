@@ -11,8 +11,6 @@ export default function initGame() {
     scoreSpan = document.querySelector('.scoreSpan'),
     score = 0,
     pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'];
-  // Pga jQuery
-  var $;
 
   function jump() {
     time += 1;
@@ -32,7 +30,6 @@ export default function initGame() {
     frame = (frame + 1) % 8;
     player.style.backgroundPosition = pos[frame];
     // Det som fungerar med jQuery
-    $('.monster').animate({ left: '-=5' }, 30, 'linear');
     $('.monster').each(function () {
       var item = $(this);
       var posX = item.position().left;
