@@ -1,1 +1,1 @@
-
+import initGame from './game';
