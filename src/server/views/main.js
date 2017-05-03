@@ -1,3 +1,5 @@
+const gameContainer = require('./partials/game-container');
+
 module.exports = function mainView(req) {
   return `
     <!DOCTYPE html>
@@ -12,12 +14,7 @@ module.exports = function mainView(req) {
     </head>
     <body>
       <h1>spelJS</h1>
-      <div class="gameContainer gameContainer-js">
-        <p>Press space or arrow up to jump</p>
-        <div class="scoreContainer">Score:<span class="scoreSpan">0</span></div>
-        <div class="player"></div>
-      </div>
-
+      ${gameContainer()}
       <div class="login">
         ${!req.isAuthenticated() ?
           '<a href="/login">Logga in</a>' :
