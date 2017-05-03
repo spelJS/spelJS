@@ -31,8 +31,8 @@ export default function initGame() {
     frame = (frame + 1) % 8;
     player.style.backgroundPosition = pos[frame];
     // Removes the monster and gives a score (Obs! Funkar inte ännu)
-    for (var i = 0; i < monsters.length; i++) {
-      var posX = monsters[i].position().left;
+    for (let i = 0; i < monsters.length; i += 1) {
+      const posX = monsters[i].position().left;
       if (posX < 10) {
         monsters[i].remove();
         score += 1;
@@ -54,7 +54,7 @@ export default function initGame() {
     }
   });
   function generateMonsters() {
-    var monsterDiv = document.createElement('div');
+    const monsterDiv = document.createElement('div');
     monsterDiv.setAttribute('class', 'monster');
     document.body.appendChild(monsterDiv);
     setTimeout(function () {
