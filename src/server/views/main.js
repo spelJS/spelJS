@@ -8,6 +8,7 @@ module.exports = function mainView(req) {
         ${!req.isAuthenticated() ?
           `
             <h1 class="headline">Laika's Space Adventure</h1>
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/71/Laika_%28Soviet_dog%29.jpg">
             <p>Sign in with Facebook</p>
             <div class="login">
               <a href="/login">Login</a>
