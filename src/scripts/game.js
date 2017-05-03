@@ -10,6 +10,8 @@ export default function initGame() {
     movY = 0,
     scoreSpan = document.querySelector('.scoreSpan'),
     score = 0,
+    highSpan = document.querySelector('.highSpan'),
+    highest = 0,
     pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'],
     gameContainer = document.querySelector('.gameContainer-js');
   function jump() {
@@ -33,14 +35,21 @@ export default function initGame() {
     $('.monster').each(function (i) {
       var item = $(this);
       var posX = item.position().left;
+      // If the enemy leaves the stage without colliding with the player
       if (posX < 0) {
         item.remove();
         score += 1;
       }
+      // If the player collides with the enemy
       if (((posX - playerX) < 56) && ((posX - playerX) > -25) && (movY < 50)) {
         scoreSpan.textContent = 0;
         score = 0;
         item.remove();
+      }
+      // Displays High Score
+      if (score > highest) {
+        highSpan.textContent = score;
+        highest = score;
       }
     });
   }
