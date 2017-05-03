@@ -12,7 +12,10 @@ module.exports = function mainView(req) {
       <h1>Hello!</h1>
       ${!req.isAuthenticated() ?
         '<a href="/login">Logga in</a>' :
-        `<pre>${JSON.stringify(req.user, null, 2)}</pre>`
+        `
+          <h1>Hello ${JSON.stringify(req.user.displayName)}!</h1>
+          <pre>${JSON.stringify(req.user, null, 2)}</pre>
+        `
       }
       <script src="/socket.io/socket.io.js"></script>
       <script src="/main.js"></script>
