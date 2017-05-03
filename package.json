@@ -8,7 +8,8 @@
     "watch:css": "node-sass src/scss/main.scss -w -o build --source-map-embed",
     "build": "npm run build:js && npm run build:css",
     "watch": "npm run watch:js & npm run watch:css",
-    "start": "http-serve build"
+    "start": "node src/server/server.js",
+    "restart": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -27,8 +28,16 @@
     "eslint-plugin-import": "^2.2.0",
     "http-serve": "^1.0.1",
     "node-sass": "^4.5.2",
+    "nodemon": "^1.11.0",
     "postcss-cli": "^3.2.0",
     "uglify-js": "^2.8.22",
     "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "socket.io": "^1.7.3"
   }
 }

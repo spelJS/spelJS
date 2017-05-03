@@ -11,7 +11,10 @@ export default function initGame() {
     scoreSpan = document.querySelector('.scoreSpan'),
     score = 0,
     pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'],
-    monsters = document.querySelectorAll('.monster');
+    monsters = document.querySelectorAll('.monster'),
+    gameContainer = document.querySelector('.gameContainer-js');
+
+  console.log(gameContainer);
 
   function jump() {
     time += 1;
@@ -56,7 +59,7 @@ export default function initGame() {
   function generateMonsters() {
     const monsterDiv = document.createElement('div');
     monsterDiv.setAttribute('class', 'monster');
-    document.body.appendChild(monsterDiv);
+    gameContainer.appendChild(monsterDiv);
     setTimeout(function () {
       generateMonsters();
     }, Math.round(1000 + (Math.random() * 1500)));
