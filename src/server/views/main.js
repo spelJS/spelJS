@@ -17,6 +17,7 @@ module.exports = function mainView(req) {
             <h1>Hello ${JSON.stringify(req.user._json.name)}!</h1>
             ${gameContainer()}
             <pre>${JSON.stringify(req.user, null, 2)}</pre>
+            <a href="/logout">Logga ut</a>
           `
         }
       </div>

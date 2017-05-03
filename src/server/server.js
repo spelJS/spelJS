@@ -78,6 +78,11 @@ app.get('/callback',
   }
 );
 
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
 // Use folder 'build' for static files.
 app.use(express.static('build'));
 
