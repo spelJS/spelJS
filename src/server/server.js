@@ -7,6 +7,8 @@ const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const notFound = require('./views/404');
 
+const handleUsers = require('./database/handle-users');
+
 // Set up an instance of express
 const app = express();
 
@@ -75,8 +77,8 @@ app.get('/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/');
-    // Log user id in terminal
-    console.log(req.user.id);
+    const currentUser = req.user;
+    handleUsers(currentUser);
   }
 );
 
