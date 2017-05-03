@@ -26,6 +26,10 @@ body {
   width: 100vw;
 }
 
+.headline {
+  text-transform: uppercase;
+}
+
 a {
   color: $laika-purple;
   text-decoration: none;
@@ -50,14 +54,14 @@ pre {
 ------------------------------------------------------------------------------*/
 
 .user-info {
-  display: flex;
   box-sizing: border-box;
-  position: fixed;
-  top: 0;
+  display: flex;
+  justify-content: flex-end;
   left: 0;
   width: 100%;
   padding: 0.7rem 0.9rem;
-  justify-content: flex-end;
+  position: fixed;
+  top: 0;
 
   .user-info__content {
     margin-right: 1rem;

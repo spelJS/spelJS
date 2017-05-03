@@ -7,15 +7,15 @@ module.exports = function mainView(req) {
       ${header()}
         ${!req.isAuthenticated() ?
           `
-            <h1>Laika's Space Adventure</h1>
-            <p>Sign in to play</p>
+            <h1 class="headline">Laika's Space Adventure</h1>
+            <p>Sign in with Facebook</p>
             <div class="login">
               <a href="/login">Login</a>
             </div>
           `
           :
           `
-            <h1>Laika's Space Adventure</h1>
+            <h1 class="headline">Laika's Space Adventure</h1>
             <div class="user-info">
               <div class="user-info__content">
                 <p>You are logged in as: ${req.user.displayName}</p>
