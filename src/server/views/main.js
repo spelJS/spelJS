@@ -5,14 +5,19 @@ const footer = require('./partials/footer');
 module.exports = function mainView(req) {
   return `
       ${header()}
-      <h1>spelJS</h1>
-      ${gameContainer()}
-      <div class="login">
         ${!req.isAuthenticated() ?
-          '<a href="/login">Logga in</a>' :
           `
-            <h1>Hello ${JSON.stringify(req.user.displayName)}!</h1>
+            <h1>Sign in to play!</h1>
+            <div class="login">
+              <a href="/login">Logga in</a>
+            </div>
+          `
+          :
+          `
+            <h1>Hello ${JSON.stringify(req.user._json.name)}!</h1>
+            ${gameContainer()}
             <pre>${JSON.stringify(req.user, null, 2)}</pre>
+            <a href="/logout">Logga ut</a>
           `
         }
       </div>
