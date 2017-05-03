@@ -51,7 +51,8 @@ passport.deserializeUser((obj, done) => done(null, obj));
 passport.use(new FacebookStrategy({
   clientID,
   clientSecret,
-  callbackURL
+  callbackURL,
+  profileFields: ['id', 'displayName', 'picture.type(large)']
 }, function (accessToken, refreshToken, profile, done) {
   return done(null, profile);
 }));
