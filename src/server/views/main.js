@@ -24,7 +24,6 @@ module.exports = function mainView(req) {
               <img src="${req.user.photos[0].value}" alt="Photo of ${req.user.displayName}">
             </div>
             ${gameContainer()}
-
           `
         }
       </div>

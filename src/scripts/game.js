@@ -14,8 +14,6 @@ export default function initGame() {
     monsters = document.querySelectorAll('.monster'),
     gameContainer = document.querySelector('.gameContainer-js');
 
-  console.log(gameContainer);
-
   function jump() {
     time += 1;
     movY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));

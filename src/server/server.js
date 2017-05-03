@@ -17,10 +17,10 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-// This is not used at the moment.
-io.on('connection', (socket) => {
-  console.log('A user is connected');
-});
+// TODO: Remove if not needed
+// io.on('connection', (socket) => {
+//   console.log('A user is connected');
+// });
 
 // This is just for testing purposes.
 let count = 0;
@@ -74,8 +74,9 @@ app.get('/login', passport.authenticate('facebook', { scope: 'user_friends' }));
 app.get('/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
-    // res.send(req.user);
     res.redirect('/');
+    // Log user id in terminal
+    console.log(req.user.id);
   }
 );
 

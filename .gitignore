@@ -2,3 +2,4 @@ node_modules/
 build/main.js
 build/style.css
 src/server/credentials.js
+npm-debug.log
