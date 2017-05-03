@@ -1,4 +1,4 @@
 node_modules/
 build/main.js
-build/main.css
+build/style.css
 src/server/credentials.js

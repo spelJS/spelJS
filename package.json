@@ -4,8 +4,8 @@
   "scripts": {
     "build:js": "browserify -t babelify src/scripts/main.js | uglifyjs > build/main.js",
     "watch:js": "watchify -d -t babelify -o build/main.js src/scripts/main.js",
-    "build:css": "node-sass src/scss/main.scss --output-style compressed | postcss -u autoprefixer --no-map -o build/main.css",
-    "watch:css": "node-sass src/scss/main.scss -w -o build --source-map-embed",
+    "build:css": "node-sass src/scss/style.scss --output-style compressed | postcss -u autoprefixer --no-map -o build/style.css",
+    "watch:css": "node-sass src/scss/style.scss -w -o build --source-map-embed",
     "build": "npm run build:js && npm run build:css",
     "watch": "npm run watch:js & npm run watch:css",
     "start": "node src/server/server.js",
