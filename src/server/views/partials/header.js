@@ -8,7 +8,7 @@ module.exports = function header() {
       <meta name="description" content="JavaScript Inl 3 -­ Kampanj">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link rel="stylesheet" type="text/css" href="/style.css">
-      <title>spelJS</title>
+      <title>Laika's Space Adventure</title>
     </head>
     <body>
   `;

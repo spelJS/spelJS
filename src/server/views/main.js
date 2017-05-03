@@ -7,20 +7,29 @@ module.exports = function mainView(req) {
       ${header()}
         ${!req.isAuthenticated() ?
           `
-            <h1>Sign in to play!</h1>
+            <h1 class="headline">Laika's Space Adventure</h1>
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/71/Laika_%28Soviet_dog%29.jpg">
             <div class="login">
-              <a href="/login">Logga in</a>
+              <a href="/login">Sign in with Facebook</a>
             </div>
           `
           :
           `
-            <h1>Hello ${JSON.stringify(req.user._json.name)}!</h1>
+            <h1 class="headline">Laika's Space Adventure</h1>
+            <div class="user-info">
+              <div class="user-info__content">
+                <p>You are logged in as: ${req.user.displayName}</p>
+                <a href="/logout">Logout</a>
+              </div>
+              <img src="${req.user.photos[0].value}" alt="Photo of ${req.user.displayName}">
+            </div>
             ${gameContainer()}
-            <pre>${JSON.stringify(req.user, null, 2)}</pre>
-            <a href="/logout">Logga ut</a>
+
           `
         }
       </div>
       ${footer()}
   `;
 };
+
+// <pre>${JSON.stringify(req.user, null, 2)}</pre>
