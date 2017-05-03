@@ -15,7 +15,7 @@ pre {
 .player {
   width: 56px;
   background-color: blue;
-  height: 96px;
+  height: 92px;
   position: absolute;
   top: 158px;
   left: 150px;
@@ -32,12 +32,12 @@ pre {
   height: 50px;
   display: block;
   background-color: red;
-  animation: monsterAnimation 20s;
+  animation: monsterAnimation 1s;
   animation-timing-function: linear;
 }
 @keyframes monsterAnimation {
   from {left: 100vw;}
-  to {left: -5vw;}
+  to {left: 0vw;}
 }
 h1 {
   display: flex;
