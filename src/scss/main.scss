@@ -8,6 +8,12 @@ body {
   overflow: hidden;
 }
 
+pre {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 .player {
   width: 56px;
   background-color: blue;
