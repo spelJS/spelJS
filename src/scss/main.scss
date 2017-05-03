@@ -1,47 +1,8 @@
 @import "normalize";
-
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  position: absolute;
-  overflow: hidden;
+@import "base";
+@media screen and (min-width: 1024px){
+    @import "tablet";
 }
-
-pre {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.player {
-  width: 56px;
-  background-color: blue;
-  height: 96px;
-  position: absolute;
-  top: 158px;
-  left: 150px;
-  display: block;
-  z-index: -1;
-  transform: scaleX(-1);
-  background-position: -56px;
-}
-.monster {
-  position: absolute;
-  left: 100vw;
-  top: 200px;
-  width: 30px;
-  height: 50px;
-  display: block;
-  background-color: red;
-  animation: monsterAnimation 20s;
-  animation-timing-function: linear;
-}
-@keyframes monsterAnimation {
-  from {left: 100vw;}
-  to {left: -5vw;}
-}
-h1 {
-  display: flex;
-  color: blue;
+@media screen and (min-width: 1200px){
+    @import "desktop";
 }
