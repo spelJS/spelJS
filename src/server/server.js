@@ -56,6 +56,7 @@ passport.use(new FacebookStrategy({
   callbackURL,
   profileFields: ['id', 'displayName', 'photos']
 }, function (accessToken, refreshToken, profile, done) {
+  // TODO: Hantera användare här!
   return done(null, profile);
 }));
 
