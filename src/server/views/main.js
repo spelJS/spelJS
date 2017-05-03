@@ -16,10 +16,15 @@ module.exports = function mainView(req) {
           :
           `
             <h1>Laika's Space Adventure</h1>
-            <p>You are logged in as: ${req.user.displayName}</p>
-            <img src="${req.user.photos[0].value}" alt="Photo of ${req.user.displayName}">
+            <div class="user-info">
+              <div class="user-info__content">
+                <p>You are logged in as: ${req.user.displayName}</p>
+                <a href="/logout">Logout</a>
+              </div>
+              <img src="${req.user.photos[0].value}" alt="Photo of ${req.user.displayName}">
+            </div>
             ${gameContainer()}
-            <a href="/logout">Logout</a>
+
           `
         }
       </div>

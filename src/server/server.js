@@ -52,7 +52,7 @@ passport.use(new FacebookStrategy({
   clientID,
   clientSecret,
   callbackURL,
-  profileFields: ['id', 'displayName', 'picture.type(large)']
+  profileFields: ['id', 'displayName', 'photos']
 }, function (accessToken, refreshToken, profile, done) {
   return done(null, profile);
 }));
