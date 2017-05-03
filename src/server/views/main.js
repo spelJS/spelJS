@@ -1,18 +1,10 @@
+const header = require('./partials/header');
 const gameContainer = require('./partials/game-container');
+const footer = require('./partials/footer');
 
 module.exports = function mainView(req) {
   return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="JavaScript Inl 3 -­ Kampanj">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <link rel="stylesheet" type="text/css" href="/main.css">
-      <title>spelJS</title>
-    </head>
-    <body>
+      ${header()}
       <h1>spelJS</h1>
       ${gameContainer()}
       <div class="login">
@@ -24,10 +16,6 @@ module.exports = function mainView(req) {
           `
         }
       </div>
-
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="/main.js"></script>
-    </body>
-    </html>
+      ${footer()}
   `;
 };
