@@ -7,7 +7,8 @@ const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const notFound = require('./views/404');
 
-const handleUsers = require('./database/handle-users');
+// The function for saving users to database.
+const saveUser = require('./database/handle-users');
 
 // Set up an instance of express
 const app = express();
@@ -20,9 +21,9 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 // TODO: Remove if not needed
-// io.on('connection', (socket) => {
-//   console.log('A user is connected');
-// });
+io.on('connection', (socket) => {
+  console.log('A user is connected');
+});
 
 // This is just for testing purposes.
 let count = 0;
@@ -79,7 +80,7 @@ app.get('/callback',
   (req, res) => {
     res.redirect('/');
     const currentUser = req.user;
-    handleUsers(currentUser);
+    saveUser(currentUser);
   }
 );
 
