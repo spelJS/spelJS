@@ -1,6 +1,21 @@
 const fs = require('fs');
 
 /**
+ * Read from database file. Used when file exists.
+ */
+function readFromDatabase() {
+  fs.readFile('src/server/database/users.json', function readFileCallback(error, data) {
+    if (error) {
+      console.log(error);
+    } else {
+      const userObject = JSON.parse(data);
+      console.log(userObject);
+      console.log('File already exists.');
+    }
+  });
+}
+
+/**
  * Create a json file to store users in, used when file does not exist.
  * @param  {object} user Information about current user
  */
@@ -15,6 +30,8 @@ function createFile(user) {
   fs.writeFile('src/server/database/users.json', json, 'utf8', function writeFileCallback(error, data) {
     if (error) {
       console.log(error);
+    } else {
+      console.log('File did not exist, now created!');
     }
   });
 }
@@ -24,19 +41,7 @@ function createFile(user) {
  * @param  {object} user Information about current user
  */
 module.exports = function saveUser(user) {
-  // First, check if file exist
   fs.exists('src/server/database/users.json', (exists) => {
-    if (exists) {
-      fs.readFile('src/server/database/users.json', function readFileCallback(error, data) {
-        if (error) {
-          console.log(error);
-        } else {
-          const userObject = JSON.parse(data);
-          console.log(userObject);
-        }
-      });
-    } else {
-      createFile(user);
-    }
+    exists ? readFromDatabase() : createFile(user);
   });
 };
