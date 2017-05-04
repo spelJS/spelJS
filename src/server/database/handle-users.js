@@ -3,7 +3,7 @@ const fs = require('fs');
 /**
  * Read from database file. Used when file exists.
  */
-function readFromDatabase() {
+function readFromDatabase(user) {
   fs.readFile('src/server/database/users.json', function readFileCallback(error, data) {
     if (error) {
       console.log(error);
@@ -19,7 +19,7 @@ function readFromDatabase() {
  * Create a json file to store users in, used when file does not exist.
  * @param  {object} user Information about current user
  */
-function createFile(user) {
+function createDatabase(user) {
   const jsonObject = {
     users: []
   };
@@ -42,6 +42,6 @@ function createFile(user) {
  */
 module.exports = function saveUser(user) {
   fs.exists('src/server/database/users.json', (exists) => {
-    exists ? readFromDatabase() : createFile(user);
+    exists ? readFromDatabase(user) : createDatabase(user);
   });
 };
