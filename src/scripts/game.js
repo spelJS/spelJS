@@ -14,6 +14,7 @@ export default function initGame() {
     highest = 0,
     pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'],
     gameContainer = document.querySelector('.gameContainer-js');
+
   function jump() {
     time += 1;
     movY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));

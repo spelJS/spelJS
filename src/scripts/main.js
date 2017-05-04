@@ -5,4 +5,5 @@ import { connect } from './socket';
 connect();
 
 // Start game
+// TODO: First check if user is logged in
 initGame();

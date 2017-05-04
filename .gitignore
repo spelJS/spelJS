@@ -2,4 +2,5 @@ node_modules/
 build/main.js
 build/style.css
 src/server/credentials.js
-npm-debug*
+npm-debug.log*
+src/server/database/users.json
