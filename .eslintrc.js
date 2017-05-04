@@ -39,6 +39,11 @@ module.exports = {
           "error",
           { "allowForLoopAfterthoughts": true }
         ],
+        "no-shadow": [
+          "error",
+          { "allow": ["done", "error", "resolve", "reject"]
+          }
+        ],
         "prefer-template": "off",
         "no-restricted-syntax": "off",
         "func-names": "off"

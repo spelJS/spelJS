@@ -8,7 +8,7 @@ const mainView = require('./views/main');
 const notFound = require('./views/404');
 
 // The function for saving users to database.
-const saveUser = require('./database/handle-users');
+const { getUserById, addUser } = require('./database/handle-users');
 
 // Set up an instance of express
 const app = express();
@@ -43,22 +43,38 @@ app.use(session({
   USE PASSPORT TO HANDLE AUTHENTICATION
 ------------------------------------------------------------------------------*/
 
-// In order to restore authentication state across HTTP requests,
-// Passport needs to serialize users into and deserialize users out of the session.
-// Explaination: https://github.com/passport/express-4.x-facebook-example/blob/master/server.js
+/**
+ * In order to restore authentication state across HTTP requests,
+ * Passport needs to serialize users into and deserialize users out of the session.
+ * Explaination: https://github.com/passport/express-4.x-facebook-example/blob/master/server.js
+ */
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
-// Configure a new strategy. clientID, clientSecret and callbackURL
-// are all found in credentials.js.
+/**
+ * Configure a new Facebook strategy. clientID, clientSecret and callbackURL
+ * are all found in credentials.js.
+ */
 passport.use(new FacebookStrategy({
   clientID,
   clientSecret,
   callbackURL,
   profileFields: ['id', 'displayName', 'photos']
 }, function (accessToken, refreshToken, profile, done) {
-  // TODO: Hantera användare här!
-  return done(null, profile);
+  // Check if user already exists in database
+  getUserById(profile.id)
+    .then((result) => {
+      if (!result) {
+        addUser(profile)
+          .then(user => done(null, user))
+          .catch(error => done(error));
+      } else {
+        // TODO: Update user information
+        // (check if profile pic needs to be updated)
+        done(null, result);
+      }
+    })
+    .catch(error => done(error));
 }));
 
 // Initialize Passport (required since we are using Express)
@@ -79,11 +95,10 @@ app.get('/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/');
-    const currentUser = req.user;
-    saveUser(currentUser);
   }
 );
 
+// On logout, remove the req.user property and clear the login session.
 app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');

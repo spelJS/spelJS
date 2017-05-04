@@ -1,47 +1,52 @@
 const fs = require('fs');
 
 /**
- * Read from database file. Used when file exists.
+ * Match user's profile id on Facebook with id in database
+ * @param  {string} id     The user's unique Facebook id.
+ * @return {object} user   The user with information about profile photo etc.
  */
-function readFromDatabase(user) {
-  fs.readFile('src/server/database/users.json', function readFileCallback(error, data) {
-    if (error) {
-      console.log(error);
-    } else {
-      const userObject = JSON.parse(data);
-      console.log(userObject);
-      console.log('File already exists.');
-    }
+exports.getUserById = function getUserById(id) {
+  return new Promise((resolve, reject) => {
+    fs.readFile('src/server/database/users.json', function readFileCallback(error, data) {
+      if (error) {
+        reject(error);
+      } else {
+        const users = JSON.parse(data); // Array with users
+        const user = users.find(item => item.id === id); // Find user based on id
+        resolve(user);
+      }
+    });
   });
-}
+};
 
 /**
- * Create a json file to store users in, used when file does not exist.
- * @param  {object} user Information about current user
+ * Add new user to database
+ * @param {object}  profile   Information retrieved from Facebook profile
+ * @return {object} user      The user with information about profile photo etc.
  */
-function createDatabase(user) {
-  const jsonObject = {
-    users: []
-  };
-  // Push user to object
-  jsonObject.users.push({ id: user.id, name: user.displayName });
-  const json = JSON.stringify(jsonObject);
-  // Create file.
-  fs.writeFile('src/server/database/users.json', json, 'utf8', function writeFileCallback(error, data) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('File did not exist, now created!');
-    }
-  });
-}
+exports.addUser = function addUser(profile) {
+  return new Promise((resolve, reject) => {
+    // Get users from database (json file)
+    fs.readFile('src/server/database/users.json', (error, data) => {
+      if (error) {
+        reject(error);
+      } else {
+        const users = JSON.parse(data); // Save users in variable
 
-/**
- * Push user ID and user name to an object and save it in users.json.
- * @param  {object} user Information about current user
- */
-module.exports = function saveUser(user) {
-  fs.exists('src/server/database/users.json', (exists) => {
-    exists ? readFromDatabase(user) : createDatabase(user);
+        const user = {
+          id: profile.id,
+          name: profile.displayName,
+          photo: profile.photos[0].value,
+          highscore: 0
+        };
+
+        users.push(user); // Push user to list of users
+        const json = JSON.stringify(users, null, 2); // Convert list to json
+
+        fs.writeFile('src/server/database/users.json', json, 'utf8', (error) => {
+          error ? reject(error) : resolve(user);
+        });
+      }
+    });
   });
 };
