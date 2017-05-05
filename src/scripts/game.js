@@ -1,7 +1,7 @@
-import { updateHighscore } from './socket';
+import { sendScore } from './socket';
 
 export default function initGame(gameContainer) {
-  updateHighscore(10); // Only for testing purposes.
+  sendScore(10);
 
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
@@ -60,9 +60,6 @@ export default function initGame(gameContainer) {
       if (score > highest) {
         highSpan.textContent = score;
         highest = score;
-
-        // Send information with socket.io about new High Score
-        updateHighscore(score);
       }
     });
   }

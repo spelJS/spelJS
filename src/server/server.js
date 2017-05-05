@@ -7,8 +7,12 @@ const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const notFound = require('./views/404');
 
-// The function for saving users to database.
-const { getUserById, addUser, updateUser } = require('./database/handle-users');
+// The functions for handling user database.
+const {
+  getUserById,
+  addUser,
+  updateUserHighScore
+} = require('./database/handle-users');
 
 // Set up an instance of express
 const app = express();
@@ -20,23 +24,23 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+// io.on('connection', function (socket) {
+//   socket.on('on-highscore', (data) => {
+//     updateUser(data.id, { highscore: data.highscore }).then(() => {
+//       socket.broadcast.emit('new-highscore', data); // Send message to everyone BUT sender
+//     });
+//   });
+// });
 
-io.on('connection', function (socket) {
-  socket.on('on-highscore', (data) => {
-    updateUser(data.id, { highscore: data.highscore }).then(() => {
-      socket.broadcast.emit('new-highscore', data); // Send message to everyone BUT sender
+io.on('connection', (socket) => {
+  // On information about new high score, update database
+  socket.on('on-highscore', function (data) {
+    updateUserHighScore(data.id, data.highscore).then(() => {
+      // FIXME: This is not working at the moment.
+      socket.broadcast.emit('new-highscore', data); // This is sent to everyone but sender
     });
   });
 });
-
-// TODO: Remove if not needed
-io.on('connection', (socket) => {
-  console.log('A user is connected');
-});
-
-// This is just for testing purposes.
-let count = 0;
-setInterval(() => io.emit('count', (count += 1)), 30000);
 
 /*------------------------------------------------------------------------------
   SESSION SUPPORT
