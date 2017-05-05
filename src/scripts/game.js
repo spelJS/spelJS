@@ -14,7 +14,8 @@ export default function initGame(gameContainer) {
     time = 0,
     movY = 0,
     score = 0,
-    highest = 0;
+    // highSpan get it's content from database.
+    highest = highSpan.innerText ? parseInt(highSpan.innerText, 10) : 0;
 
   function jump() {
     time += 1;

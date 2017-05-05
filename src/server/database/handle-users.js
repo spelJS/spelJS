@@ -52,14 +52,26 @@ exports.addUser = function addUser(profile) {
 };
 
 /**
- * Takes information about user id and high score and updates database.
- * @param  {[type]} id        [description]
- * @param  {[type]} highscore [description]
- * @return {[type]}           [description]
+ * Takes information about user and high score and then updates database.
+ * @param  {object} data Information about current user and highscore
+ * @return {object} user The that just was updated.
  */
-exports.updateUserHighScore = function (id, highscore) {
-  return new Promise(function (resolve, reject) {
-    console.info(`User with the id ${id} just got a new high score: ${highscore}`);
-    resolve();
+exports.updateUserHighScore = function (data) {
+  return new Promise((resolve, reject) => {
+    fs.readFile('src/server/database/users.json', function readFileCallback(error, dataBase) {
+      if (error) {
+        reject(error);
+      } else {
+        const users = JSON.parse(dataBase); // Array with users
+        const user = users.find(item => item.id === data.id); // Find user based on id
+        user.highscore = data.highscore; // Update user with new highscore
+
+        const json = JSON.stringify(users, null, 2); // Convert list back to json.
+
+        fs.writeFile('src/server/database/users.json', json, 'utf8', (error) => {
+          error ? reject(error) : resolve(user);
+        });
+      }
+    });
   });
 };
