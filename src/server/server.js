@@ -24,20 +24,12 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-// io.on('connection', function (socket) {
-//   socket.on('on-highscore', (data) => {
-//     updateUser(data.id, { highscore: data.highscore }).then(() => {
-//       socket.broadcast.emit('new-highscore', data); // Send message to everyone BUT sender
-//     });
-//   });
-// });
-
 io.on('connection', (socket) => {
-  // On information about new high score, update database
+  // When recieving information about new high score, update database
   socket.on('on-highscore', function (data) {
     updateUserHighScore(data).then(() => {
-      // FIXME: This is not working at the moment.
-      socket.broadcast.emit('new-highscore', data); // This is sent to everyone but sender
+      // Sent to everyone BUT sender
+      socket.broadcast.emit('new-highscore', data);
     });
   });
 });

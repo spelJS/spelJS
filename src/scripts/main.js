@@ -1,5 +1,5 @@
 import initGame from './game';
-import { socket } from './socket';
+import { socket, listenOnHighscore } from './socket';
 
 const gameContainer = document.querySelector('.gameContainer-js');
 
@@ -13,6 +13,4 @@ if (gameContainer) {
     .catch(err => console.error(err));
 }
 
-socket.on('new-highscore', (data) => {
-  console.log('There was a new highscore');
-});
+listenOnHighscore();
