@@ -51,8 +51,15 @@ exports.addUser = function addUser(profile) {
   });
 };
 
-exports.updateUser = function (...args) {
-  return new Promise(function(resolve, reject) {
+/**
+ * Takes information about user id and high score and updates database.
+ * @param  {[type]} id        [description]
+ * @param  {[type]} highscore [description]
+ * @return {[type]}           [description]
+ */
+exports.updateUserHighScore = function (id, highscore) {
+  return new Promise(function (resolve, reject) {
+    console.info(`User with the id ${id} just got a new high score: ${highscore}`);
     resolve();
   });
 };

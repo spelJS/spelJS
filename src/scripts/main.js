@@ -1,9 +1,13 @@
 import initGame from './game';
-import { connect } from './socket';
+import { socket } from './socket';
 
-// Connect to the websocket server
-connect();
+const gameContainer = document.querySelector('.gameContainer-js');
 
-// Start game
-// TODO: First check if user is logged in
-initGame();
+// Initialize game if gameContainer exists.
+if (gameContainer) {
+  initGame(gameContainer);
+}
+
+socket.on('new-highscore', (data) => {
+  console.log('There was a new highscore');
+});
