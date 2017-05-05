@@ -8,7 +8,7 @@ const mainView = require('./views/main');
 const notFound = require('./views/404');
 
 // The function for saving users to database.
-const { getUserById, addUser } = require('./database/handle-users');
+const { getUserById, addUser, updateUser } = require('./database/handle-users');
 
 // Set up an instance of express
 const app = express();
@@ -20,10 +20,26 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-// TODO: Remove if not needed
-io.on('connection', (socket) => {
-  console.log('A user is connected');
+// Send a message with socket.io
+// io.broadcast.emit('user just connected');
+
+io.on('connection', function (socket) {
+  socket.on('on-highscore', (data) => {
+    updateUser(data.id, { highscore: data.highscore }).then(() => {
+      socket.broadcast.emit('new-highscore', data); // Send message to everyone BUT sender
+    });
+  });
 });
+
+
+// io.on('connection', function (socket) {
+//   socket.broadcast.emit('user connected');
+// });
+
+// TODO: Remove if not needed
+// io.on('connection', (socket) => {
+//   console.log('A user is connected');
+// });
 
 // This is just for testing purposes.
 let count = 0;
@@ -110,6 +126,14 @@ app.use(express.static('build'));
 // Redirect to main page
 app.get('/', (req, res) => {
   res.send(mainView(req));
+});
+
+app.get('/user', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.status(401).send('Not logged in, fool!');
+  }
 });
 
 // If no other page is specified or found, 404 is shown.

@@ -50,3 +50,9 @@ exports.addUser = function addUser(profile) {
     });
   });
 };
+
+exports.updateUser = function (...args) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+};

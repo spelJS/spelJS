@@ -1,19 +1,23 @@
+import { updateHighscore } from './socket';
+
 export default function initGame() {
-  // Game Variables
-  var frame = 0,
-    time = 0,
-    gravity = 0.275,
+  updateHighscore(10); // Only for testing purposes.
+
+  const gameContainer = document.querySelector('.gameContainer-js'),
+    highSpan = document.querySelector('.highSpan-js'), // Skapa en ny klass som heter -js
+    scoreSpan = document.querySelector('.scoreSpan-js'), // Skapa en ny klass som heter -js
+    player = document.querySelector('.player-js'), // Skapa en ny klass som heter -js
     jumpPower = 10,
+    gravity = 0.275,
     playerTop = 158,
-    player = document.querySelector('.player'),
     playerX = parseInt(player.offsetLeft, 10),
+    pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'];
+
+  let frame = 0,
+    time = 0,
     movY = 0,
-    scoreSpan = document.querySelector('.scoreSpan'),
     score = 0,
-    highSpan = document.querySelector('.highSpan'),
-    highest = 0,
-    pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'],
-    gameContainer = document.querySelector('.gameContainer-js');
+    highest = 0;
 
   function jump() {
     time += 1;
@@ -28,6 +32,7 @@ export default function initGame() {
       requestAnimationFrame(jump);
     }
   }
+
   function render() {
     requestAnimationFrame(render);
     frame = (frame + 1) % 8;
@@ -51,16 +56,21 @@ export default function initGame() {
       if (score > highest) {
         highSpan.textContent = score;
         highest = score;
+
+        // Send information with socket.io about new High Score
+        updateHighscore(score);
       }
     });
   }
+
   document.addEventListener('keydown', function (e) {
-    e.preventDefault();
     // Player jumps if 'space' or 'up arrow' is pressed
     if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
+      e.preventDefault();
       jump();
     }
   });
+
   function generateMonsters() {
     const monsterDiv = document.createElement('div');
     monsterDiv.setAttribute('class', 'monster');
