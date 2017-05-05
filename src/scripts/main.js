@@ -1,9 +1,8 @@
 import initGame from './game';
-import { connect } from './socket';
 
-// Connect to the websocket server
-connect();
+const gameContainer = document.querySelector('.gameContainer-js');
 
-// Start game
-// TODO: First check if user is logged in
-initGame();
+// Initialize game if gameContainer exists.
+if (gameContainer) {
+  initGame(gameContainer);
+}

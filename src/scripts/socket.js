@@ -1,13 +1,16 @@
 export const socket = io();
 
-export function connect() {
-  // Every time count is changed, the number is logged.
-  // socket.on('count', count => console.log(count));
-}
-
 export function updateHighscore(score) {
   // socket.on('new highscore', console.log(`There is a new highscore: ${score}`));
 }
+
+// io.on('connection', function (socket) {
+//   socket.on('on-highscore', (data) => {
+//     updateUser(data.id, { highscore: data.highscore }).then(() => {
+//       socket.broadcast.emit('new-highscore', data); // Send message to everyone BUT sender
+//     });
+//   });
+// });
 
 fetch('/user', { credentials: 'include', headers: { accept: 'application/json' }})
   .then(body => body.json())

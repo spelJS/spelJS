@@ -20,8 +20,6 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-// Send a message with socket.io
-// io.broadcast.emit('user just connected');
 
 io.on('connection', function (socket) {
   socket.on('on-highscore', (data) => {
@@ -31,15 +29,10 @@ io.on('connection', function (socket) {
   });
 });
 
-
-// io.on('connection', function (socket) {
-//   socket.broadcast.emit('user connected');
-// });
-
 // TODO: Remove if not needed
-// io.on('connection', (socket) => {
-//   console.log('A user is connected');
-// });
+io.on('connection', (socket) => {
+  console.log('A user is connected');
+});
 
 // This is just for testing purposes.
 let count = 0;
