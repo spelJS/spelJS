@@ -53,8 +53,8 @@ app.use(session({
  * Passport needs to serialize users into and deserialize users out of the session.
  * Explaination: https://github.com/passport/express-4.x-facebook-example/blob/master/server.js
  */
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
+passport.serializeUser((user, done) => done(null, user.id));
+passport.deserializeUser((id, done) => getUserById(id).then(user => done(null, user), done));
 
 /**
  * Configure a new Facebook strategy. clientID, clientSecret and callbackURL
