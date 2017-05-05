@@ -16,7 +16,7 @@ $laika-white: #f8f8f8;
 body {
   box-sizing: border-box;
   background-color: $laika-white;
-  color: $laika-purple;
+  color: $laika-white;
   font-family: $font-stack;
   height: 100vh;
   margin: 0;
@@ -31,7 +31,7 @@ body {
 }
 
 a {
-  color: $laika-purple;
+  color: $laika-white;
   text-decoration: none;
   padding-bottom: 0.2em;
   border-bottom: 2px solid $laika-purple;
@@ -51,6 +51,55 @@ pre {
 
 .login {
   margin-top: 1rem;
+}
+
+/* -----------------------------------------------------------------------------
+  STYLES FOR THE STARRY BACKGROUND WITH GRADIENT
+------------------------------------------------------------------------------*/
+
+.backgroundVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -5;
+}
+
+@keyframes spacedust {
+  from {background-position:10000px 0;}
+  to {background-position:0 0;}
+}
+
+@keyframes stars {
+  0% {opacity: 0.5;}
+  50% {opacity: 1;}
+  100% {opacity: 0.5;}
+}
+
+.stars, .spacedust {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.stars {
+  animation:stars 200s linear infinite;
+  background:transparent url("img/stars.png") repeat top center;
+  z-index:-4;
+}
+
+.spacedust {
+  animation:spacedust 15s linear infinite;
+  background:transparent url("img/stardust.png") repeat top center;
+  z-index:-2;
 }
 
 /* -----------------------------------------------------------------------------
@@ -105,8 +154,8 @@ pre {
   width: 30px;
   height: 50px;
   display: block;
-  background-color: $laika-lighter;
-  animation: monsterAnimation 20s;
+  background-color: $laika-white;
+  animation: monsterAnimation 1s;
   animation-timing-function: linear;
 }
 
