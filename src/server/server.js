@@ -35,7 +35,7 @@ const io = require('socket.io')(server);
 io.on('connection', (socket) => {
   // On information about new high score, update database
   socket.on('on-highscore', function (data) {
-    updateUserHighScore(data.id, data.highscore).then(() => {
+    updateUserHighScore(data).then(() => {
       // FIXME: This is not working at the moment.
       socket.broadcast.emit('new-highscore', data); // This is sent to everyone but sender
     });

@@ -23,7 +23,7 @@ module.exports = function mainView(req) {
               </div>
               <img src="${req.user.photo}" alt="Photo of ${req.user.name}">
             </div>
-            ${gameContainer()}
+            ${gameContainer(req.user.highscore)}
           `
         }
       </div>
