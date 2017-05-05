@@ -1,6 +1,6 @@
 import { sendScore } from './socket';
 
-export default function initGame(gameContainer) {
+export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     player = document.querySelector('.player-js'),
@@ -59,7 +59,7 @@ export default function initGame(gameContainer) {
       if (score > highest) {
         highSpan.textContent = score;
         highest = score;
-        sendScore(highest); // Send score to server.
+        sendScore(user, highest); // Send information about score and user to server
       }
     });
   }
