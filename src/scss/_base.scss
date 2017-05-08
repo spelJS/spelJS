@@ -8,6 +8,7 @@ $font-stack: 'Lato', sans-serif;
 $laika-purple: #390099;
 $laika-lighter: #FF0054;
 $laika-white: #f8f8f8;
+$laika-black: #0C090D;
 
 /* -----------------------------------------------------------------------------
   GENERAL STYLES
@@ -15,7 +16,7 @@ $laika-white: #f8f8f8;
 
 body {
   box-sizing: border-box;
-  background-color: $laika-white;
+  background-color: $laika-black;
   color: $laika-white;
   font-family: $font-stack;
   height: 100vh;
@@ -74,9 +75,9 @@ pre {
 }
 
 @keyframes stars {
-  0% {opacity: 0.5;}
+  0% {opacity: 0.3;}
   50% {opacity: 1;}
-  100% {opacity: 0.5;}
+  100% {opacity: 0.3;}
 }
 
 .stars, .spacedust {
@@ -91,7 +92,7 @@ pre {
 }
 
 .stars {
-  animation:stars 200s linear infinite;
+  animation:stars 2s linear infinite;
   background:transparent url("img/stars.png") repeat top center;
   z-index:-4;
 }
