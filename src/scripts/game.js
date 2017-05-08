@@ -1,21 +1,26 @@
 import { sendScore } from './socket';
+import { generateMonsters } from './functions';
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     player = document.querySelector('.player-js'),
-    jumpPower = 10,
-    gravity = 0.275,
     playerTop = 158,
     playerX = parseInt(player.offsetLeft, 10),
+    jumpPower = 10,
+    gravity = 0.275,
     pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'];
 
+  // Updated frequently when game is active.
   let frame = 0,
     time = 0,
     movY = 0,
     score = 0,
     highest = user.highscore;
 
+  /**
+   * Gets called when user wants to jump to avoid enemies.
+   */
   function jump() {
     time += 1;
     movY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));
@@ -32,6 +37,8 @@ export default function initGame(gameContainer, user) {
     }
   }
 
+  // FIXME: make sure that this contain as little code and calculations as
+  // possible, since all of it get calculated/rendered 60 times a second.
   function render() {
     requestAnimationFrame(render);
     frame = (frame + 1) % 8;
@@ -63,7 +70,7 @@ export default function initGame(gameContainer, user) {
     });
   }
 
-  // Player jumps if 'space' or 'up arrow' is pressed
+  // Make player jump by hitting 'space' or 'up arrow'
   document.addEventListener('keydown', function (e) {
     if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
       e.preventDefault();
@@ -71,15 +78,7 @@ export default function initGame(gameContainer, user) {
     }
   });
 
-  function generateMonsters() {
-    const monsterDiv = document.createElement('div');
-    monsterDiv.classList.add('monster');
-    gameContainer.appendChild(monsterDiv);
-    setTimeout(function () {
-      generateMonsters();
-    }, Math.round(2000 + (Math.random() * 2000)));
-  }
-
-  generateMonsters();
+  // TODO: Remove monsters when they are no longer visible
+  generateMonsters(gameContainer);
   render();
 }
