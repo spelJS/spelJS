@@ -10,7 +10,6 @@ export function generateMonsters(gameContainer) {
   const monsterDiv = document.createElement('div');
   monsterDiv.classList.add('monster');
   gameContainer.appendChild(monsterDiv);
-
   setTimeout(() => {
     generateMonsters(gameContainer);
   }, Math.round(2000 + (Math.random() * 2000)));
