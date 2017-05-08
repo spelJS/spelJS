@@ -7,9 +7,9 @@ export default function initGame(gameContainer, user) {
     player = document.querySelector('.player-js'),
     playerTop = 158,
     playerX = parseInt(player.offsetLeft, 10),
-    jumpPower = 10,
-    gravity = 0.275,
-    pos = ['0', '0', '-56px', '-56px', '-112px', '-112px', '-56px', '-56px'];
+    jumpPower = 9,
+    gravity = 0.4,
+    pos = ['0', '0', '-168px', '-168px', '-112px', '-112px', '-168px', '-168px'];
 
   // Updated frequently when game is active.
   let frame = 0,
@@ -21,6 +21,7 @@ export default function initGame(gameContainer, user) {
   /**
    * Gets called when user wants to jump to avoid enemies.
    */
+
   function jump() {
     time += 1;
     movY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));
@@ -55,7 +56,7 @@ export default function initGame(gameContainer, user) {
       }
 
       // If the player collides with the enemy
-      if (((posX - playerX) < 56) && ((posX - playerX) > -25) && (movY < 50)) {
+      if (((posX - playerX) < 168) && ((posX - playerX) > -25) && (movY < 50)) {
         scoreSpan.textContent = 0;
         score = 0;
         item.remove();
@@ -70,11 +71,17 @@ export default function initGame(gameContainer, user) {
     });
   }
 
+  function removeOnJump() {
+    document.querySelector('.laika').classList.remove('onJump');
+  }
+
   // Make player jump by hitting 'space' or 'up arrow'
   document.addEventListener('keydown', function (e) {
     if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
       e.preventDefault();
       jump();
+      document.querySelector('.laika').classList.add('onJump');
+      setTimeout(removeOnJump, 700);
     }
   });
 

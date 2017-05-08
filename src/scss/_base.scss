@@ -8,6 +8,7 @@ $font-stack: 'Lato', sans-serif;
 $laika-purple: #390099;
 $laika-lighter: #FF0054;
 $laika-white: #f8f8f8;
+$laika-black: #0C090D;
 
 /* -----------------------------------------------------------------------------
   GENERAL STYLES
@@ -15,7 +16,7 @@ $laika-white: #f8f8f8;
 
 body {
   box-sizing: border-box;
-  background-color: $laika-white;
+  background-color: $laika-black;
   color: $laika-white;
   font-family: $font-stack;
   height: 100vh;
@@ -26,8 +27,19 @@ body {
   width: 100vw;
 }
 
+@keyframes neon2 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+  }
+}
+
 .headline {
   text-transform: uppercase;
+  letter-spacing: 0.4em;
+  animation: neon2 1.5s ease-in-out infinite alternate;
 }
 
 a {
@@ -66,6 +78,7 @@ pre {
   width: auto;
   height: auto;
   z-index: -5;
+  filter: brightness(40%);
 }
 
 @keyframes spacedust {
@@ -74,9 +87,9 @@ pre {
 }
 
 @keyframes stars {
-  0% {opacity: 0.5;}
+  0% {opacity: 0.3;}
   50% {opacity: 1;}
-  100% {opacity: 0.5;}
+  100% {opacity: 0.3;}
 }
 
 .stars, .spacedust {
@@ -91,7 +104,7 @@ pre {
 }
 
 .stars {
-  animation:stars 200s linear infinite;
+  animation:stars 2s linear infinite;
   background:transparent url("img/stars.png") repeat top center;
   z-index:-4;
 }
@@ -135,17 +148,34 @@ pre {
   position: relative;
 }
 
+@keyframes laikaFireOnJump {
+  0% {stroke: none; stroke-width: 0;}
+  50% {stroke: yellow; stroke-width: 100;}
+  100% {stroke: none; stroke-width: 0;}
+}
+
+@keyframes flying {
+	0% {transform: rotate( 6deg );}
+	50% {transform: rotate( 12deg );}
+	100% {transform: rotate( 6deg );}
+}
+
 .player {
-  width: 56px;
-  background-color: $laika-purple;
-  height: 96px;
+  width: 168px;
+  height: 135px;
   position: absolute;
   top: 158px;
   left: 150px;
   display: block;
   z-index: -1;
-  transform: scaleX(-1);
-  background-position: -56px;
+  background-position: -168px;
+  animation: flying 1s infinite;
+  .laika.onJump {
+    transform: rotate(-12deg);
+    .laikaFire {
+      animation: laikaFireOnJump 1s;
+    }
+  }
 }
 .monster {
   position: absolute;
