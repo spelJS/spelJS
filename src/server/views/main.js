@@ -1,4 +1,5 @@
 const header = require('./partials/header');
+const logo = require('./partials/logo');
 const icon = require('./partials/facebook-icon');
 const gameContainer = require('./partials/game-container');
 const footer = require('./partials/footer');
@@ -8,6 +9,7 @@ module.exports = function mainView(req) {
       ${header()}
         ${!req.isAuthenticated() ?
           `
+            ${logo()}
             <h1 class="headline">Laika's Space<br>Adventure</h1>
             <div class="login">
               <a href="/login" class="loginButton">Sign in with Facebook ${icon()}</a>
