@@ -213,15 +213,29 @@ a {
   position: absolute;
   left: 100vw;
   top: 200px;
-  width: 30px;
+  width: 50px;
   height: 50px;
   display: block;
-  background-color: $laika-white;
-  animation: monsterAnimation 1s;
+  animation: monsterAnimation 2s;
   animation-timing-function: linear;
+  background-image: url("img/spritesheet.png");
+  background-repeat:no-repeat;
+  background-size: 100% auto;
+}
+.monster.one {
+  background-position: 0px 0px;
+}
+.monster.two {
+  background-position: 0px -50px;
+}
+.monster.three {
+  background-position: 0px -100px;
 }
 
 @keyframes monsterAnimation {
-  from {left: 100vw;}
-  to {left: -5vw;}
+  0% {left: 100vw; transform: rotate( -12deg );}
+  25% {transform: rotate( 12deg );}
+	50% {transform: rotate( -12deg );}
+  75% {transform: rotate( 12deg );}
+	100% {left: -5vw; transform: rotate( -12deg );}
 }
