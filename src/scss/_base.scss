@@ -63,18 +63,18 @@ body {
 ------------------------------------------------------------------------------*/
 
 a {
-  color: $laika-white;
   text-decoration: none;
+  text-shadow: none;
 
   &:not(.loginButton) {
-    padding-bottom: 0.2em;
-    border-bottom: 2px solid $laika-white;
+    color: $laika-blue;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.3em;
+    transition: border-bottom 450ms ease;
   }
 
   &:hover:not(.loginButton) {
-    color: $laika-pink;
-    border-bottom: 2px solid $laika-pink;
-    transition: border-bottom 450ms ease, color 450ms ease;
+    border-bottom: 2px solid $laika-blue;
   }
 }
 
@@ -86,13 +86,14 @@ a {
   margin-top: 2rem;
 
   .loginButton {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 2px;
     background-color: $laika-pink;
+    border-radius: 2px;
+    color: $laika-white;
+    display: flex;
     font-size: 1.4rem;
     font-weight: 300;
+    justify-content: center;
     padding: 0.7em 1em;
     transition: background-color 650ms ease, color 650ms ease;
 
@@ -166,7 +167,9 @@ a {
 
 .user-info {
   box-sizing: border-box;
+  align-items: center;
   display: flex;
+  font-size: 0.9rem;
   justify-content: flex-end;
   width: auto;
   position: fixed;
@@ -174,14 +177,28 @@ a {
   right: 2%;
 
   .user-info__content {
-    margin-right: 1rem;
+    color: $laika-blue;
+    margin-right: 0.7rem;
     text-align: right;
 
     p {
-      margin: 0 0 0.4em;
+      margin: 0;
     }
   }
+
+  .photo__container {
+    box-shadow: 0 0 2px $laika-white, 0 0 10px $laika-white, 0 0 2px $laika-white, 0 0 15px $laika-blue, 0 0 15px $laika-blue, 0 0 15px $laika-blue, 0 0 5px $laika-blue, 0 0 2px $laika-blue;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+  }
 }
+
 
 /* -----------------------------------------------------------------------------
   GAME CONTAINER
