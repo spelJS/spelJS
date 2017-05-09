@@ -15,7 +15,6 @@ $laika-blue: #228DFF;
 /* -----------------------------------------------------------------------------
   GENERAL STYLES
 ------------------------------------------------------------------------------*/
-
 body {
   display: flex;
   justify-content: center;
@@ -53,9 +52,18 @@ body {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
+  margin-top: 0.2em;
   font-family: $font-title;
   font-size: 24px;
   font-size: 2.4rem;
+}
+
+.logo {
+  box-sizing: border-box;
+  padding: 1rem;
+  filter: drop-shadow(3px 3px 5px $laika-blue);
+  height: 15rem;
+  width: 15rem;
 }
 
 /* -----------------------------------------------------------------------------
@@ -77,6 +85,7 @@ a {
     border-bottom: 2px solid $laika-blue;
   }
 }
+
 
 /* -----------------------------------------------------------------------------
   LOGIN BUTTON
