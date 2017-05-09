@@ -15,6 +15,7 @@ $laika-blue: #228DFF;
 /* -----------------------------------------------------------------------------
   GENERAL STYLES
 ------------------------------------------------------------------------------*/
+
 body {
   display: flex;
   justify-content: center;
@@ -34,8 +35,17 @@ body {
   line-height: 1.5;
 }
 
-* {
-  // border: 1px solid yellow;
+/* -----------------------------------------------------------------------------
+  TYPOGRAPHY
+------------------------------------------------------------------------------*/
+
+p {
+  margin: 0.2em 0;
+}
+
+a {
+  text-decoration: none;
+  text-shadow: none;
 }
 
 @keyframes textGlow {
@@ -45,6 +55,10 @@ body {
   to {
     text-shadow: 0 0 5px $laika-white, 0 0 10px $laika-white, 0 0 15px $laika-white, 0 0 20px $laika-blue, 0 0 35px $laika-blue, 0 0 40px $laika-blue, 0 0 50px $laika-blue, 0 0 75px $laika-blue;
   }
+}
+
+* {
+  // border: 1px solid yellow;
 }
 
 .headline {
@@ -57,6 +71,10 @@ body {
   font-size: 2.4rem;
 }
 
+/* -----------------------------------------------------------------------------
+  LOGIN PAGE
+------------------------------------------------------------------------------*/
+
 .logo {
   box-sizing: border-box;
   padding: 1rem;
@@ -64,16 +82,6 @@ body {
   height: 15rem;
   width: 15rem;
 }
-
-a {
-  text-decoration: none;
-  text-shadow: none;
-}
-
-
-/* -----------------------------------------------------------------------------
-  LOGIN BUTTON
-------------------------------------------------------------------------------*/
 
 .login {
   margin-top: 2rem;
@@ -120,47 +128,47 @@ a {
 }
 
 @keyframes spacedust {
-  from {background-position:10000px 0;}
-  to {background-position:0 0;}
+  from { background-position: 10000px 0px; }
+  to { background-position: 0px 0px; }
 }
 
 @keyframes stars {
-  0% {opacity: 0.3;}
-  50% {opacity: 1;}
-  100% {opacity: 0.3;}
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
 }
 
 .stars, .spacedust {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100%;
-  height:100%;
-  display:block;
+  bottom: 0;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
 }
 
 .stars {
-  animation:stars 2s linear infinite;
-  background:transparent url("img/stars.png") repeat top center;
-  z-index:-4;
+  animation: stars 2s linear infinite;
+  background: transparent url("img/stars.png") repeat top center;
+  z-index: -4;
 }
 
 .spacedust {
+  animation: spacedust 15s linear infinite;
+  background: transparent url("img/stardust.png") repeat top center;
   display: none;
-  animation:spacedust 15s linear infinite;
-  background:transparent url("img/stardust.png") repeat top center;
-  z-index:-2;
+  z-index: -2;
 }
 
 /* -----------------------------------------------------------------------------
-  USER INFO
+  USER INFO (SHOWN WHEN LOGGED IN)
 ------------------------------------------------------------------------------*/
 
 .user-info {
-  box-sizing: border-box;
   align-items: center;
+  box-sizing: border-box;
   display: flex;
   font-size: 0.9rem;
   justify-content: flex-end;
@@ -172,9 +180,11 @@ a {
   .user-info__content {
     margin-right: 2rem;
     text-align: right;
+
     p {
       margin-top: 0;
     }
+
     p, a {
       color: $laika-white;
       font-size: 13px;
@@ -183,10 +193,12 @@ a {
       letter-spacing: 0.3em;
       animation: textGlow 1.5s ease-in-out infinite alternate;
     }
+
     a {
       border-bottom: 2px solid transparent;
       padding-bottom: 0.3em;
       transition: border-bottom 450ms ease;
+
       &:hover {
         border-bottom: 2px solid $laika-white;
       }
@@ -224,14 +236,16 @@ a {
   position: absolute;
   top: 4%;
   left: 2%;
-  p {
-    margin-top: 0;
-  }
+
   .scoreText {
-    letter-spacing: 0.3em;
     animation: textGlow 1.5s ease-in-out infinite alternate;
+    letter-spacing: 0.3em;
   }
 }
+
+/* -----------------------------------------------------------------------------
+  LAIKA (PLAYER)
+------------------------------------------------------------------------------*/
 
 @keyframes laikaFireOnJump {
   0% {stroke: none; stroke-width: 0;}
@@ -255,17 +269,25 @@ a {
   z-index: -1;
   background-position: -168px;
   animation: flying 1s infinite;
+
   .laika {
     width: 100%;
     height: auto;
   }
+
   .laika.onJump {
     transform: rotate(-12deg);
+
     .laikaFire {
       animation: laikaFireOnJump 1s;
     }
   }
 }
+
+/* -----------------------------------------------------------------------------
+  MONSTERS (ENEMIES)
+------------------------------------------------------------------------------*/
+
 .monster {
   position: absolute;
   left: 100vw;
@@ -279,23 +301,30 @@ a {
   background-repeat:no-repeat;
   background-size: 100% auto;
 }
+
 .monster.one {
   background-position: 0px 0px;
 }
+
 .monster.two {
   background-position: 0px -50px;
 }
+
 .monster.three {
   background-position: 0px -100px;
 }
 
 @keyframes monsterAnimation {
-  0% {left: 100vw; transform: rotate( -12deg );}
-  25% {transform: rotate( 12deg );}
-	50% {transform: rotate( -12deg );}
-  75% {transform: rotate( 12deg );}
-	100% {left: -5vw; transform: rotate( -12deg );}
+  0% { left: 100vw; transform: rotate( -12deg ); }
+  25% { transform: rotate( 12deg ); }
+	50% { transform: rotate( -12deg ); }
+  75% { transform: rotate( 12deg ); }
+	100% { left: -5vw; transform: rotate( -12deg ); }
 }
+
+/* -----------------------------------------------------------------------------
+  UTILITIES
+------------------------------------------------------------------------------*/
 
 .show {
   display: block;
@@ -312,6 +341,6 @@ a {
 }
 
 @keyframes fadeOut {
-  0% {opacity: 1;}
-  100% {opacity: 0; display: none;}
+  0% { opacity: 1; }
+  100% { opacity: 0; display: none; }
 }
