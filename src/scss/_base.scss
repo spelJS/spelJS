@@ -73,17 +73,6 @@ body {
 a {
   text-decoration: none;
   text-shadow: none;
-
-  &:not(.loginButton) {
-    color: $laika-blue;
-    border-bottom: 2px solid transparent;
-    padding-bottom: 0.3em;
-    transition: border-bottom 450ms ease;
-  }
-
-  &:hover:not(.loginButton) {
-    border-bottom: 2px solid $laika-blue;
-  }
 }
 
 
@@ -186,12 +175,26 @@ a {
   right: 2%;
 
   .user-info__content {
-    color: $laika-blue;
-    margin-right: 0.7rem;
+    margin-right: 2rem;
     text-align: right;
-
     p {
-      margin: 0;
+      margin-top: 0;
+    }
+    p, a {
+      color: $laika-white;
+      font-size: 13px;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      letter-spacing: 0.3em;
+      animation: textGlow 1.5s ease-in-out infinite alternate;
+    }
+    a {
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.3em;
+      transition: border-bottom 450ms ease;
+      &:hover {
+        border-bottom: 2px solid $laika-white;
+      }
     }
   }
 
@@ -303,4 +306,15 @@ a {
 
 .hide {
   display: none;
+}
+
+.fadeOut {
+  animation: fadeOut 1s;
+  animation-delay: 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0; display: none;}
 }
