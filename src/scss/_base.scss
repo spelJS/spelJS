@@ -17,21 +17,20 @@ $laika-blue: #228DFF;
 ------------------------------------------------------------------------------*/
 
 body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
   background-color: $laika-black;
+  box-sizing: border-box;
   color: $laika-white;
+  display: flex;
+  flex-direction: column;
   font-family: $font-stack;
+  font-size: 1.3rem;
   height: 100vh;
+  justify-content: center;
   margin: 0;
   overflow: hidden;
   position: absolute;
   width: 100vw;
-  font-size: 13px;
-  font-size: 1.3rem;
   line-height: 1.5;
 }
 
@@ -254,9 +253,9 @@ a {
 }
 
 @keyframes flying {
-	0% {transform: rotate( 6deg );}
-	50% {transform: rotate( 12deg );}
-	100% {transform: rotate( 6deg );}
+  0% { transform: rotate( 6deg ); }
+  50% { transform: rotate( 12deg ); }
+  100% { transform: rotate( 6deg ); }
 }
 
 .player {
@@ -317,9 +316,9 @@ a {
 @keyframes monsterAnimation {
   0% { left: 100vw; transform: rotate( -12deg ); }
   25% { transform: rotate( 12deg ); }
-	50% { transform: rotate( -12deg ); }
+  50% { transform: rotate( -12deg ); }
   75% { transform: rotate( 12deg ); }
-	100% { left: -5vw; transform: rotate( -12deg ); }
+  100% { left: -5vw; transform: rotate( -12deg ); }
 }
 
 /* -----------------------------------------------------------------------------
