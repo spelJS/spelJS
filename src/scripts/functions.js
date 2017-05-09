@@ -22,8 +22,11 @@ export function updateURL(hash) {
  * @param  {string} gameContainer The element that should contain monsters.
  */
 export function generateMonsters(gameContainer) {
-  const monsterDiv = document.createElement('div');
+  const monsterDiv = document.createElement('div'),
+    monsterClasses = ['one', 'two', 'three'],
+    randomClass = monsterClasses[Math.floor(Math.random() * monsterClasses.length)];
   monsterDiv.classList.add('monster');
+  monsterDiv.classList.add(randomClass);
   gameContainer.appendChild(monsterDiv);
   setTimeout(() => {
     generateMonsters(gameContainer);
