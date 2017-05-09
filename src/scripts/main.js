@@ -4,17 +4,15 @@ import { listenOnHighscore } from './socket';
 
 const gameContainer = document.querySelector('.gameContainer-js');
 
-// Initialize game if gameContainer exists.
+// Updated URL and initialize game when user is logged in
 if (gameContainer) {
-  updateURL(window.location.hash)
-    .then(
-      fetch('/user', { credentials: 'include', headers: { accept: 'application/json' } })
-      .then(body => body.json())
-      .then((user) => {
-        initGame(gameContainer, user);
-      })
-    )
-  .catch(err => console.error(err));
+  updateURL(window.location.hash);
+  fetch('/user', { credentials: 'include', headers: { accept: 'application/json' } })
+    .then(body => body.json())
+    .then((user) => {
+      initGame(gameContainer, user);
+    })
+    .catch(err => console.error(err));
 }
 
 listenOnHighscore();

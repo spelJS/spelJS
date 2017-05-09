@@ -6,14 +6,9 @@
  * @param  {string} hash The current URL.
  */
 export function updateURL(hash) {
-  return new Promise((resolve, reject) => {
-    if (hash && hash === '#_=_') {
-      window.location.hash = 'play';
-      resolve();
-    } else {
-      reject(console.log('You are not logged in'));
-    }
-  });
+  if (hash && hash === '#_=_') {
+    window.location.hash = 'play';
+  }
 }
 
 /**
