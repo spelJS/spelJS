@@ -36,10 +36,10 @@ body {
 }
 
 * {
-  border: 1px solid yellow;
+  // border: 1px solid yellow;
 }
 
-@keyframes neon2 {
+@keyframes textGlow {
   from {
     text-shadow: 0 0 10px $laika-white, 0 0 20px $laika-white, 0 0 30px $laika-white, 0 0 40px $laika-blue, 0 0 70px $laika-blue, 0 0 80px $laika-blue, 0 0 100px $laika-blue, 0 0 150px $laika-blue;
   }
@@ -49,17 +49,13 @@ body {
 }
 
 .headline {
-  animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: textGlow 1.5s ease-in-out infinite alternate;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
   font-family: $font-title;
   font-size: 24px;
   font-size: 2.4rem;
-}
-.headline.inContainer {
-  font-size: 12px;
-  font-size: 1.2rem;
 }
 
 /* -----------------------------------------------------------------------------
@@ -172,11 +168,10 @@ a {
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
-  left: 0;
-  width: 100%;
-  padding: 0.7rem 0.9rem;
+  width: auto;
   position: fixed;
-  top: 0;
+  top: 4%;
+  right: 2%;
 
   .user-info__content {
     margin-right: 1rem;
@@ -193,8 +188,23 @@ a {
 ------------------------------------------------------------------------------*/
 
 .gameContainer {
-  margin-top: 2rem;
+  margin-top: 6rem;
   position: relative;
+  width: 100vw;
+  height: 60vh;
+}
+
+.gameInfo {
+  position: absolute;
+  top: 4%;
+  left: 2%;
+  p {
+    margin-top: 0;
+  }
+  .scoreText {
+    letter-spacing: 0.3em;
+    animation: textGlow 1.5s ease-in-out infinite alternate;
+  }
 }
 
 @keyframes laikaFireOnJump {
