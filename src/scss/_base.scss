@@ -5,10 +5,12 @@
 ------------------------------------------------------------------------------*/
 
 $font-stack: 'Lato', sans-serif;
+$font-title: 'Iceland', cursive;
 $laika-purple: #390099;
 $laika-pink: #ff0099;
 $laika-white: #f8f8f8;
 $laika-black: #0C090D;
+$laika-blue: #228DFF;
 
 /* -----------------------------------------------------------------------------
   GENERAL STYLES
@@ -28,14 +30,21 @@ body {
   overflow: hidden;
   position: absolute;
   width: 100vw;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+* {
+  //border: 1px solid yellow;
 }
 
 @keyframes neon2 {
   from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+    text-shadow: 0 0 10px $laika-white, 0 0 20px $laika-white, 0 0 30px $laika-white, 0 0 40px $laika-blue, 0 0 70px $laika-blue, 0 0 80px $laika-blue, 0 0 100px $laika-blue, 0 0 150px $laika-blue;
   }
   to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+    text-shadow: 0 0 5px $laika-white, 0 0 10px $laika-white, 0 0 15px $laika-white, 0 0 20px $laika-blue, 0 0 35px $laika-blue, 0 0 40px $laika-blue, 0 0 50px $laika-blue, 0 0 75px $laika-blue;
   }
 }
 
@@ -44,6 +53,9 @@ body {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
+  font-family: $font-title;
+  font-size: 24px;
+  font-size: 2.4rem;
 }
 
 /* -----------------------------------------------------------------------------
@@ -91,8 +103,8 @@ a {
     }
 
     &:hover {
-      background-color: $laika-white;
-      color: $laika-pink;
+      background-color: $laika-blue;
+      box-shadow: 0 0 5px $laika-white, 0 0 10px $laika-white, 0 0 15px $laika-white, 0 0 20px $laika-blue, 0 0 35px $laika-blue, 0 0 40px $laika-blue, 0 0 50px $laika-blue, 0 0 75px $laika-blue;
     }
   }
 }
@@ -202,6 +214,10 @@ a {
   z-index: -1;
   background-position: -168px;
   animation: flying 1s infinite;
+  .laika {
+    width: 100%;
+    height: auto;
+  }
   .laika.onJump {
     transform: rotate(-12deg);
     .laikaFire {
