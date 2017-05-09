@@ -6,7 +6,7 @@
 
 $font-stack: 'Lato', sans-serif;
 $laika-purple: #390099;
-$laika-lighter: #FF0054;
+$laika-pink: #ff0099;
 $laika-white: #f8f8f8;
 $laika-black: #0C090D;
 
@@ -15,6 +15,10 @@ $laika-black: #0C090D;
 ------------------------------------------------------------------------------*/
 
 body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   box-sizing: border-box;
   background-color: $laika-black;
   color: $laika-white;
@@ -22,7 +26,6 @@ body {
   height: 100vh;
   margin: 0;
   overflow: hidden;
-  padding: 4rem 2rem;
   position: absolute;
   width: 100vw;
 }
@@ -37,36 +40,65 @@ body {
 }
 
 .headline {
+  animation: neon2 1.5s ease-in-out infinite alternate;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
-  animation: neon2 1.5s ease-in-out infinite alternate;
 }
+
+/* -----------------------------------------------------------------------------
+  LINKS
+------------------------------------------------------------------------------*/
 
 a {
   color: $laika-white;
   text-decoration: none;
-  padding-bottom: 0.2em;
-  border-bottom: 2px solid $laika-white;
-}
 
-a:hover {
-  color: $laika-lighter;
-  border-bottom: 2px solid $laika-lighter;
-  transition: border-bottom 450ms ease, color 450ms ease;
-}
+  &:not(.loginButton) {
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid $laika-white;
+  }
 
-pre {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.login {
-  margin-top: 1rem;
+  &:hover:not(.loginButton) {
+    color: $laika-pink;
+    border-bottom: 2px solid $laika-pink;
+    transition: border-bottom 450ms ease, color 450ms ease;
+  }
 }
 
 /* -----------------------------------------------------------------------------
-  STYLES FOR THE STARRY BACKGROUND WITH GRADIENT
+  LOGIN BUTTON
+------------------------------------------------------------------------------*/
+
+.login {
+  margin-top: 2rem;
+
+  .loginButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    background-color: $laika-pink;
+    font-size: 1.4rem;
+    font-weight: 300;
+    padding: 0.7em 1em;
+    transition: background-color 650ms ease, color 650ms ease;
+
+    .facebook-icon {
+      margin-left: 0.5rem;
+      width: 1.7rem;
+      height: 1.7rem;
+    }
+
+    &:hover {
+      background-color: $laika-white;
+      color: $laika-pink;
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+  STARRY BACKGROUND WITH GRADIENT
 ------------------------------------------------------------------------------*/
 
 .backgroundVideo {
