@@ -15,7 +15,7 @@ module.exports = function mainView(req) {
           `
           :
           `
-            <h1 class="headline">Laika's Space<br>Adventure</h1>
+            <h1 class="headline">Laika's Space Adventure</h1>
             <div class="user-info">
               <div class="user-info__content">
                 <p>${req.user.name}</p>

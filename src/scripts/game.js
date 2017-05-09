@@ -9,7 +9,9 @@ export default function initGame(gameContainer, user) {
     playerX = parseInt(player.offsetLeft, 10),
     jumpPower = 9,
     gravity = 0.4,
-    pos = ['0', '0', '-168px', '-168px', '-112px', '-112px', '-168px', '-168px'];
+    pos = ['0', '0', '-168px', '-168px', '-112px', '-112px', '-168px', '-168px'],
+    spacedust = document.querySelector('.spacedust'),
+    headline = document.querySelector('.headline');
 
   // Updated frequently when game is active.
   let frame = 0,
@@ -21,6 +23,12 @@ export default function initGame(gameContainer, user) {
   /**
    * Gets called when user wants to jump to avoid enemies.
    */
+  function addClasses() {
+    spacedust.classList.add('show');
+    headline.classList.add('inContainer');
+  }
+
+  addClasses();
 
   function jump() {
     time += 1;
