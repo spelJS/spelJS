@@ -2,6 +2,21 @@
 // that can be extracted from game.js, then move it back in.
 
 /**
+ * Replace Facebook's return URL with '#play' when logging in.
+ * @param  {string} hash The current URL.
+ */
+export function updateURL(hash) {
+  return new Promise((resolve, reject) => {
+    if (hash && hash === '#_=_') {
+      window.location.hash = 'play';
+      resolve();
+    } else {
+      reject(console.log('You are not logged in'));
+    }
+  });
+}
+
+/**
  * Render monsters and append them to gameContainer
  * at a random interval.
  * @param  {string} gameContainer The element that should contain monsters.
