@@ -15,16 +15,17 @@ $laika-blue: #228DFF;
 /* -----------------------------------------------------------------------------
   GENERAL STYLES
 ------------------------------------------------------------------------------*/
+
 body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
   background-color: $laika-black;
+  box-sizing: border-box;
   color: $laika-white;
+  display: flex;
+  flex-direction: column;
   font-family: $font-stack;
   height: 100vh;
+  justify-content: center;
   margin: 0;
   overflow: hidden;
   position: absolute;
@@ -32,8 +33,17 @@ body {
   font-size: 0.9rem;
 }
 
-* {
-  //border: 1px solid yellow;
+/* -----------------------------------------------------------------------------
+  TYPOGRAPHY
+------------------------------------------------------------------------------*/
+
+p {
+  margin: 0.2em 0;
+}
+
+a {
+  text-decoration: none;
+  text-shadow: none;
 }
 
 @keyframes textGlow {
@@ -45,15 +55,23 @@ body {
   }
 }
 
+* {
+  // border: 1px solid yellow;
+}
+
 .headline {
   animation: textGlow 1.5s ease-in-out infinite alternate;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
-  margin-top: 0.2em;
+  margin: 0.2em;
   font-family: $font-title;
   font-size: 1.6rem;
 }
+
+/* -----------------------------------------------------------------------------
+  LOGIN PAGE
+------------------------------------------------------------------------------*/
 
 .logo {
   box-sizing: border-box;
@@ -62,20 +80,6 @@ body {
   height: 15rem;
   width: 15rem;
 }
-
-/* -----------------------------------------------------------------------------
-  LINKS
-------------------------------------------------------------------------------*/
-
-a {
-  text-decoration: none;
-  text-shadow: none;
-}
-
-
-/* -----------------------------------------------------------------------------
-  LOGIN BUTTON
-------------------------------------------------------------------------------*/
 
 .login {
   margin-top: 2rem;
@@ -122,46 +126,47 @@ a {
 }
 
 @keyframes spacedust {
-  from {background-position:10000px 0;}
-  to {background-position:0 0;}
+  from { background-position: 10000px 0px; }
+  to { background-position: 0px 0px; }
 }
 
 @keyframes stars {
-  0% {opacity: 0.3;}
-  50% {opacity: 1;}
-  100% {opacity: 0.3;}
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
 }
 
 .stars, .spacedust {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100%;
-  height:100%;
-  display:block;
+  bottom: 0;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
 }
 
 .stars {
-  animation:stars 2s linear infinite;
-  background:transparent url("img/stars.png") repeat top center;
-  z-index:-4;
+  animation: stars 2s linear infinite;
+  background: transparent url("img/stars.png") repeat top center;
+  z-index: -4;
 }
 
 .spacedust {
+  animation: spacedust 15s linear infinite;
+  background: transparent url("img/stardust.png") repeat top center;
   display: none;
-  animation:spacedust 15s linear infinite;
-  background:transparent url("img/stardust.png") repeat top center;
-  z-index:-2;
+  z-index: -2;
 }
 
 /* -----------------------------------------------------------------------------
-  USER INFO
+  USER INFO (SHOWN WHEN LOGGED IN)
 ------------------------------------------------------------------------------*/
 
 .user-info {
   align-items: center;
+  box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
   width: 90vw;
@@ -170,19 +175,23 @@ a {
     margin-right: 1rem;
     text-align: right;
     height: 100%;
+
     p {
       margin-top: 0;
     }
+
     p, a {
       color: $laika-white;
       line-height: 1.5;
       letter-spacing: 0.3em;
       animation: textGlow 1.5s ease-in-out infinite alternate;
     }
+
     a {
       border-bottom: 2px solid transparent;
       padding-bottom: 0.3em;
       transition: border-bottom 450ms ease;
+
       &:hover {
         border-bottom: 2px solid $laika-white;
       }
@@ -218,8 +227,8 @@ a {
   margin-top: 5%;
   width: 90vw;
   .scoreText {
-    letter-spacing: 0.3em;
     animation: textGlow 1.5s ease-in-out infinite alternate;
+    letter-spacing: 0.3em;
   }
   p {
     margin-top: 0;
@@ -229,6 +238,10 @@ a {
   }
 }
 
+/* -----------------------------------------------------------------------------
+  LAIKA (PLAYER)
+------------------------------------------------------------------------------*/
+
 @keyframes laikaFireOnJump {
   0% {stroke: none; stroke-width: 0;}
   50% {stroke: yellow; stroke-width: 100;}
@@ -236,9 +249,9 @@ a {
 }
 
 @keyframes flying {
-	0% {transform: rotate( 6deg );}
-	50% {transform: rotate( 12deg );}
-	100% {transform: rotate( 6deg );}
+  0% { transform: rotate( 6deg ); }
+  50% { transform: rotate( 12deg ); }
+  100% { transform: rotate( 6deg ); }
 }
 
 .player {
@@ -251,17 +264,25 @@ a {
   z-index: -1;
   background-position: -168px;
   animation: flying 1s infinite;
+
   .laika {
     width: 100%;
     height: auto;
   }
+
   .laika.onJump {
     transform: rotate(-12deg);
+
     .laikaFire {
       animation: laikaFireOnJump 1s;
     }
   }
 }
+
+/* -----------------------------------------------------------------------------
+  MONSTERS (ENEMIES)
+------------------------------------------------------------------------------*/
+
 .monster {
   position: absolute;
   left: 100vw;
@@ -275,23 +296,30 @@ a {
   background-repeat:no-repeat;
   background-size: 100% auto;
 }
+
 .monster.one {
   background-position: 0px 0px;
 }
+
 .monster.two {
   background-position: 0px -50px;
 }
+
 .monster.three {
   background-position: 0px -100px;
 }
 
 @keyframes monsterAnimation {
-  0% {left: 100vw; transform: rotate( -12deg );}
-  25% {transform: rotate( 12deg );}
-	50% {transform: rotate( -12deg );}
-  75% {transform: rotate( 12deg );}
-	100% {left: -5vw; transform: rotate( -12deg );}
+  0% { left: 100vw; transform: rotate( -12deg ); }
+  25% { transform: rotate( 12deg ); }
+  50% { transform: rotate( -12deg ); }
+  75% { transform: rotate( 12deg ); }
+  100% { left: -5vw; transform: rotate( -12deg ); }
 }
+
+/* -----------------------------------------------------------------------------
+  UTILITIES
+------------------------------------------------------------------------------*/
 
 .show {
   display: block;
@@ -308,6 +336,6 @@ a {
 }
 
 @keyframes fadeOut {
-  0% {opacity: 1;}
-  100% {opacity: 0;}
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
