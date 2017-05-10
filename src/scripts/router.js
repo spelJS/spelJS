@@ -1,19 +1,26 @@
 const highScoreContainer = require('../server/views/partials/highscore');
-// const gameContainer = require('../server/views/partials/game-container');
 
-export default function updateContent(element, container) {
-  const link = document.querySelector(element);
-  if (link) {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
+export default function updateContent(container) {
+  const playGame = document.querySelector('.play-js');
+  const viewHighscore = document.querySelector('.highscore-js');
 
-      if (element === '.play-js') {
+  return new Promise((resolve, reject) => {
+    if (playGame && viewHighscore) {
+      playGame.addEventListener('click', (e) => {
+        e.preventDefault();
         history.pushState(null, null, '/#play');
-        container.innerHTML = '<h1>Play Game</h1>';
-      } else if (element === '.highscore-js') {
+        container.innerHTML = '<h1 class="headline">Play game!</h1>';
+        resolve();
+      });
+
+      viewHighscore.addEventListener('click', (e) => {
+        e.preventDefault();
         history.pushState(null, null, '/highscore');
         container.innerHTML = `${highScoreContainer()}`;
-      }
-    });
-  }
+        resolve();
+      });
+    } else {
+      reject(console.log('Oops, something went wrong!'));
+    }
+  });
 }

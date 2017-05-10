@@ -37,7 +37,8 @@ exports.addUser = function addUser(profile) {
           id: profile.id,
           name: profile.displayName,
           photo: profile.photos[0].value,
-          highscore: 0
+          highscore: 0,
+          friends: profile._json.friends.data
         };
 
         users.push(user); // Push user to list of users

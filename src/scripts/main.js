@@ -19,5 +19,4 @@ if (gameContainer) {
 
 listenOnHighscore();
 
-updateContent('.play-js', content);
-updateContent('.highscore-js', content);
+updateContent(content);
