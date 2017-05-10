@@ -5,23 +5,22 @@ export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     player = document.querySelector('.player-js'),
-    playerTop = 158,
-    playerX = parseInt(player.offsetLeft, 10),
+    playerTop = player.offsetTop,
+    playerX = player.offsetLeft,
     jumpPower = 9,
-    gravity = 0.4,
-    pos = ['0', '0', '-168px', '-168px', '-112px', '-112px', '-168px', '-168px'],
+    gravity = 0.275,
     spacedust = document.querySelector('.spacedust'),
     gameInstructions = document.querySelector('.gameInstructions');
 
   // Updated frequently when game is active.
   let frame = 0,
     time = 0,
-    movY = 0,
+    playerJumpY = 0,
     score = 0,
     highest = user.highscore;
 
   /**
-   * Gets called when user wants to jump to avoid enemies.
+   * Displays spacedust and hides game instructions when the game begins
    */
   function addClasses() {
     spacedust.classList.add('show');
@@ -30,16 +29,19 @@ export default function initGame(gameContainer, user) {
 
   addClasses();
 
+  /**
+   * Gets called when user wants to jump to avoid enemies.
+   */
   function jump() {
     time += 1;
-    movY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));
+    playerJumpY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));
 
-    if (movY < 0) {
-      movY = 0;
+    if (playerJumpY < 0) {
+      playerJumpY = 0;
     }
 
-    player.style.top = (playerTop - movY) + 'px';
-    if (movY === 0) {
+    player.style.top = (playerTop - playerJumpY) + 'px';
+    if (playerJumpY === 0) {
       time = 0;
     } else {
       requestAnimationFrame(jump);
@@ -55,7 +57,6 @@ export default function initGame(gameContainer, user) {
   function render() {
     requestAnimationFrame(render);
     frame = (frame + 1) % 8;
-    player.style.backgroundPosition = pos[frame];
     scoreSpan.textContent = score;
     $('.monster').each(function (i) {
       var item = $(this);
@@ -68,7 +69,7 @@ export default function initGame(gameContainer, user) {
       }
 
       // If the player collides with the enemy
-      if (((posX - playerX) < 168) && ((posX - playerX) > -25) && (movY < 50)) {
+      if (((posX - playerX) < 168) && ((posX - playerX) > -25) && (playerJumpY < 50)) {
         scoreSpan.textContent = 0;
         score = 0;
         item.remove();

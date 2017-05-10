@@ -31,6 +31,7 @@ body {
   position: absolute;
   width: 100vw;
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 /* -----------------------------------------------------------------------------
@@ -46,9 +47,6 @@ p,
 a:not(.loginButton) {
   animation: textGlow 1.5s ease-in-out infinite alternate;
   color: $laika-white;
-  font-size: 13px;
-  font-size: 1.3rem;
-  line-height: 1.5;
   letter-spacing: 0.3em;
   margin: 0.2em 0;
 }
@@ -73,7 +71,7 @@ a:not(.loginButton) {
 }
 
 * {
-  // border: 1px solid yellow;
+  border: 1px solid yellow;
 }
 
 .headline {
@@ -143,8 +141,8 @@ a:not(.loginButton) {
 }
 
 @keyframes spacedust {
-  from { background-position: 10000px 0px; }
-  to { background-position: 0px 0px; }
+  from { background-position: left center; }
+  to { background-position: 200% center; }
 }
 
 @keyframes stars {
@@ -171,8 +169,9 @@ a:not(.loginButton) {
 }
 
 .spacedust {
-  animation: spacedust 15s linear infinite;
+  //animation: spacedust 3s linear infinite;
   background: transparent url("img/stardust.png") repeat top center;
+  background-size: 200%;
   display: none;
   z-index: -2;
 }
@@ -182,7 +181,9 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .user-info {
-  align-items: center;
+  position: absolute;
+  top: 4%;
+  align-items: flex-start;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
@@ -218,7 +219,7 @@ a:not(.loginButton) {
   margin-top: 0;
   position: relative;
   width: 100vw;
-  height: 65vh;
+  height: 50vh;
 }
 
 .gameInfo {
@@ -257,8 +258,10 @@ a:not(.loginButton) {
   width: 168px;
   height: 135px;
   position: absolute;
-  top: 158px;
-  left: 150px;
+  top: 5%;
+  //top: 158px;
+  left: 5%;
+  //left: 150px;
   display: block;
   z-index: -1;
   background-position: -168px;
@@ -293,11 +296,12 @@ a:not(.loginButton) {
 .monster {
   position: absolute;
   left: 100vw;
-  top: 200px;
+  //top: 200px;
+  top: 10%;
   width: 50px;
   height: 50px;
   display: block;
-  animation: monsterAnimation 2s;
+  animation: monsterAnimation 1s;
   animation-timing-function: linear;
   background-image: url("img/spritesheet.png");
   background-repeat:no-repeat;
