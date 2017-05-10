@@ -46,6 +46,10 @@ export default function initGame(gameContainer, user) {
     }
   }
 
+  function removeDamage() {
+    document.querySelector('.player').classList.remove('damage');
+  }
+
   // FIXME: make sure that this contain as little code and calculations as
   // possible, since all of it get calculated/rendered 60 times a second.
   function render() {
@@ -68,6 +72,8 @@ export default function initGame(gameContainer, user) {
         scoreSpan.textContent = 0;
         score = 0;
         item.remove();
+        document.querySelector('.player').classList.add('damage');
+        setTimeout(removeDamage, 150);
       }
 
       // Display High Score
