@@ -169,7 +169,7 @@ a:not(.loginButton) {
 }
 
 .spacedust {
-  //animation: spacedust 3s linear infinite;
+  animation: spacedust 3s linear infinite;
   background: transparent url("img/stardust.png") repeat top center;
   background-size: 200%;
   display: none;
@@ -259,9 +259,7 @@ a:not(.loginButton) {
   height: 135px;
   position: absolute;
   top: 5%;
-  //top: 158px;
   left: 5%;
-  //left: 150px;
   display: block;
   z-index: -1;
   background-position: -168px;
@@ -296,7 +294,6 @@ a:not(.loginButton) {
 .monster {
   position: absolute;
   left: 100vw;
-  //top: 200px;
   top: 10%;
   width: 50px;
   height: 50px;
