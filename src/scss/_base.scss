@@ -29,13 +29,11 @@ body {
   overflow: hidden;
   position: absolute;
   width: 100vw;
-  font-size: 13px;
-  font-size: 1.3rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
 }
 
 * {
-  // border: 1px solid yellow;
+  //border: 1px solid yellow;
 }
 
 @keyframes textGlow {
@@ -54,8 +52,7 @@ body {
   letter-spacing: 0.4em;
   margin-top: 0.2em;
   font-family: $font-title;
-  font-size: 24px;
-  font-size: 2.4rem;
+  font-size: 1.6rem;
 }
 
 .logo {
@@ -89,7 +86,7 @@ a {
     border-radius: 2px;
     color: $laika-white;
     display: flex;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
     justify-content: center;
     padding: 0.7em 1em;
@@ -164,26 +161,20 @@ a {
 ------------------------------------------------------------------------------*/
 
 .user-info {
-  box-sizing: border-box;
   align-items: center;
   display: flex;
-  font-size: 0.9rem;
   justify-content: flex-end;
-  width: auto;
-  position: fixed;
-  top: 4%;
-  right: 2%;
+  width: 90vw;
 
   .user-info__content {
-    margin-right: 2rem;
+    margin-right: 1rem;
     text-align: right;
+    height: 100%;
     p {
       margin-top: 0;
     }
     p, a {
       color: $laika-white;
-      font-size: 13px;
-      font-size: 1.3rem;
       line-height: 1.5;
       letter-spacing: 0.3em;
       animation: textGlow 1.5s ease-in-out infinite alternate;
@@ -200,15 +191,12 @@ a {
 
   .photo__container {
     box-shadow: 0 0 2px $laika-white, 0 0 10px $laika-white, 0 0 2px $laika-white, 0 0 15px $laika-blue, 0 0 15px $laika-blue, 0 0 15px $laika-blue, 0 0 5px $laika-blue, 0 0 2px $laika-blue;
-    display: block;
-    position: relative;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     overflow: hidden;
   }
 
   .photo {
-    display: block;
     width: 100%;
   }
 }
@@ -219,22 +207,25 @@ a {
 ------------------------------------------------------------------------------*/
 
 .gameContainer {
-  margin-top: 6rem;
+  margin-top: 0;
   position: relative;
   width: 100vw;
-  height: 60vh;
+  height: 65vh;
 }
 
 .gameInfo {
-  position: absolute;
-  top: 4%;
-  left: 2%;
-  p {
-    margin-top: 0;
-  }
+  text-align: right;
+  margin-top: 5%;
+  width: 90vw;
   .scoreText {
     letter-spacing: 0.3em;
     animation: textGlow 1.5s ease-in-out infinite alternate;
+  }
+  p {
+    margin-top: 0;
+  }
+  .gameInstructions {
+    margin-bottom: 0;
   }
 }
 
@@ -318,5 +309,5 @@ a {
 
 @keyframes fadeOut {
   0% {opacity: 1;}
-  100% {opacity: 0; display: none;}
+  100% {opacity: 0;}
 }
