@@ -38,13 +38,30 @@ body {
   TYPOGRAPHY
 ------------------------------------------------------------------------------*/
 
-p {
-  margin: 0.2em 0;
-}
-
 a {
   text-decoration: none;
   text-shadow: none;
+}
+
+p,
+a:not(.loginButton) {
+  animation: textGlow 1.5s ease-in-out infinite alternate;
+  color: $laika-white;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  letter-spacing: 0.3em;
+  margin: 0.2em 0;
+}
+
+a:not(.loginButton) {
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.3em;
+  transition: border-bottom 450ms ease;
+
+  &:hover {
+    border-bottom: 2px solid $laika-white;
+  }
 }
 
 @keyframes textGlow {
@@ -183,25 +200,6 @@ a {
     p {
       margin-top: 0;
     }
-
-    p, a {
-      color: $laika-white;
-      font-size: 13px;
-      font-size: 1.3rem;
-      line-height: 1.5;
-      letter-spacing: 0.3em;
-      animation: textGlow 1.5s ease-in-out infinite alternate;
-    }
-
-    a {
-      border-bottom: 2px solid transparent;
-      padding-bottom: 0.3em;
-      transition: border-bottom 450ms ease;
-
-      &:hover {
-        border-bottom: 2px solid $laika-white;
-      }
-    }
   }
 
   .photo__container {
@@ -218,7 +216,6 @@ a {
     width: 100%;
   }
 }
-
 
 /* -----------------------------------------------------------------------------
   GAME CONTAINER

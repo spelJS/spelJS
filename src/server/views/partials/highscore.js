@@ -1,3 +1,5 @@
+// TODO: This should get rendered from users.json.
+
 module.exports = function highscore() {
   return `
   <div class="highscoreContainer highscoreContainer-js">
