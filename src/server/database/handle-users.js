@@ -20,7 +20,9 @@ exports.getUserById = function getUserById(id) {
 };
 
 /**
- * Add new user to database
+ * Add new user to database, and also add this user to other user's
+ * friendlist, if they are friends on Facebook.
+ *
  * @param {object}  profile   Information retrieved from Facebook profile
  * @return {object} user      The user with information about profile photo etc.
  */
@@ -32,18 +34,37 @@ exports.addUser = function addUser(profile) {
         reject(error);
       } else {
         const users = JSON.parse(data); // Save users in variable
+        const userFriendList = profile._json.friends.data;
+        const friendsId = [];
 
+        // Push all the user's friends Facebook Id's to an array
+        for (let i = 0; i < userFriendList.length; i += 1) {
+          friendsId.push(userFriendList[i].id);
+        }
+
+        // FIXME: Right now, there is a possibility for duplicates
+        for (let i = 0; i < users.length; i += 1) {
+          if (friendsId.includes(users[i].id)) {
+            users[i].friends.push({
+              name: profile.displayName,
+              id: profile.id
+            });
+          }
+        }
+
+        // Create the user based on information from Facebook
         const user = {
           id: profile.id,
           name: profile.displayName,
           photo: profile.photos[0].value,
           highscore: 0,
-          friends: profile._json.friends.data
+          friends: profile._json.friends.data || [] // TODO: Is this correct?
         };
 
         users.push(user); // Push user to list of users
         const json = JSON.stringify(users, null, 2); // Convert list to json
 
+        // Update database
         fs.writeFile('src/server/database/users.json', json, 'utf8', (error) => {
           error ? reject(error) : resolve(user);
         });
