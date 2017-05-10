@@ -319,6 +319,26 @@ a:not(.loginButton) {
 }
 
 /* -----------------------------------------------------------------------------
+  NAVIGATION
+------------------------------------------------------------------------------*/
+
+.navigation__list {
+  list-style-type: none;
+  padding-left: 0;
+
+  .navigation__list-item {
+    display: inline;
+  }
+
+  .navigation__list-item:not(:last-of-type)::after {
+    content: "|";
+    margin: 1rem;
+    animation: textGlow 1.5s ease-in-out infinite alternate;
+
+  }
+}
+
+/* -----------------------------------------------------------------------------
   UTILITIES
 ------------------------------------------------------------------------------*/
 
