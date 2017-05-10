@@ -32,7 +32,15 @@ module.exports = function mainView(req) {
               <p class="scoreText">Score: <span class="scoreSpan-js">0</span></p>
               <p class="gameInstructions">Press space or arrow up to jump</p>
             </div>
-            ${gameContainer(req.user.highscore)}
+            <div class="content content-js">
+              ${gameContainer(req.user.highscore)}
+            </div>
+            <nav class="navigation navigation-js">
+              <ul class="navigation__list">
+                <li class="navigation__list-item play-js"><a href="/#play">Play Game</a></li>
+                <li class="navigation__list-item highscore-js"><a href="/highscore">View Highscore</a></li>
+              </ul>
+            </nav>
           `
         }
       </div>

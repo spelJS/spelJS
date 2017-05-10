@@ -1,7 +1,9 @@
 import { updateURL } from './functions';
+import updateContent from './router';
 import initGame from './game';
 import { listenOnHighscore } from './socket';
 
+const content = document.querySelector('.content-js');
 const gameContainer = document.querySelector('.gameContainer-js');
 
 // Updated URL and initialize game when user is logged in
@@ -16,3 +18,6 @@ if (gameContainer) {
 }
 
 listenOnHighscore();
+
+updateContent('.play-js', content);
+updateContent('.highscore-js', content);
