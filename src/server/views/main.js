@@ -44,8 +44,6 @@ module.exports = function mainView(req) {
           `
         }
       </div>
-      ${footer()}
+      ${footer(req)}
   `;
 };
-
-// <pre>${JSON.stringify(req.user, null, 2)}</pre>

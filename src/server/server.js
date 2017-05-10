@@ -64,7 +64,7 @@ passport.use(new FacebookStrategy({
   clientID,
   clientSecret,
   callbackURL,
-  profileFields: ['id', 'displayName', 'picture.type(large)']
+  profileFields: ['id', 'displayName', 'picture.type(large)', 'friends']
 }, function (accessToken, refreshToken, profile, done) {
   // Check if user already exists in database
   getUserById(profile.id)
