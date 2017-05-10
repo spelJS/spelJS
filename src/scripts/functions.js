@@ -7,23 +7,6 @@
  */
 export function updateURL(hash) {
   if (hash && hash === '#_=_') {
-    window.location.hash = 'play';
+    history.pushState(null, null, '/play');
   }
-}
-
-/**
- * Render monsters and append them to gameContainer
- * at a random interval.
- * @param  {string} gameContainer The element that should contain monsters.
- */
-export function generateMonsters(gameContainer) {
-  const monsterDiv = document.createElement('div'),
-    monsterClasses = ['one', 'two', 'three'],
-    randomClass = monsterClasses[Math.floor(Math.random() * monsterClasses.length)];
-  monsterDiv.classList.add('monster');
-  monsterDiv.classList.add(randomClass);
-  gameContainer.appendChild(monsterDiv);
-  setTimeout(() => {
-    generateMonsters(gameContainer);
-  }, Math.round(2000 + (Math.random() * 2000)));
 }

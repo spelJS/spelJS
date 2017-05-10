@@ -13,7 +13,8 @@ export default function initGame(gameContainer, user) {
     gameInstructions = document.querySelector('.gameInstructions');
 
   // Updated frequently when game is active.
-  let frame = 0,
+  let isActive = true,
+    frame = 0,
     time = 0,
     playerJumpY = 0,
     score = 0,
@@ -55,12 +56,17 @@ export default function initGame(gameContainer, user) {
   // FIXME: make sure that this contain as little code and calculations as
   // possible, since all of it get calculated/rendered 60 times a second.
   function render() {
+    if (!isActive) {
+      return;
+    }
     requestAnimationFrame(render);
     frame = (frame + 1) % 8;
     scoreSpan.textContent = score;
+
+    // TODO: Replace this code with less demanding one
     $('.monster').each(function (i) {
       var item = $(this);
-      var posX = item.position().left;
+      var posX = item.position().left; // FIXME: Stop reading from DOM
 
       // If the enemy leaves the stage without colliding with the player
       if (posX < 0) {
@@ -92,6 +98,10 @@ export default function initGame(gameContainer, user) {
 
   // Make player jump by hitting 'space' or 'up arrow'
   document.addEventListener('keydown', function (e) {
+    if (!isActive) {
+      return;
+    }
+
     if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
       e.preventDefault();
       jump();
@@ -100,7 +110,33 @@ export default function initGame(gameContainer, user) {
     }
   });
 
-  // TODO: Remove monsters when they are no longer visible
+  /**
+   * Render monsters and append them to gameContainer
+   * at a random interval.
+   * @param  {string} gameContainer The element that should contain monsters.
+   */
+  function generateMonsters(gameContainer) {
+    if (!isActive) {
+      return;
+    }
+
+    const monsterDiv = document.createElement('div'),
+      monsterClasses = ['one', 'two', 'three'],
+      randomClass = monsterClasses[Math.floor(Math.random() * monsterClasses.length)];
+    monsterDiv.classList.add('monster');
+    monsterDiv.classList.add(randomClass);
+    gameContainer.appendChild(monsterDiv);
+    setTimeout(() => {
+      generateMonsters(gameContainer);
+    }, Math.round(2000 + (Math.random() * 2000)));
+  }
+
   generateMonsters(gameContainer);
   render();
+
+  return {
+    stop() {
+      isActive = false;
+    }
+  };
 }

@@ -99,7 +99,7 @@ app.get('/login', passport.authenticate('facebook', { scope: 'user_friends' }));
 app.get('/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect('/');
+    res.redirect('/play');
   }
 );
 
@@ -112,11 +112,6 @@ app.get('/logout', function (req, res) {
 // Use folder 'build' for static files.
 app.use(express.static('build'));
 
-// Redirect to main page
-app.get('/', (req, res) => {
-  res.send(mainView(req));
-});
-
 app.get('/user', (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
@@ -125,10 +120,15 @@ app.get('/user', (req, res) => {
   }
 });
 
-// If no other page is specified or found, 404 is shown.
+// Redirect to main page
 app.get('*', (req, res) => {
-  res.send(notFound());
+  res.send(mainView(req));
 });
+
+// If no other page is specified or found, 404 is shown.
+// app.get('*', (req, res) => {
+//   res.send(notFound(req));
+// });
 
 // Listen on http://localhost:3000/
 server.listen(3000);

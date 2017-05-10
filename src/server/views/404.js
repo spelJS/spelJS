@@ -1,18 +1,10 @@
-module.exports = function notFound() {
+const header = require('./partials/header');
+const footer = require('./partials/footer');
+
+module.exports = function notFound(req) {
   return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Ooops!</title>
-    </head>
-    <body>
-      <h1>The page you are looking for is not found</h1>
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="/main.js"></script>
-    </body>
-    </html>
+    ${header()}
+      <h1 class="headline">The page you are looking for is not found</h1>
+    ${footer(req)}
   `;
 };
