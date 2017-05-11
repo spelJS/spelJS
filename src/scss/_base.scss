@@ -11,6 +11,7 @@ $laika-pink: #ff0099;
 $laika-white: #f8f8f8;
 $laika-black: #0C090D;
 $laika-blue: #228DFF;
+$glow: 0 0 10px $laika-white, 0 0 20px $laika-white, 0 0 30px $laika-white, 0 0 40px $laika-blue, 0 0 70px $laika-blue, 0 0 80px $laika-blue, 0 0 100px $laika-blue, 0 0 150px $laika-blue;
 
 /* -----------------------------------------------------------------------------
   GENERAL STYLES
@@ -45,7 +46,9 @@ a {
 
 p,
 a:not(.loginButton) {
-  animation: textGlow 1.5s ease-in-out infinite alternate;
+  &:not(.gameInstructions) {
+    text-shadow: $glow;
+  }
   color: $laika-white;
   letter-spacing: 0.3em;
   margin: 0.2em 0;
@@ -61,21 +64,12 @@ a:not(.loginButton) {
   }
 }
 
-@keyframes textGlow {
-  from {
-    text-shadow: 0 0 10px $laika-white, 0 0 20px $laika-white, 0 0 30px $laika-white, 0 0 40px $laika-blue, 0 0 70px $laika-blue, 0 0 80px $laika-blue, 0 0 100px $laika-blue, 0 0 150px $laika-blue;
-  }
-  to {
-    text-shadow: 0 0 5px $laika-white, 0 0 10px $laika-white, 0 0 15px $laika-white, 0 0 20px $laika-blue, 0 0 35px $laika-blue, 0 0 40px $laika-blue, 0 0 50px $laika-blue, 0 0 75px $laika-blue;
-  }
+* {
+  //border: 1px solid yellow;
 }
 
-// * {
-//   border: 1px solid yellow;
-// }
-
 .headline {
-  animation: textGlow 1.5s ease-in-out infinite alternate;
+  text-shadow: $glow;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
@@ -140,11 +134,6 @@ a:not(.loginButton) {
   filter: brightness(40%);
 }
 
-@keyframes spacedust {
-  from { background-position: left center; }
-  to { background-position: 200% center; }
-}
-
 @keyframes stars {
   0% { opacity: 0.3; }
   50% { opacity: 1; }
@@ -154,12 +143,12 @@ a:not(.loginButton) {
 .stars, .spacedust {
   bottom: 0;
   display: block;
-  height: 100%;
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
-  width: 100%;
+  height: auto;
+  width: 100vw;
 }
 
 .stars {
@@ -169,9 +158,10 @@ a:not(.loginButton) {
 }
 
 .spacedust {
-  animation: spacedust 3s linear infinite;
-  background: transparent url("img/stardust.png") repeat top center;
-  background-size: 200%;
+  top: 50%;
+  width: 200vw;
+  background: transparent url("img/stardust.png") no-repeat;
+  background-size:contain;
   display: none;
   z-index: -2;
 }
@@ -227,7 +217,7 @@ a:not(.loginButton) {
   margin-top: 5%;
   width: 90vw;
   .scoreText {
-    animation: textGlow 1.5s ease-in-out infinite alternate;
+    text-shadow: $glow;
     letter-spacing: 0.3em;
   }
   p {
@@ -238,23 +228,18 @@ a:not(.loginButton) {
   }
 }
 
-/* -----------------------------------------------------------------------------
-  LAIKA (PLAYER)
-------------------------------------------------------------------------------*/
-
-@keyframes laikaFireOnJump {
-  0% {stroke: none; stroke-width: 0;}
-  50% {stroke: yellow; stroke-width: 100;}
-  100% {stroke: none; stroke-width: 0;}
-}
-
 @keyframes flying {
   0% { transform: rotate( 6deg ); }
   50% { transform: rotate( 12deg ); }
   100% { transform: rotate( 6deg ); }
 }
 
+/* -----------------------------------------------------------------------------
+  LAIKA (PLAYER)
+------------------------------------------------------------------------------*/
+
 .player {
+  animation: flying 1s infinite;
   width: 168px;
   height: 135px;
   position: absolute;
@@ -263,7 +248,6 @@ a:not(.loginButton) {
   display: block;
   z-index: -1;
   background-position: -168px;
-  animation: flying 1s infinite;
 
   .laika {
     width: 100%;
@@ -272,9 +256,9 @@ a:not(.loginButton) {
 
   .laika.onJump {
     transform: rotate(-12deg);
-
     .laikaFire {
-      animation: laikaFireOnJump 1s;
+      stroke: yellow;
+      stroke-width: 80;
     }
   }
 }
@@ -292,14 +276,13 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .monster {
+  animation: flying 1s infinite;
   position: absolute;
   left: 100vw;
   top: 10%;
   width: 50px;
   height: 50px;
   display: block;
-  animation: monsterAnimation 1s;
-  animation-timing-function: linear;
   background-image: url("img/spritesheet.png");
   background-repeat:no-repeat;
   background-size: 100% auto;
@@ -315,14 +298,6 @@ a:not(.loginButton) {
 
 .monster.three {
   background-position: 0px -100px;
-}
-
-@keyframes monsterAnimation {
-  0% { left: 100vw; transform: rotate( -12deg ); }
-  25% { transform: rotate( 12deg ); }
-  50% { transform: rotate( -12deg ); }
-  75% { transform: rotate( 12deg ); }
-  100% { left: -5vw; transform: rotate( -12deg ); }
 }
 
 /* -----------------------------------------------------------------------------
@@ -349,7 +324,7 @@ a:not(.loginButton) {
     .navigation__list-item:not(:last-of-type)::after {
       content: "|";
       margin: 1rem;
-      animation: textGlow 1.5s ease-in-out infinite alternate;
+      text-shadow: $glow;
 
     }
   }
@@ -365,15 +340,4 @@ a:not(.loginButton) {
 
 .hide {
   display: none;
-}
-
-.fadeOut {
-  animation: fadeOut 1s;
-  animation-delay: 4s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
 }

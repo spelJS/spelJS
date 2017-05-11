@@ -1,5 +1,6 @@
 import { sendScore } from './socket';
 import { generateMonsters } from './functions';
+import { monsterAnimation, moveSpacedust, fadeOutEffect } from './animations';
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
@@ -21,14 +22,22 @@ export default function initGame(gameContainer, user) {
     highest = user.highscore;
 
   /**
-   * Displays spacedust and hides game instructions when the game begins
-   */
+  * Displays spacedust when the game begins
+  */
   function addClasses() {
     spacedust.classList.add('show');
-    gameInstructions.classList.add('fadeOut');
   }
-
   addClasses();
+
+  /**
+  * Moves spacedust from left to right
+  */
+  moveSpacedust(spacedust);
+
+  /**
+  * Fades out the game instructions after four seconds
+  */
+  setTimeout(() => fadeOutEffect(gameInstructions), 4000);
 
   /**
    * Gets called when user wants to jump to avoid enemies.
@@ -107,6 +116,7 @@ export default function initGame(gameContainer, user) {
       jump();
       document.querySelector('.laika').classList.add('onJump');
       setTimeout(removeOnJump, 700);
+      // TODO: transition end
     }
   });
 
@@ -124,11 +134,13 @@ export default function initGame(gameContainer, user) {
       monsterClasses = ['one', 'two', 'three'],
       randomClass = monsterClasses[Math.floor(Math.random() * monsterClasses.length)];
     monsterDiv.classList.add('monster');
+    monsterDiv.classList.add('monster-js');
     monsterDiv.classList.add(randomClass);
     gameContainer.appendChild(monsterDiv);
     setTimeout(() => {
       generateMonsters(gameContainer);
     }, Math.round(2000 + (Math.random() * 2000)));
+    monsterAnimation(monsterDiv);
   }
 
   generateMonsters(gameContainer);
