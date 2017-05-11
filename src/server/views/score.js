@@ -1,7 +1,6 @@
 const header = require('./partials/header');
 const logo = require('./partials/logo');
 const icon = require('./partials/facebook-icon');
-const gameContainer = require('./partials/game-container');
 const userInfo = require('./partials/user-info');
 const highscore = require('./partials/highscore');
 const navigation = require('./partials/navigation');
