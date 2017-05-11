@@ -12,7 +12,8 @@ const notFound = require('./views/404');
 const {
   getUserById,
   addUser,
-  updateUserHighScore
+  updateUserHighScore,
+  getScore
 } = require('./database/handle-users');
 
 // Set up an instance of express
@@ -113,9 +114,22 @@ app.get('/logout', function (req, res) {
 // Use folder 'build' for static files.
 app.use(express.static('build'));
 
-app.get('/user', (req, res) => {
+// Used for getting information about user when logging in.
+app.get('/getuser', (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
+  } else {
+    res.status(401).send('Not logged in, fool!');
+  }
+});
+
+// Used for getting information about highscore.
+app.get('/getscore', (req, res) => {
+  if (req.isAuthenticated()) {
+    getScore(req.user)
+    .then((json) => {
+      res.json(json);
+    });
   } else {
     res.status(401).send('Not logged in, fool!');
   }

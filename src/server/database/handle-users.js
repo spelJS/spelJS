@@ -97,3 +97,18 @@ exports.updateUserHighScore = function (data) {
     });
   });
 };
+
+
+exports.getScore = function (user) {
+  return new Promise((resolve, reject) => {
+    fs.readFile('src/server/database/users.json', function readFileCallback(error, dataBase) {
+      if (error) {
+        reject(error);
+      } else {
+        console.log(user);
+        const users = JSON.parse(dataBase);
+        resolve(users);
+      }
+    });
+  });
+};
