@@ -5,6 +5,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 
 const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
+const scoreView = require('./views/score');
 const notFound = require('./views/404');
 
 // The functions for handling user database.
@@ -120,11 +121,17 @@ app.get('/user', (req, res) => {
   }
 });
 
+// Redirect to highscore page
+app.get('/highscore', (req, res) => {
+  res.send(scoreView(req));
+});
+
 // Redirect to main page
 app.get('*', (req, res) => {
   res.send(mainView(req));
 });
 
+// TODO: Figure out if you would like to handle 404, else remove.
 // If no other page is specified or found, 404 is shown.
 // app.get('*', (req, res) => {
 //   res.send(notFound(req));

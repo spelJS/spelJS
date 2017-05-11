@@ -1,4 +1,5 @@
-module.exports = function highscore() {
+// TODO: Figure out if you need the request here.
+module.exports = function highscore(req) {
   return `
   <div class="highscoreContainer highscoreContainer-js">
     <h2 class="headline headline--highscore">All Time High</h2>
