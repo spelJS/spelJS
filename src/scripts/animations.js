@@ -5,28 +5,27 @@
  */
 
   export function monsterAnimation(monsterDiv) {
-    const elem = monsterDiv,
-      monsterAnimationId = setInterval(frame, 8);
+    const elem = monsterDiv;
     let monsterAnimationPos = 100;
     function frame() {
       if (monsterAnimationPos === -10) {
-        clearInterval(monsterAnimationId);
+        clearInterval();
       } else {
         monsterAnimationPos -= 1;
         elem.style.left = monsterAnimationPos + '%';
       }
     }
+    setInterval(frame, 8);
   }
 
   /**
    * Moves spacedust from left to right
-   * @param  {string} spacedust Div element with background-image "stardust.png".
+   * @param  {string} spacedust A div element with background-image "stardust.png".
    * Located in src/server/views/partials/header.js
    */
 
   export function moveSpacedust(spacedust) {
-    const elem = spacedust,
-    spacedustId = setInterval(frame, 15);
+    const elem = spacedust;
     let spacedustPos = 100;
     function frame() {
       if (spacedustPos === -200) {
@@ -36,6 +35,7 @@
         elem.style.left = spacedustPos + 'vw';
       }
     }
+    setInterval(frame, 15);
   }
 
   /**
@@ -45,15 +45,30 @@
    */
 
   export function fadeOutEffect(gameInstructions) {
-    var fadeTarget = gameInstructions;
-    var fadeEffect = setInterval(function () {
-      if (!fadeTarget.style.opacity) {
-        fadeTarget.style.opacity = 1;
-      }
-      if (fadeTarget.style.opacity < 0.1) {
-        clearInterval(fadeEffect);
-      } else {
-        fadeTarget.style.opacity -= 0.1;
-      }
-    }, 60);
+    const fadeTarget = gameInstructions,
+      fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+          fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity < 0.1) {
+          clearInterval(fadeEffect);
+        } else {
+          fadeTarget.style.opacity -= 0.1;
+        }
+      }, 60);
+  }
+
+  /**
+   * Makes the player red when it collides with an enemy
+   * @param  {string} player A div element located in
+   * src/server/views/partials/game-container.js
+   */
+
+  export function damage() {
+
+
+    const damageTarget = document.querySelector('.laika');
+    setInterval(function () {
+      damageTarget.path.style.fill = 'rgb(170, 0, 0)';
+    }, 150);
   }
