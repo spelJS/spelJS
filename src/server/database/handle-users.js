@@ -131,6 +131,12 @@ exports.getFriendsScore = function (user) {
             }
           }
         }
+
+        if (friendsScore.length > 3) {
+          console.log('Det finns fler än 3 vänner i listan!');
+          // TODO: Make sure to only return a sorted list of top 3.
+        }
+
         resolve(friendsScore);
       }
     });

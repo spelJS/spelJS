@@ -6,7 +6,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const scoreView = require('./views/score');
-const notFound = require('./views/404');
+// const notFound = require('./views/404');
 
 // The functions for handling user database.
 const {

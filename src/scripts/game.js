@@ -32,7 +32,7 @@ export default function initGame(gameContainer, user) {
   /**
   * Moves spacedust from left to right
   */
-  moveSpacedust(spacedust);
+  moveSpacedust(spacedust, isActive);
 
   /**
   * Fades out the game instructions after four seconds

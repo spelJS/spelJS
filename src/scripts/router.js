@@ -33,7 +33,7 @@ const gameContainer = require('../server/views/partials/game-container');
 //
 // router.on('/play', () => '<h1 class="headline">Play game!</h1>');
 
-export default function router(container, user, game) {
+export default function router(container, data, game) {
   const playGame = document.querySelector('.play-js');
   const viewHighscore = document.querySelector('.highscore-js');
   let currentGame = game;
@@ -43,8 +43,8 @@ export default function router(container, user, game) {
       playGame.addEventListener('click', (e) => {
         e.preventDefault();
         history.pushState(null, null, '/play');
-        container.innerHTML = gameContainer(user.highscore);
-        currentGame = initGame(container.firstElementChild, user);
+        container.innerHTML = gameContainer(data.highscore);
+        currentGame = initGame(container.firstElementChild, data);
         resolve();
       });
 
@@ -52,7 +52,14 @@ export default function router(container, user, game) {
         currentGame.stop();
         e.preventDefault();
         history.pushState(null, null, '/highscore');
-        container.innerHTML = `${highScoreContainer()}`;
+
+        fetch('/getscore', { credentials: 'include', headers: { accept: 'application/json' } })
+        .then(body => body.json())
+          .then((highscores) => {
+            container.innerHTML = highScoreContainer(highscores);
+          })
+          .catch(err => console.error(err));
+
         resolve();
       });
     } else {
