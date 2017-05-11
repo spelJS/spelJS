@@ -1,12 +1,11 @@
-// TODO: If generateMonsters is the only function
-// that can be extracted from game.js, then move it back in.
+// TODO: Before publishing, this needs to be updated!
 
 /**
- * Replace Facebook's return URL with '#play' when logging in.
+ * Remove weird URL ending added by Facebook.
  * @param  {string} hash The current URL.
  */
-export function updateURL(hash) {
-  if (hash && hash === '#_=_') {
+export function updateURL(href) {
+  if (href === 'http://localhost:3000/play#_=_') {
     history.pushState(null, null, '/play');
   }
 }
