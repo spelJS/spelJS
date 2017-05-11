@@ -12,6 +12,7 @@ module.exports = function header() {
       <title>Laika's Space Adventure</title>
     </head>
     <body>
+
       <video loop muted autoplay class="backgroundVideo">
         <source src="img/gradient.mp4" type="video/mp4">
       </video>
