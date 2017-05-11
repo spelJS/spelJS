@@ -12,11 +12,10 @@ module.exports = function header() {
       <title>Laika's Space Adventure</title>
     </head>
     <body>
-      <!---
       <video loop muted autoplay class="backgroundVideo">
         <source src="img/gradient.mp4" type="video/mp4">
       </video>
       <div class="stars"></div>
-      <div class="spacedust"></div> -->
+      <div class="spacedust"></div>
   `;
 };

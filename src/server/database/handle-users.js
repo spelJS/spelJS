@@ -98,16 +98,40 @@ exports.updateUserHighScore = function (data) {
   });
 };
 
-
-exports.getScore = function (user) {
+/**
+ * Get current user's friends' name and highscore.
+ * @param  {object} user            Current user
+ * @return {array}  friendsScore    A list of friends and
+ *                                  current user's highscore.
+ */
+exports.getFriendsScore = function (user) {
   return new Promise((resolve, reject) => {
     fs.readFile('src/server/database/users.json', function readFileCallback(error, dataBase) {
       if (error) {
         reject(error);
       } else {
-        console.log(user);
+        const currentUser = user;
         const users = JSON.parse(dataBase);
-        resolve(users);
+        const friendsScore = [{
+          name: currentUser.name,
+          highscore: currentUser.highscore
+        }];
+
+        // Loop through database to see who are friends with current user
+        for (let i = 0; i < users.length; i += 1) {
+          const usersFriends = users[i].friends;
+
+          // If friends, push their name and highscore to friendsScore.
+          for (let i = 0; i < usersFriends.length; i += 1) {
+            if (usersFriends[i].id === currentUser.id) {
+              friendsScore.push({
+                name: users[i].name,
+                highscore: users[i].highscore
+              });
+            }
+          }
+        }
+        resolve(friendsScore);
       }
     });
   });
