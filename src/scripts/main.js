@@ -1,4 +1,4 @@
-import { updateURL } from './functions';
+import { updateURL, spaceDust } from './functions';
 import router from './router';
 import initGame from './game';
 import { listenOnHighscore } from './socket';
@@ -16,6 +16,7 @@ if (gameContainer) {
       const game = initGame(gameContainer, user);
       router(content, user, game);
     })
+    .then(() => spaceDust())
     .catch(err => console.error(err));
 }
 
