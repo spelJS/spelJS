@@ -50,18 +50,28 @@ export default function initGame(gameContainer, user) {
     player.classList.remove('onJump');
   }
 
-  // Make player jump by hitting 'space' or 'up arrow'
+  // Makes the player jump by hitting 'space' or 'up arrow'
   document.addEventListener('keydown', function (e) {
     if (!isActive) {
       return;
     }
-
     if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
       e.preventDefault();
       jump();
       player.classList.add('onJump');
       setTimeout(removeOnJump, 700);
     }
+  });
+
+  // Makes the player jump by touch
+  document.addEventListener('touchstart', function (e) {
+    if (!isActive) {
+      return;
+    }
+    e.preventDefault();
+    jump();
+    player.classList.add('onJump');
+    setTimeout(removeOnJump, 700);
   });
 
   /**
