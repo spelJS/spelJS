@@ -1,15 +1,23 @@
 import { sendScore } from './socket';
 import { monsterAnimation, fadeOutEffect } from './animations';
 
+// TODO:
+// 1. Check if monster is at the same place as player. If so, remove
+// monsters and start over.
+// 2. If monster reach end, remove monster and give points.
+
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     player = document.querySelector('.player-js'),
+    // FIXME: do we need both player and laika?
+    laika = document.querySelector('.laika'),
+    monsterClasses = ['one', 'two', 'three'],
+    instructions = document.querySelector('.instructions-js'),
     playerTop = player.offsetTop,
     playerX = player.offsetLeft,
     jumpPower = 9,
-    gravity = 0.275,
-    gameInstructions = document.querySelector('.gameInstructions');
+    gravity = 0.275;
 
   // Updated frequently when game is active.
   let isActive = true,
@@ -22,7 +30,7 @@ export default function initGame(gameContainer, user) {
   /**
   * Fades out the game instructions after four seconds
   */
-  setTimeout(() => fadeOutEffect(gameInstructions), 4000);
+  setTimeout(() => fadeOutEffect(instructions), 4000);
 
   /**
    * Gets called when user wants to jump to avoid enemies.
@@ -53,20 +61,24 @@ export default function initGame(gameContainer, user) {
     if (!isActive) {
       return;
     }
+
     requestAnimationFrame(render);
     frame = (frame + 1) % 8;
-    scoreSpan.textContent = score;
+
+    // These are only used for testing purposes.
+    const item = 'test';
+    const posX = 2;
 
     // TODO: Replace this code with less demanding one
-    $('.monster').each(function (i) {
-      var item = $(this);
-      var posX = item.position().left; // FIXME: Stop reading from DOM
+    // $('.monster').each(function (i) {
+    //   var item = $(this);
+    //   var posX = item.position().left; // FIXME: Stop reading from DOM
 
       // If the enemy leaves the stage without colliding with the player
-      if (posX < 0) {
-        item.remove();
-        score += 1;
-      }
+      // if (posX < 0) {
+      //   item.remove();
+      //   score += 1;
+      // }
 
       // If the player collides with the enemy
       if (((posX - playerX) < 168) && ((posX - playerX) > -25) && (playerJumpY < 50)) {
@@ -77,18 +89,11 @@ export default function initGame(gameContainer, user) {
         setTimeout(removeDamage, 150);
       }
 
-      // Display High Score
-      if (score > highest) {
-        highSpan.textContent = score;
-        highest = score;
-        sendScore(user, highest); // Send information about score and user to server
-      }
-    });
+    // });
   }
 
-  // TODO: Spara ned alla document.querySelector som variabler, samt ge dom "-js"-ändelse.
   function removeOnJump() {
-    document.querySelector('.laika').classList.remove('onJump');
+    laika.classList.remove('onJump');
   }
 
   // Make player jump by hitting 'space' or 'up arrow'
@@ -100,7 +105,7 @@ export default function initGame(gameContainer, user) {
     if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
       e.preventDefault();
       jump();
-      document.querySelector('.laika').classList.add('onJump');
+      laika.classList.add('onJump');
       setTimeout(removeOnJump, 700);
       // TODO: transition end
     }
@@ -117,16 +122,34 @@ export default function initGame(gameContainer, user) {
     }
 
     const monsterDiv = document.createElement('div'),
-      monsterClasses = ['one', 'two', 'three'],
       randomClass = monsterClasses[Math.floor(Math.random() * monsterClasses.length)];
-    monsterDiv.classList.add('monster');
-    monsterDiv.classList.add('monster-js');
-    monsterDiv.classList.add(randomClass);
+
+    monsterDiv.classList.add('monster', 'monster-js', randomClass);
     gameContainer.appendChild(monsterDiv);
-    setTimeout(() => {
-      generateMonsters(gameContainer);
-    }, Math.round(2000 + (Math.random() * 2000)));
-    monsterAnimation(monsterDiv);
+
+    monsterAnimation(monsterDiv)
+      .then((giveScore) => {
+        gameContainer.removeChild(monsterDiv);
+
+        // Update score if monster reached the other side
+        // TODO: Right now, collision is not handled.
+        if (giveScore) {
+          score += 1;
+          scoreSpan.textContent = score;
+        }
+
+        // Display new High Score
+        if (score > highest) {
+          highSpan.textContent = score;
+          highest = score;
+          sendScore(user, highest); // Notify server about new highscore
+        }
+
+        // Generate a new monster after 2–4 seconds
+        setTimeout(() => {
+          generateMonsters(gameContainer);
+        }, Math.round(2000 + (Math.random() * 2000)));
+      });
   }
 
   generateMonsters(gameContainer);

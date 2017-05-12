@@ -1,21 +1,28 @@
 /**
- * Moves the monster from left to right
- * @param  {string} monsterDiv Div element that is created by
- * the function generateMonsters in src/scripts/game.js
+ * Moves monster from right to left. If monster reaches the position -10
+ * (outside screen on the left side), promise is resolved and giveScore will
+ * be set to 'true'.
+ * @param  {string} monsterDiv    Element created by the function generateMonsters
+ * @return {bolean} giveScore     Is return true to give user score.
  */
-
 export function monsterAnimation(monsterDiv) {
   const elem = monsterDiv;
   let monsterAnimationPos = 100;
-  function frame() {
-    if (monsterAnimationPos === -10) {
-      clearInterval();
-    } else {
-      monsterAnimationPos -= 1;
-      elem.style.left = monsterAnimationPos + '%';
+  let giveScore = false;
+
+  return new Promise((resolve, reject) => { // FIXME: What to do on reject?
+    function frame() {
+      if (monsterAnimationPos === -10) {
+        giveScore = true;
+        clearInterval();
+        resolve(giveScore);
+      } else {
+        monsterAnimationPos -= 1;
+        elem.style.left = monsterAnimationPos + '%';
+      }
     }
-  }
-  setInterval(frame, 8);
+    setInterval(frame, 8);
+  });
 }
 
 /**
@@ -23,7 +30,6 @@ export function monsterAnimation(monsterDiv) {
   * @param  {string} spacedust A div element with background-image "stardust.png".
   * Located in src/server/views/partials/header.js
   */
-
 export function moveSpacedust(spacedust) {
   const elem = spacedust;
   let spacedustPos = 100;
@@ -43,7 +49,6 @@ export function moveSpacedust(spacedust) {
   * @param  {string} gameInstructions A paragraph with game instructions.
   * Located in server/views/main.js
   */
-
 export function fadeOutEffect(gameInstructions) {
   const fadeTarget = gameInstructions,
     fadeEffect = setInterval(function () {
