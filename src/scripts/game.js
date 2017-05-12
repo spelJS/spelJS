@@ -17,7 +17,6 @@ export default function initGame(gameContainer, user) {
 
   // Updated frequently when game is active.
   let isActive = true,
-    frame = 0,
     time = 0,
     playerJumpY = 0,
     score = 0,
@@ -45,16 +44,6 @@ export default function initGame(gameContainer, user) {
     } else {
       requestAnimationFrame(jump);
     }
-  }
-
-  // FIXME: make sure that this contain as little code and calculations as
-  // possible, since all of it get calculated/rendered 60 times a second.
-  function render() {
-    if (!isActive) {
-      return;
-    }
-    requestAnimationFrame(render);
-    frame = (frame + 1) % 8;
   }
 
   function removeOnJump() {
@@ -117,7 +106,6 @@ export default function initGame(gameContainer, user) {
   }
 
   generateMonsters(gameContainer);
-  render();
 
   return {
     stop() {
