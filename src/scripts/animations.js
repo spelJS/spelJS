@@ -5,20 +5,21 @@
  * @param  {string} monsterDiv    Element created by the function generateMonsters
  * @return {bolean} giveScore     Is return true to give user score.
  */
-export function monsterAnimation(monsterDiv) {
+export function monsterHandler(monsterDiv) {
   const elem = monsterDiv;
-  let monsterAnimationPos = 100;
+  let monsterPosX = 100;
   let giveScore = false;
 
   return new Promise((resolve, reject) => { // FIXME: What to do on reject?
     function frame() {
-      if (monsterAnimationPos === -10) {
+      if (monsterPosX === -10) {
         giveScore = true;
         clearInterval();
         resolve(giveScore);
+        elem.remove();
       } else {
-        monsterAnimationPos -= 1;
-        elem.style.left = monsterAnimationPos + '%';
+        monsterPosX -= 1;
+        elem.style.left = monsterPosX + '%';
       }
     }
     setInterval(frame, 8);

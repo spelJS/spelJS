@@ -1,10 +1,9 @@
 import { sendScore } from './socket';
-import { monsterAnimation, fadeOutEffect } from './animations';
+import { monsterHandler, fadeOutEffect } from './animations';
 
 // TODO:
 // 1. Check if monster is at the same place as player. If so, remove
 // monsters and start over.
-// 2. If monster reach end, remove monster and give points.
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
@@ -127,9 +126,9 @@ export default function initGame(gameContainer, user) {
     monsterDiv.classList.add('monster', 'monster-js', randomClass);
     gameContainer.appendChild(monsterDiv);
 
-    monsterAnimation(monsterDiv)
+    monsterHandler(monsterDiv)
       .then((giveScore) => {
-        gameContainer.removeChild(monsterDiv);
+        // gameContainer.removeChild(monsterDiv);
 
         // Update score if monster reached the other side
         // TODO: Right now, collision is not handled.
