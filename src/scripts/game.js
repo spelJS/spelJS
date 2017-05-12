@@ -1,6 +1,5 @@
 import { sendScore } from './socket';
-import { generateMonsters } from './functions';
-import { monsterAnimation, moveSpacedust, fadeOutEffect } from './animations';
+import { monsterAnimation, fadeOutEffect } from './animations';
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
@@ -10,7 +9,6 @@ export default function initGame(gameContainer, user) {
     playerX = player.offsetLeft,
     jumpPower = 9,
     gravity = 0.275,
-    spacedust = document.querySelector('.spacedust'),
     gameInstructions = document.querySelector('.gameInstructions');
 
   // Updated frequently when game is active.
@@ -20,19 +18,6 @@ export default function initGame(gameContainer, user) {
     playerJumpY = 0,
     score = 0,
     highest = user.highscore;
-
-  /**
-  * Displays spacedust when the game begins
-  */
-  function addClasses() {
-    spacedust.classList.add('show');
-  }
-  addClasses();
-
-  /**
-  * Moves spacedust from left to right
-  */
-  moveSpacedust(spacedust, isActive);
 
   /**
   * Fades out the game instructions after four seconds
@@ -59,7 +44,7 @@ export default function initGame(gameContainer, user) {
   }
 
   function removeDamage() {
-    document.querySelector('.player').classList.remove('damage');
+    player.classList.remove('damage');
   }
 
   // FIXME: make sure that this contain as little code and calculations as
@@ -88,7 +73,7 @@ export default function initGame(gameContainer, user) {
         scoreSpan.textContent = 0;
         score = 0;
         item.remove();
-        document.querySelector('.player').classList.add('damage');
+        player.classList.add('damage');
         setTimeout(removeDamage, 150);
       }
 
@@ -101,6 +86,7 @@ export default function initGame(gameContainer, user) {
     });
   }
 
+  // TODO: Spara ned alla document.querySelector som variabler, samt ge dom "-js"-ändelse.
   function removeOnJump() {
     document.querySelector('.laika').classList.remove('onJump');
   }
