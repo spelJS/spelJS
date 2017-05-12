@@ -9,12 +9,9 @@ export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     player = document.querySelector('.player-js'),
-    // FIXME: do we need both player and laika?
-    laika = document.querySelector('.laika'),
     monsterClasses = ['one', 'two', 'three'],
     instructions = document.querySelector('.instructions-js'),
     playerTop = player.offsetTop,
-    playerX = player.offsetLeft,
     jumpPower = 9,
     gravity = 0.275;
 
@@ -50,49 +47,18 @@ export default function initGame(gameContainer, user) {
     }
   }
 
-  function removeDamage() {
-    player.classList.remove('damage');
-  }
-
   // FIXME: make sure that this contain as little code and calculations as
   // possible, since all of it get calculated/rendered 60 times a second.
   function render() {
     if (!isActive) {
       return;
     }
-
     requestAnimationFrame(render);
     frame = (frame + 1) % 8;
-
-    // These are only used for testing purposes.
-    const item = 'test';
-    const posX = 2;
-
-    // TODO: Replace this code with less demanding one
-    // $('.monster').each(function (i) {
-    //   var item = $(this);
-    //   var posX = item.position().left; // FIXME: Stop reading from DOM
-
-      // If the enemy leaves the stage without colliding with the player
-      // if (posX < 0) {
-      //   item.remove();
-      //   score += 1;
-      // }
-
-      // If the player collides with the enemy
-      if (((posX - playerX) < 168) && ((posX - playerX) > -25) && (playerJumpY < 50)) {
-        scoreSpan.textContent = 0;
-        score = 0;
-        item.remove();
-        player.classList.add('damage');
-        setTimeout(removeDamage, 150);
-      }
-
-    // });
   }
 
   function removeOnJump() {
-    laika.classList.remove('onJump');
+    player.classList.remove('onJump');
   }
 
   // Make player jump by hitting 'space' or 'up arrow'
@@ -104,9 +70,8 @@ export default function initGame(gameContainer, user) {
     if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
       e.preventDefault();
       jump();
-      laika.classList.add('onJump');
+      player.classList.add('onJump');
       setTimeout(removeOnJump, 700);
-      // TODO: transition end
     }
   });
 
@@ -126,7 +91,7 @@ export default function initGame(gameContainer, user) {
     monsterDiv.classList.add('monster', 'monster-js', randomClass);
     gameContainer.appendChild(monsterDiv);
 
-    monsterHandler(monsterDiv)
+    monsterHandler(monsterDiv, player)
       .then((giveScore) => {
         // gameContainer.removeChild(monsterDiv);
 

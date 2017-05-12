@@ -253,8 +253,10 @@ a:not(.loginButton) {
     width: 100%;
     height: auto;
   }
+}
 
-  .laika.onJump {
+.player.onJump {
+  .laika {
     transform: rotate(-12deg);
     .laikaFire {
       stroke: yellow;

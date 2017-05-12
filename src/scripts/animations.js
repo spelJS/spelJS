@@ -1,25 +1,43 @@
 /**
- * Moves monster from right to left. If monster reaches the position -10
+ * Moves the monster from right to left. If monster reaches the position -10
  * (outside screen on the left side), promise is resolved and giveScore will
  * be set to 'true'.
  * @param  {string} monsterDiv    Element created by the function generateMonsters
  * @return {bolean} giveScore     Is return true to give user score.
  */
-export function monsterHandler(monsterDiv) {
+export function monsterHandler(monsterDiv, player) {
   const elem = monsterDiv;
   let monsterPosX = 100;
   let giveScore = false;
 
   return new Promise((resolve, reject) => { // FIXME: What to do on reject?
+    function removeDamage() {
+      player.classList.remove('damage');
+    }
     function frame() {
+      // If the enemy leaves the stage without colliding with the player
       if (monsterPosX === -10) {
         giveScore = true;
         clearInterval();
-        resolve(giveScore);
         elem.remove();
+        resolve(giveScore);
       } else {
+        // Moves the monster from right to left.
         monsterPosX -= 1;
         elem.style.left = monsterPosX + '%';
+
+        // TODO: Fix the score (should become 0)
+        // TODO: Add a position-y condition like (playerJumpY < height_of_the_monster).
+
+        // If the player collides with the enemy
+        const monsterOffsetLeft = monsterDiv.offsetLeft;
+        // collisionPoint = offsetLeft of the Player plus the width of the player
+        const collisionPoint = player.offsetLeft + 168;
+        if (monsterOffsetLeft < collisionPoint) {
+          player.classList.add('damage');
+          setTimeout(removeDamage, 150);
+          elem.remove();
+        }
       }
     }
     setInterval(frame, 8);
