@@ -210,6 +210,7 @@ a:not(.loginButton) {
   position: relative;
   width: 100vw;
   height: 50vh;
+  overflow: hidden; // Prevents calculations when monsters are out of view
 }
 
 .gameInfo {
@@ -239,12 +240,11 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .player {
-  animation: flying 1s infinite;
+  // FIXME: animation needs to be solved in another way.
+  // animation: flying 1s infinite;
   width: 168px;
   height: 135px;
   position: absolute;
-  top: 5%;
-  left: 5%;
   display: block;
   z-index: -1;
   background-position: -168px;
@@ -278,7 +278,7 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .monster {
-  animation: flying 1s infinite;
+  // animation: flying 1s infinite;
   position: absolute;
   left: 100vw;
   top: 10%;

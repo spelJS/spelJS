@@ -1,3 +1,5 @@
+// TODO: This file will not be needed once we have sorted out game.
+
 /**
  * Moves the monster from right to left. If monster reaches the position -10
  * (outside screen on the left side), promise is resolved and giveScore will
@@ -49,35 +51,36 @@ export function monsterHandler(monsterDiv, player) {
   * @param  {string} spacedust A div element with background-image "stardust.png".
   * Located in src/server/views/partials/header.js
   */
-export function moveSpacedust(spacedust) {
-  const elem = spacedust;
-  let spacedustPos = 100;
-  function frame() {
-    if (spacedustPos === -200) {
-      spacedustPos = 100;
-    } else {
-      spacedustPos -= 1;
-      elem.style.left = spacedustPos + 'vw';
-    }
-  }
-  setInterval(frame, 15);
-}
+// export function moveSpacedust(spacedust) {
+//   const elem = spacedust;
+//   let spacedustPos = 100;
+//   function frame() {
+//     if (spacedustPos === -200) {
+//       spacedustPos = 100;
+//     } else {
+//       spacedustPos -= 1;
+//       elem.style.left = spacedustPos + 'vw';
+//     }
+//   }
+//   setInterval(frame, 15);
+// }
+// TODO: Change this to a CSS animation
 
 /**
   * Fades out given elements
   * @param  {string} gameInstructions A paragraph with game instructions.
   * Located in server/views/main.js
   */
-export function fadeOutEffect(gameInstructions) {
-  const fadeTarget = gameInstructions,
-    fadeEffect = setInterval(function () {
-      if (!fadeTarget.style.opacity) {
-        fadeTarget.style.opacity = 1;
-      }
-      if (fadeTarget.style.opacity < 0.1) {
-        clearInterval(fadeEffect);
-      } else {
-        fadeTarget.style.opacity -= 0.1;
-      }
-    }, 60);
-}
+// export function fadeOutEffect(gameInstructions) {
+//   const fadeTarget = gameInstructions,
+//     fadeEffect = setInterval(function () {
+//       if (!fadeTarget.style.opacity) {
+//         fadeTarget.style.opacity = 1;
+//       }
+//       if (fadeTarget.style.opacity < 0.1) {
+//         clearInterval(fadeEffect);
+//       } else {
+//         fadeTarget.style.opacity -= 0.1;
+//       }
+//     }, 60);
+// }

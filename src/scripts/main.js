@@ -1,8 +1,9 @@
-import { updateURL, spaceDust } from './functions';
+import { updateURL } from './functions';
 import router from './router';
 import initGame from './game';
 import { listenOnHighscore } from './socket';
 
+// TODO: replace spaceDust() function with CSS animation
 const content = document.querySelector('.content-js');
 const gameContainer = document.querySelector('.gameContainer-js');
 const scoreContainer = document.querySelector('.highscoreContainer-js');
@@ -16,7 +17,6 @@ if (gameContainer) {
       const game = initGame(gameContainer, user);
       router(content, user, game);
     })
-    .then(() => spaceDust())
     .catch(err => console.error(err));
 }
 

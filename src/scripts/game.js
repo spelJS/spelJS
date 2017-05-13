@@ -1,53 +1,124 @@
 import { sendScore } from './socket';
-import { monsterHandler, fadeOutEffect } from './animations';
 
 // TODO:
-// 1. Check if monster is at the same place as player. If so, remove
-// monsters and start over.
+// 1. Make sure player y and monster y is moved down based on gameContainer's height.
+// 2. fadeOutEffect and moveSpacedust is better done as a CSS animation. :-)
+// 3. Sort out score and collision hit.
+// 4. Remove setInterval-stuff. If needed, try to do all things in onFrame. Let's talk!
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
-    player = document.querySelector('.player-js'),
-    monsterClasses = ['one', 'two', 'three'],
     instructions = document.querySelector('.instructions-js'),
-    playerTop = player.offsetTop,
+
+    // Size of the game plan
+    { width, height } = gameContainer.getBoundingClientRect(),
+
+    // Variables connected to player and jump
+    player = { element: document.querySelector('.player-js'), x: width * 0.05, y: 0 },
     jumpPower = 9,
-    gravity = 0.275;
+    gravity = 0.275,
+
+    // Monster position and class
+    monsterClasses = ['one', 'two', 'three'],
+    monster = { x: width, y: 0, type: randomType(monsterClasses), element: document.createElement('div'), width: 100 };
 
   // Updated frequently when game is active.
   let isActive = true,
-    time = 0,
-    playerJumpY = 0,
+    isJumping = false,
+    takeoff,
+    spawnTime,
     score = 0,
     highest = user.highscore;
 
   /**
-  * Fades out the game instructions after four seconds
-  */
-  setTimeout(() => fadeOutEffect(instructions), 4000);
-
-  /**
-   * Gets called when user wants to jump to avoid enemies.
+   * Get a random monster type on respawn.
+   * @param  {array} listOfClasses An array with different type of monster looks.
+   * @return {string}               A random class to change monster appearence.
    */
-  function jump() {
-    time += 1;
-    playerJumpY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));
+  function randomType(listOfClasses) {
+    const randomClass = listOfClasses[Math.floor(Math.random() * listOfClasses.length)];
 
-    if (playerJumpY < 0) {
-      playerJumpY = 0;
-    }
-
-    player.style.top = (playerTop - playerJumpY) + 'px';
-    if (playerJumpY === 0) {
-      time = 0;
-    } else {
-      requestAnimationFrame(jump);
-    }
+    return randomClass;
   }
 
-  function removeOnJump() {
-    player.classList.remove('onJump');
+  /**
+   * Move monster from left to right, and add a new random class to it.
+   */
+  function respawn() {
+    monster.x = width;
+    monster.y = 0;
+    monster.element.classList.remove(monster.type);
+    monster.type = randomType(monsterClasses);
+    monster.element.classList.add(monster.type, 'monster');
+    gameContainer.appendChild(monster.element);
+    spawnTime = Date.now();
+  }
+
+  /**
+   * Set 'isJumping' to true, and save current time as 'takeoff'.
+   */
+  function jump() {
+    if (isJumping) { return; }
+    isJumping = true;
+    player.element.style.animation = 'none';
+    takeoff = Date.now();
+  }
+
+  function collision() {
+    // TODO: This needs to do a collision detection between monster and player,
+    // not by using offsetLeft or offsetTop, but by reading from the values we've created.
+    // return true
+  }
+
+  /**
+   * Move game forward on frame, using 'requestAnimationFrame'. If monster reaches
+   * left side of screen, points will be given to player.
+   * @return {[type]} [description]
+   */
+  function onframe() {
+    requestAnimationFrame(onframe);
+
+    const monsterLifeSpan = (Date.now() - spawnTime) / 2000;
+
+    if (collision()) {
+      score = 0;
+      scoreSpan.textContent = score;
+      respawn();
+    } else if (monsterLifeSpan >= 1) {
+      respawn();
+
+      // Update score
+      score += 1;
+      scoreSpan.textContent = score;
+
+      // Display new High Score
+      if (score > highest) {
+        highSpan.textContent = score;
+        highest = score;
+        sendScore(user, highest); // Notify server about new highscore
+      }
+    } else {
+      monster.x = ((width + monster.width) * monsterLifeSpan) * -1;
+    }
+
+    if (isJumping) {
+      const airtime = 60 * ((Date.now() - takeoff) / 1000);
+      const offset = Math.floor((airtime * jumpPower) - (0.5 * Math.pow(airtime, 2) * gravity));
+      player.element.classList.add('onJump');
+
+      if (offset <= 0) {
+        player.y = 0;
+        isJumping = false;
+        player.element.classList.remove('onJump');
+        player.element.style.animation = '';
+      } else {
+        player.y = offset * -1;
+      }
+    }
+
+    monster.element.style.transform = `translate(${monster.x}px, ${monster.y}px)`;
+    player.element.style.transform = `translate(${player.x}px, ${player.y}px)`;
   }
 
   // Makes the player jump by hitting 'space' or 'up arrow'
@@ -55,11 +126,9 @@ export default function initGame(gameContainer, user) {
     if (!isActive) {
       return;
     }
-    if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
+    if ((e.keyCode === 32 || e.keyCode === 38)) {
       e.preventDefault();
       jump();
-      player.classList.add('onJump');
-      setTimeout(removeOnJump, 700);
     }
   });
 
@@ -70,52 +139,14 @@ export default function initGame(gameContainer, user) {
     }
     e.preventDefault();
     jump();
-    player.classList.add('onJump');
-    setTimeout(removeOnJump, 700);
   });
 
-  /**
-   * Render monsters and append them to gameContainer
-   * at a random interval.
-   * @param  {string} gameContainer The element that should contain monsters.
-   */
-  function generateMonsters(gameContainer) {
-    if (!isActive) {
-      return;
-    }
-
-    const monsterDiv = document.createElement('div'),
-      randomClass = monsterClasses[Math.floor(Math.random() * monsterClasses.length)];
-
-    monsterDiv.classList.add('monster', 'monster-js', randomClass);
-    gameContainer.appendChild(monsterDiv);
-
-    monsterHandler(monsterDiv, player)
-      .then((giveScore) => {
-        // gameContainer.removeChild(monsterDiv);
-
-        // Update score if monster reached the other side
-        // TODO: Right now, collision is not handled.
-        if (giveScore) {
-          score += 1;
-          scoreSpan.textContent = score;
-        }
-
-        // Display new High Score
-        if (score > highest) {
-          highSpan.textContent = score;
-          highest = score;
-          sendScore(user, highest); // Notify server about new highscore
-        }
-
-        // Generate a new monster after 2–4 seconds
-        setTimeout(() => {
-          generateMonsters(gameContainer);
-        }, Math.round(2000 + (Math.random() * 2000)));
-      });
+  function start() {
+    respawn();
+    onframe();
   }
 
-  generateMonsters(gameContainer);
+  start();
 
   return {
     stop() {
