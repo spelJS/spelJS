@@ -6,7 +6,6 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const scoreView = require('./views/score');
-// const notFound = require('./views/404');
 
 // The functions for handling user database.
 const {
@@ -119,7 +118,7 @@ app.get('/getuser', (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
-    res.status(401).send('Not logged in, fool!');
+    res.redirect('/');
   }
 });
 
@@ -131,13 +130,18 @@ app.get('/getscore', (req, res) => {
       res.json(json);
     });
   } else {
-    res.status(401).send('Not logged in, fool!');
+    res.redirect('/');
   }
 });
 
 // Redirect to highscore page
+// FIXME: Do a redirect through /getscore
 app.get('/highscore', (req, res) => {
-  res.send(scoreView(req));
+  if (req.isAuthenticated()) {
+    res.send(scoreView(req));
+  } else {
+    res.redirect('/');
+  }
 });
 
 // Redirect to main page
