@@ -13,9 +13,9 @@ export default function initGame(gameContainer, user) {
     player = {
       element: document.querySelector('.player-js'),
       x: (width * 0.80) * -1,
-      y: 0
+      y: 0,
+      width: 168
     },
-    playerWidth = 168,
     jumpPower = 9,
     gravity = 0.275,
 
@@ -74,7 +74,10 @@ export default function initGame(gameContainer, user) {
    * Set 'isJumping' to true, and save current time as 'takeoff'.
    */
   function jump() {
-    if (isJumping) { return; }
+    if (isJumping) {
+      return;
+    }
+
     isJumping = true;
     player.element.style.animation = 'none';
     takeoff = Date.now();
@@ -121,7 +124,7 @@ export default function initGame(gameContainer, user) {
       }
     } else {
       monster.x = ((width + monster.width) * monsterLifeSpan) * -1;
-      if ((monster.x < player.x) && (monster.x > (player.x - playerWidth)) && ((player.y * -1) < monster.height)) {
+      if ((monster.x < player.x) && (monster.x > (player.x - player.width)) && ((player.y * -1) < monster.height)) {
         collision();
       }
     }
