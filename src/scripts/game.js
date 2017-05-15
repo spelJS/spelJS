@@ -9,7 +9,12 @@ export default function initGame(gameContainer, user) {
     { width, height } = gameContainer.getBoundingClientRect(),
 
     // Variables connected to player and jump. X = gameContainers width * left 5%
-    player = { element: document.querySelector('.player-js'), x: (width * 0.80) * -1, y: 0 },
+    player = {
+      element: document.querySelector('.player-js'),
+      x: (width * 0.80) * -1,
+      y: 0
+    },
+    playerWidth = 168,
     jumpPower = 9,
     gravity = 0.275,
 
@@ -110,7 +115,7 @@ export default function initGame(gameContainer, user) {
       }
     } else {
       monster.x = ((width + monster.width) * monsterLifeSpan) * -1;
-      if (monster.x < ((width * 0.80) * -1) && ((player.y * -1) < monster.height)) {
+      if ((monster.x < player.x) && (monster.x > (player.x - playerWidth)) && ((player.y * -1) < monster.height)) {
         collision();
       }
     }
