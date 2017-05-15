@@ -93,6 +93,10 @@ export default function initGame(gameContainer, user) {
    * @return {[type]} [description]
    */
   function onframe() {
+    if (!isActive) {
+      return;
+    }
+
     requestAnimationFrame(onframe);
 
     const monsterLifeSpan = (Date.now() - spawnTime) / 2000;
@@ -166,6 +170,8 @@ export default function initGame(gameContainer, user) {
   return {
     stop() {
       isActive = false;
+      score = 0; // TODO: Should this be here?
+      scoreSpan.textContent = score; // TODO: Should this be here?
     }
   };
 }

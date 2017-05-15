@@ -38,6 +38,7 @@ exports.addUser = function addUser(profile) {
         const friendsId = [];
 
         // Push all the user's friends Facebook Id's to an array
+        // FIXME: make sure to check that there is an array to check length of.
         for (let i = 0; i < userFriendList.length; i += 1) {
           friendsId.push(userFriendList[i].id);
         }

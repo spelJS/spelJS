@@ -75,7 +75,7 @@ a:not(.loginButton) {
   letter-spacing: 0.4em;
   margin: 0.2em;
   font-family: $font-title;
-  font-size: 1.6rem;
+  font-size: 2.5rem;
 }
 
 /* -----------------------------------------------------------------------------
@@ -336,6 +336,11 @@ a:not(.loginButton) {
 
     }
   }
+}
+
+.highscoreContainer {
+  width: 90vw;
+  margin: 0 auto;
 }
 
 /* -----------------------------------------------------------------------------
