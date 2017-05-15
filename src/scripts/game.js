@@ -15,7 +15,7 @@ export default function initGame(gameContainer, user) {
     // Size of the game plan
     { width, height } = gameContainer.getBoundingClientRect(),
 
-    // Variables connected to player and jump
+    // Variables connected to player and jump. X = gameContainers width * left 5%
     player = { element: document.querySelector('.player-js'), x: width * 0.05, y: 0 },
     jumpPower = 9,
     gravity = 0.275,
@@ -131,7 +131,7 @@ export default function initGame(gameContainer, user) {
   }
 
   // Makes the player jump by hitting 'space' or 'up arrow'
-  document.addEventListener('keydown', function (e) {
+  document.addEventListener('keydown', (e) => {
     if (!isActive) {
       return;
     }
@@ -142,11 +142,10 @@ export default function initGame(gameContainer, user) {
   });
 
   // Makes the player jump by touch
-  document.addEventListener('touchstart', function (e) {
+  document.addEventListener('touchstart', () => {
     if (!isActive) {
       return;
     }
-    e.preventDefault();
     jump();
   });
 

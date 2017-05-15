@@ -150,7 +150,7 @@ a:not(.loginButton) {
   height: 100%;
   background: url("img/stardust.png") repeat-x left;
   background-size: 200%;
-  animation: moveSpacedust 1.75s infinite linear;
+  animation: moveSpacedust 1s infinite linear;
   position: absolute;
   z-index: -3;
   display: none;
@@ -285,7 +285,6 @@ a:not(.loginButton) {
   // animation: flying 1s infinite;
   position: absolute;
   left: 100vw;
-  top: 10%;
   width: 50px;
   height: 50px;
   display: block;
