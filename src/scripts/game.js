@@ -79,7 +79,7 @@ export default function initGame(gameContainer, user) {
 
   function collision() {
     player.element.classList.add('damage');
-    setTimeout(removeDamage, 1500);
+    setTimeout(removeDamage, 500);
     score = 0;
     scoreSpan.textContent = score;
     respawn();
