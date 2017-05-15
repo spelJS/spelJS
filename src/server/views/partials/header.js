@@ -16,6 +16,5 @@ module.exports = function header() {
         <source src="img/gradient.mp4" type="video/mp4">
       </video>
       <div class="stars"></div>
-      <div class="spacedust"></div>
   `;
 };

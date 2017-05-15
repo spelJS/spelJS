@@ -68,7 +68,7 @@ a:not(.loginButton) {
 //   border: 1px solid yellow;
 // }
 
-.headline {
+.headline, .rotateInstructions {
   text-shadow: $glow;
   text-align: center;
   text-transform: uppercase;
@@ -153,7 +153,6 @@ a:not(.loginButton) {
   animation: moveSpacedust 1s infinite linear;
   position: absolute;
   z-index: -3;
-  display: none;
 }
 
 .stars {
@@ -208,6 +207,22 @@ a:not(.loginButton) {
 /* -----------------------------------------------------------------------------
   GAME CONTAINER
 ------------------------------------------------------------------------------*/
+.rotateIconContainer {
+  position:fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .svgRotate {
+    width: 70%;
+    fill: $laika-white;
+  }
+}
 
 .gameContainer {
   margin-top: 0;

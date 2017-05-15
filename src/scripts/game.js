@@ -3,14 +3,19 @@ import { sendScore } from './socket';
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
-    spacedust = document.querySelector('.spacedust'),
     gameInstructions = document.querySelector('.gameInstructions-js'),
+    rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
 
     // Size of the game plan
     { width, height } = gameContainer.getBoundingClientRect(),
 
     // Variables connected to player and jump. X = gameContainers width * left 5%
-    player = { element: document.querySelector('.player-js'), x: (width * 0.80) * -1, y: 0 },
+    player = {
+      element: document.querySelector('.player-js'),
+      x: (width * 0.80) * -1,
+      y: 0
+    },
+    playerWidth = 168,
     jumpPower = 9,
     gravity = 0.275,
 
@@ -37,8 +42,8 @@ export default function initGame(gameContainer, user) {
    * Displays spacedust and fades out the game instructions when the game is started
    */
   function showAndHide() {
-    spacedust.classList.add('show');
     gameInstructions.classList.add('fadeOut');
+    rotateIconContainer.classList.add('fadeOut');
   }
 
   /**
@@ -81,7 +86,7 @@ export default function initGame(gameContainer, user) {
 
   function collision() {
     player.element.classList.add('damage');
-    setTimeout(removeDamage, 150);
+    setTimeout(removeDamage, 500);
     score = 0;
     scoreSpan.textContent = score;
     respawn();
@@ -116,7 +121,7 @@ export default function initGame(gameContainer, user) {
       }
     } else {
       monster.x = ((width + monster.width) * monsterLifeSpan) * -1;
-      if (monster.x < ((width * 0.80) * -1) && ((player.y * -1) < monster.height)) {
+      if ((monster.x < player.x) && (monster.x > (player.x - playerWidth)) && ((player.y * -1) < monster.height)) {
         collision();
       }
     }

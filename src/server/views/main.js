@@ -1,6 +1,7 @@
 const header = require('./partials/header');
 const logo = require('./partials/logo');
 const icon = require('./partials/facebook-icon');
+const rotateIcon = require('./partials/rotate-icon');
 const gameContainer = require('./partials/game-container');
 const userInfo = require('./partials/user-info');
 const navigation = require('./partials/navigation');
@@ -20,6 +21,11 @@ module.exports = function mainView(req) {
           :
           `
             ${userInfo(req)}
+            <div class="spacedust"></div>
+            <div class="rotateIconContainer rotateIconContainer-js">
+              ${rotateIcon()}
+              <p class="rotateInstructions">Rotate</p>
+            </div>
             <div class="content content-js">
               ${gameContainer(req.user.highscore)}
             </div>
