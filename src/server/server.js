@@ -6,14 +6,14 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const scoreView = require('./views/score');
-const notFound = require('./views/404');
+// const notFound = require('./views/404');
 
 // The functions for handling user database.
 const {
   getUserById,
   addUser,
   updateUserHighScore,
-  getScore
+  getFriendsScore
 } = require('./database/handle-users');
 
 // Set up an instance of express
@@ -126,7 +126,7 @@ app.get('/getuser', (req, res) => {
 // Used for getting information about highscore.
 app.get('/getscore', (req, res) => {
   if (req.isAuthenticated()) {
-    getScore(req.user)
+    getFriendsScore(req.user)
     .then((json) => {
       res.json(json);
     });

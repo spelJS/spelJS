@@ -3,8 +3,7 @@ import router from './router';
 import initGame from './game';
 import { listenOnHighscore } from './socket';
 
-// TODO: replace spaceDust() function with CSS animation
-const content = document.querySelector('.content-js');
+const dynamicContainer = document.querySelector('.content-js');
 const gameContainer = document.querySelector('.gameContainer-js');
 const scoreContainer = document.querySelector('.highscoreContainer-js');
 
@@ -15,7 +14,7 @@ if (gameContainer) {
     .then(body => body.json())
     .then((user) => {
       const game = initGame(gameContainer, user);
-      router(content, user, game);
+      router(dynamicContainer, user, game);
     })
     .catch(err => console.error(err));
 }
@@ -23,8 +22,8 @@ if (gameContainer) {
 if (scoreContainer) {
   fetch('/getscore', { credentials: 'include', headers: { accept: 'application/json' } })
   .then(body => body.json())
-    .then((user) => {
-      console.log(user);
+    .then((highscores) => {
+      router(dynamicContainer, highscores, null);
     })
     .catch(err => console.error(err));
 }
