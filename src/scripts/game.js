@@ -8,9 +8,8 @@ import { sendScore } from './socket';
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
-    instructions = document.querySelector('.instructions-js'),
     spacedust = document.querySelector('.spacedust'),
-    gameInstructions = document.querySelector('.gameInstructions'),
+    gameInstructions = document.querySelector('.gameInstructions-js'),
 
     // Size of the game plan
     { width, height } = gameContainer.getBoundingClientRect(),

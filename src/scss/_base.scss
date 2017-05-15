@@ -213,7 +213,7 @@ a:not(.loginButton) {
   margin-top: 0;
   position: relative;
   width: 100vw;
-  height: 50vh;
+  height: 40vh;
   overflow: hidden; // Prevents calculations when monsters are out of view
 }
 
@@ -249,6 +249,7 @@ a:not(.loginButton) {
   width: 168px;
   height: 135px;
   position: absolute;
+  bottom: 0;
   display: block;
   z-index: -1;
   background-position: -168px;
@@ -285,6 +286,7 @@ a:not(.loginButton) {
   // animation: flying 1s infinite;
   position: absolute;
   left: 100vw;
+  bottom: 0;
   width: 50px;
   height: 50px;
   display: block;
