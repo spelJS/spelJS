@@ -1,10 +1,5 @@
 import { sendScore } from './socket';
 
-// TODO:
-// 1. Make sure player y and monster y is moved down based on gameContainer's height.
-// 2. Sort out score and collision hit.
-// 3. Remove setInterval-stuff. If needed, try to do all things in onFrame. Let's talk!
-
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
@@ -15,13 +10,20 @@ export default function initGame(gameContainer, user) {
     { width, height } = gameContainer.getBoundingClientRect(),
 
     // Variables connected to player and jump. X = gameContainers width * left 5%
-    player = { element: document.querySelector('.player-js'), x: width * 0.05, y: 0 },
+    player = { element: document.querySelector('.player-js'), x: (width * 0.80) * -1, y: 0 },
     jumpPower = 9,
     gravity = 0.275,
 
     // Monster position and class
     monsterClasses = ['one', 'two', 'three'],
-    monster = { x: width, y: 0, type: randomType(monsterClasses), element: document.createElement('div'), width: 100 };
+    monster = {
+      x: width,
+      y: 0,
+      type: randomType(monsterClasses),
+      element: document.createElement('div'),
+      width: 50,
+      height: 50
+    };
 
   // Updated frequently when game is active.
   let isActive = true,
@@ -73,10 +75,16 @@ export default function initGame(gameContainer, user) {
     takeoff = Date.now();
   }
 
+  function removeDamage() {
+    player.element.classList.remove('damage');
+  }
+
   function collision() {
-    // TODO: This needs to do a collision detection between monster and player,
-    // not by using offsetLeft or offsetTop, but by reading from the values we've created.
-    // return true
+    player.element.classList.add('damage');
+    setTimeout(removeDamage, 150);
+    score = 0;
+    scoreSpan.textContent = score;
+    respawn();
   }
 
   /**
@@ -89,11 +97,7 @@ export default function initGame(gameContainer, user) {
 
     const monsterLifeSpan = (Date.now() - spawnTime) / 2000;
 
-    if (collision()) {
-      score = 0;
-      scoreSpan.textContent = score;
-      respawn();
-    } else if (monsterLifeSpan >= 1) {
+    if (monsterLifeSpan >= 1) {
       respawn();
 
       // Update score
@@ -108,6 +112,9 @@ export default function initGame(gameContainer, user) {
       }
     } else {
       monster.x = ((width + monster.width) * monsterLifeSpan) * -1;
+      if (monster.x < ((width * 0.80) * -1) && ((player.y * -1) < monster.height)) {
+        collision();
+      }
     }
 
     if (isJumping) {
