@@ -1,12 +1,10 @@
 // TODO: Figure out if you need the request here.
-module.exports = function highscore(req) {
+module.exports = function highscore(highscores) {
   return `
   <div class="highscoreContainer highscoreContainer-js">
     <h2 class="headline headline--highscore">All Time High</h2>
     <ol>
-      <li>Tukka Teriö – 46 points</li>
-      <li>Katarina Ljungdahl – 42 points</li>
-      <li>Jenni Pulli – 41 points</li>
+      ${highscores}
     </ol>
   </div>
   `;

@@ -98,16 +98,73 @@ exports.updateUserHighScore = function (data) {
   });
 };
 
+/**
+ * Takes two arguments from highscore list and compare them. Returns listed
+ * sorted, sorted on highest to lowest.
+ * @param  {object} a One of the user's friends, with info about highscore.
+ * @param  {object} b Another one of the user's friends, with info about highscore.
+ * @return {array}    A list, sorted on highest to lowest.
+ */
+function sortHighscore(a, b) {
+  const highscoreA = a.highscore;
+  const highscoreB = b.highscore;
 
-exports.getScore = function (user) {
+  let comparison = 0;
+  if (highscoreA > highscoreB) {
+    comparison = -1;
+  } else if (highscoreA < highscoreB) {
+    comparison = 1;
+  }
+  return comparison;
+}
+
+/**
+ * Get current user's friends' name and highscore.
+ * @param  {object} user            Current user
+ * @return {array}  friendsScore    A list of friends and
+ *                                  current user's highscore.
+ */
+exports.getFriendsScore = function (user) {
   return new Promise((resolve, reject) => {
     fs.readFile('src/server/database/users.json', function readFileCallback(error, dataBase) {
       if (error) {
         reject(error);
       } else {
-        console.log(user);
+        const currentUser = user;
         const users = JSON.parse(dataBase);
-        resolve(users);
+        const friendsScore = [{
+          name: currentUser.name,
+          highscore: currentUser.highscore
+        }];
+
+        // Loop through database to see who are friends with current user
+        for (let i = 0; i < users.length; i += 1) {
+          const usersFriends = users[i].friends;
+
+          // If friends, push their name and highscore to friendsScore.
+          for (let i = 0; i < usersFriends.length; i += 1) {
+            if (usersFriends[i].id === currentUser.id) {
+              friendsScore.push({
+                name: users[i].name,
+                highscore: users[i].highscore
+              });
+            }
+          }
+        }
+
+        const sortedScore = friendsScore.sort(sortHighscore);
+        const numberOfHighscores = 3; // Only return top 3 highscore
+        let html = '';
+
+        for (let i = 0; i < numberOfHighscores; i += 1) {
+          if (sortedScore[i]) {
+            html += `<li class="highscore-list">${friendsScore[i].name}: <span class="points">${friendsScore[i].highscore} points</span></li>`;
+          } else {
+            html += '<li></li>';
+          }
+        }
+
+        resolve(html);
       }
     });
   });

@@ -4,3 +4,4 @@ build/style.css
 src/server/credentials.js
 npm-debug.log*
 src/server/database/users.json
+src/scripts/reference.js
