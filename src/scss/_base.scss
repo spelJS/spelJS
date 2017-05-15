@@ -75,7 +75,7 @@ a:not(.loginButton) {
   letter-spacing: 0.4em;
   margin: 0.2em;
   font-family: $font-title;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 /* -----------------------------------------------------------------------------
@@ -84,10 +84,10 @@ a:not(.loginButton) {
 
 .logo {
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 2rem;
   filter: drop-shadow(3px 3px 5px $laika-blue);
-  height: 15rem;
-  width: 15rem;
+  height: 18rem;
+  width: 18rem;
   .detailsColor {
     fill: $laika-blue;
   }
@@ -98,6 +98,7 @@ a:not(.loginButton) {
 
 .login {
   margin-top: 2rem;
+  margin-bottom: 1rem;
 
   .loginButton {
     align-items: center;
