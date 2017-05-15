@@ -4,6 +4,7 @@ export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     gameInstructions = document.querySelector('.gameInstructions-js'),
+    rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
 
     // Size of the game plan
     { width, height } = gameContainer.getBoundingClientRect(),
@@ -42,6 +43,7 @@ export default function initGame(gameContainer, user) {
    */
   function showAndHide() {
     gameInstructions.classList.add('fadeOut');
+    rotateIconContainer.classList.add('fadeOut');
   }
 
   /**
