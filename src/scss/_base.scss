@@ -88,6 +88,12 @@ a:not(.loginButton) {
   filter: drop-shadow(3px 3px 5px $laika-blue);
   height: 15rem;
   width: 15rem;
+  .detailsColor {
+    fill: $laika-blue;
+  }
+  .mainColor {
+    fill: $laika-black;
+  }
 }
 
 .login {
