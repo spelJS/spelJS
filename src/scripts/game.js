@@ -1,136 +1,167 @@
 import { sendScore } from './socket';
-import { monsterAnimation, fadeOutEffect } from './animations';
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
-    player = document.querySelector('.player-js'),
-    playerTop = player.offsetTop,
-    playerX = player.offsetLeft,
+    spacedust = document.querySelector('.spacedust'),
+    gameInstructions = document.querySelector('.gameInstructions-js'),
+
+    // Size of the game plan
+    { width, height } = gameContainer.getBoundingClientRect(),
+
+    // Variables connected to player and jump. X = gameContainers width * left 5%
+    player = { element: document.querySelector('.player-js'), x: (width * 0.80) * -1, y: 0 },
     jumpPower = 9,
     gravity = 0.275,
-    gameInstructions = document.querySelector('.gameInstructions');
+
+    // Monster position and class
+    monsterClasses = ['one', 'two', 'three'],
+    monster = {
+      x: width,
+      y: 0,
+      type: randomType(monsterClasses),
+      element: document.createElement('div'),
+      width: 50,
+      height: 50
+    };
 
   // Updated frequently when game is active.
   let isActive = true,
-    frame = 0,
-    time = 0,
-    playerJumpY = 0,
+    isJumping = false,
+    takeoff,
+    spawnTime,
     score = 0,
     highest = user.highscore;
 
   /**
-  * Fades out the game instructions after four seconds
-  */
-  setTimeout(() => fadeOutEffect(gameInstructions), 4000);
+   * Displays spacedust and fades out the game instructions when the game is started
+   */
+  function showAndHide() {
+    spacedust.classList.add('show');
+    gameInstructions.classList.add('fadeOut');
+  }
 
   /**
-   * Gets called when user wants to jump to avoid enemies.
+   * Get a random monster type on respawn.
+   * @param  {array} listOfClasses An array with different type of monster looks.
+   * @return {string}               A random class to change monster appearence.
+   */
+  function randomType(listOfClasses) {
+    const randomClass = listOfClasses[Math.floor(Math.random() * listOfClasses.length)];
+
+    return randomClass;
+  }
+
+  /**
+   * Move monster from left to right, and add a new random class to it.
+   */
+  function respawn() {
+    monster.x = width;
+    monster.y = 0;
+    monster.element.classList.remove(monster.type);
+    monster.type = randomType(monsterClasses);
+    monster.element.classList.add(monster.type, 'monster');
+    gameContainer.appendChild(monster.element);
+    spawnTime = Date.now();
+  }
+
+  /**
+   * Set 'isJumping' to true, and save current time as 'takeoff'.
    */
   function jump() {
-    time += 1;
-    playerJumpY = Math.floor((time * jumpPower) - (0.5 * Math.pow(time, 2) * gravity));
-
-    if (playerJumpY < 0) {
-      playerJumpY = 0;
-    }
-
-    player.style.top = (playerTop - playerJumpY) + 'px';
-    if (playerJumpY === 0) {
-      time = 0;
-    } else {
-      requestAnimationFrame(jump);
-    }
+    if (isJumping) { return; }
+    isJumping = true;
+    player.element.style.animation = 'none';
+    takeoff = Date.now();
   }
 
   function removeDamage() {
-    player.classList.remove('damage');
+    player.element.classList.remove('damage');
   }
 
-  // FIXME: make sure that this contain as little code and calculations as
-  // possible, since all of it get calculated/rendered 60 times a second.
-  function render() {
-    if (!isActive) {
-      return;
-    }
-    requestAnimationFrame(render);
-    frame = (frame + 1) % 8;
+  function collision() {
+    player.element.classList.add('damage');
+    setTimeout(removeDamage, 150);
+    score = 0;
     scoreSpan.textContent = score;
+    respawn();
+  }
 
-    // TODO: Replace this code with less demanding one
-    $('.monster').each(function (i) {
-      var item = $(this);
-      var posX = item.position().left; // FIXME: Stop reading from DOM
+  /**
+   * Move game forward on frame, using 'requestAnimationFrame'. If monster reaches
+   * left side of screen, points will be given to player.
+   * @return {[type]} [description]
+   */
+  function onframe() {
+    requestAnimationFrame(onframe);
 
-      // If the enemy leaves the stage without colliding with the player
-      if (posX < 0) {
-        item.remove();
-        score += 1;
-      }
+    const monsterLifeSpan = (Date.now() - spawnTime) / 2000;
 
-      // If the player collides with the enemy
-      if (((posX - playerX) < 168) && ((posX - playerX) > -25) && (playerJumpY < 50)) {
-        scoreSpan.textContent = 0;
-        score = 0;
-        item.remove();
-        player.classList.add('damage');
-        setTimeout(removeDamage, 150);
-      }
+    if (monsterLifeSpan >= 1) {
+      respawn();
 
-      // Display High Score
+      // Update score
+      score += 1;
+      scoreSpan.textContent = score;
+
+      // Display new High Score
       if (score > highest) {
         highSpan.textContent = score;
         highest = score;
-        sendScore(user, highest); // Send information about score and user to server
+        sendScore(user, highest); // Notify server about new highscore
       }
-    });
+    } else {
+      monster.x = ((width + monster.width) * monsterLifeSpan) * -1;
+      if (monster.x < ((width * 0.80) * -1) && ((player.y * -1) < monster.height)) {
+        collision();
+      }
+    }
+
+    if (isJumping) {
+      const airtime = 60 * ((Date.now() - takeoff) / 1000);
+      const offset = Math.floor((airtime * jumpPower) - (0.5 * Math.pow(airtime, 2) * gravity));
+      player.element.classList.add('onJump');
+
+      if (offset <= 0) {
+        player.y = 0;
+        isJumping = false;
+        player.element.classList.remove('onJump');
+        player.element.style.animation = '';
+      } else {
+        player.y = offset * -1;
+      }
+    }
+
+    monster.element.style.transform = `translate(${monster.x}px, ${monster.y}px)`;
+    player.element.style.transform = `translate(${player.x}px, ${player.y}px)`;
   }
 
-  // TODO: Spara ned alla document.querySelector som variabler, samt ge dom "-js"-ändelse.
-  function removeOnJump() {
-    document.querySelector('.laika').classList.remove('onJump');
-  }
-
-  // Make player jump by hitting 'space' or 'up arrow'
-  document.addEventListener('keydown', function (e) {
+  // Makes the player jump by hitting 'space' or 'up arrow'
+  document.addEventListener('keydown', (e) => {
     if (!isActive) {
       return;
     }
-
-    if ((e.keyCode === 32 || e.keyCode === 38) && time === 0) {
+    if ((e.keyCode === 32 || e.keyCode === 38)) {
       e.preventDefault();
       jump();
-      document.querySelector('.laika').classList.add('onJump');
-      setTimeout(removeOnJump, 700);
-      // TODO: transition end
     }
   });
 
-  /**
-   * Render monsters and append them to gameContainer
-   * at a random interval.
-   * @param  {string} gameContainer The element that should contain monsters.
-   */
-  function generateMonsters(gameContainer) {
+  // Makes the player jump by touch
+  document.addEventListener('touchstart', () => {
     if (!isActive) {
       return;
     }
+    jump();
+  });
 
-    const monsterDiv = document.createElement('div'),
-      monsterClasses = ['one', 'two', 'three'],
-      randomClass = monsterClasses[Math.floor(Math.random() * monsterClasses.length)];
-    monsterDiv.classList.add('monster');
-    monsterDiv.classList.add('monster-js');
-    monsterDiv.classList.add(randomClass);
-    gameContainer.appendChild(monsterDiv);
-    setTimeout(() => {
-      generateMonsters(gameContainer);
-    }, Math.round(2000 + (Math.random() * 2000)));
-    monsterAnimation(monsterDiv);
+  function start() {
+    respawn();
+    onframe();
+    showAndHide();
   }
 
-  generateMonsters(gameContainer);
-  render();
+  start();
 
   return {
     stop() {

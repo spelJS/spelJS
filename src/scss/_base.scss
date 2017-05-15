@@ -65,7 +65,7 @@ a:not(.loginButton) {
 }
 
 * {
-  //border: 1px solid yellow;
+  border: 1px solid yellow;
 }
 
 .headline {
@@ -140,7 +140,23 @@ a:not(.loginButton) {
   100% { opacity: 0.3; }
 }
 
-.stars, .spacedust {
+@keyframes moveSpacedust {
+  from { background-position: left; }
+  to { background-position: 200%; }
+}
+
+.spacedust {
+  width: 100%;
+  height: 100%;
+  background: url("img/stardust.png") repeat-x left;
+  background-size: 200%;
+  animation: moveSpacedust 1s infinite linear;
+  position: absolute;
+  z-index: -3;
+  display: none;
+}
+
+.stars {
   bottom: 0;
   display: block;
   left: 0;
@@ -149,21 +165,9 @@ a:not(.loginButton) {
   top: 0;
   height: auto;
   width: 100vw;
-}
-
-.stars {
   animation: stars 2s linear infinite;
   background: transparent url("img/stars.png") repeat top center;
   z-index: -4;
-}
-
-.spacedust {
-  top: 50%;
-  width: 200vw;
-  background: transparent url("img/stardust.png") no-repeat;
-  background-size:contain;
-  display: none;
-  z-index: -2;
 }
 
 /* -----------------------------------------------------------------------------
@@ -209,7 +213,8 @@ a:not(.loginButton) {
   margin-top: 0;
   position: relative;
   width: 100vw;
-  height: 50vh;
+  height: 55vh;
+  overflow: hidden; // Prevents calculations when monsters are out of view
 }
 
 .gameInfo {
@@ -239,22 +244,24 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .player {
-  animation: flying 1s infinite;
+  // FIXME: animation needs to be solved in another way.
+  // animation: flying 1s infinite;
   width: 168px;
   height: 135px;
   position: absolute;
-  top: 5%;
-  left: 5%;
+  right: 0;
+  bottom: 0;
   display: block;
   z-index: -1;
-  background-position: -168px;
 
   .laika {
     width: 100%;
     height: auto;
   }
+}
 
-  .laika.onJump {
+.player.onJump {
+  .laika {
     transform: rotate(-12deg);
     .laikaFire {
       stroke: yellow;
@@ -276,12 +283,13 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .monster {
-  animation: flying 1s infinite;
+  // animation: flying 1s infinite;
   position: absolute;
-  left: 100vw;
-  top: 10%;
+  right: 0;
+  bottom: 0;
   width: 50px;
   height: 50px;
+  margin-bottom: 2%;
   display: block;
   background-image: url("img/spritesheet.png");
   background-repeat:no-repeat;
@@ -340,4 +348,15 @@ a:not(.loginButton) {
 
 .hide {
   display: none;
+}
+
+.fadeOut {
+  animation: fadeOut 1s;
+  animation-delay: 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0; display: none;}
 }

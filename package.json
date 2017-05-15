@@ -9,7 +9,7 @@
     "build": "npm run build:js && npm run build:css",
     "watch": "npm run watch:js & npm run watch:css",
     "start": "node src/server/server.js",
-    "restart": "nodemon -i src/server/database/users.json"
+    "restart": "nodemon -i src/server/database/users.json -i src/scripts"
   },
   "repository": {
     "type": "git",
