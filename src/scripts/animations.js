@@ -47,26 +47,6 @@ export function monsterHandler(monsterDiv, player) {
 }
 
 /**
-  * Moves spacedust from left to right
-  * @param  {string} spacedust A div element with background-image "stardust.png".
-  * Located in src/server/views/partials/header.js
-  */
-// export function moveSpacedust(spacedust) {
-//   const elem = spacedust;
-//   let spacedustPos = 100;
-//   function frame() {
-//     if (spacedustPos === -200) {
-//       spacedustPos = 100;
-//     } else {
-//       spacedustPos -= 1;
-//       elem.style.left = spacedustPos + 'vw';
-//     }
-//   }
-//   setInterval(frame, 15);
-// }
-// TODO: Change this to a CSS animation
-
-/**
   * Fades out given elements
   * @param  {string} gameInstructions A paragraph with game instructions.
   * Located in server/views/main.js

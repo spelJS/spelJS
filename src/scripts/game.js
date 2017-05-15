@@ -2,14 +2,15 @@ import { sendScore } from './socket';
 
 // TODO:
 // 1. Make sure player y and monster y is moved down based on gameContainer's height.
-// 2. fadeOutEffect and moveSpacedust is better done as a CSS animation. :-)
-// 3. Sort out score and collision hit.
-// 4. Remove setInterval-stuff. If needed, try to do all things in onFrame. Let's talk!
+// 2. Sort out score and collision hit.
+// 3. Remove setInterval-stuff. If needed, try to do all things in onFrame. Let's talk!
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     instructions = document.querySelector('.instructions-js'),
+    spacedust = document.querySelector('.spacedust'),
+    gameInstructions = document.querySelector('.gameInstructions'),
 
     // Size of the game plan
     { width, height } = gameContainer.getBoundingClientRect(),
@@ -30,6 +31,14 @@ export default function initGame(gameContainer, user) {
     spawnTime,
     score = 0,
     highest = user.highscore;
+
+  /**
+   * Displays spacedust and fades out the game instructions when the game is started
+   */
+  function showAndHide() {
+    spacedust.classList.add('show');
+    gameInstructions.classList.add('fadeOut');
+  }
 
   /**
    * Get a random monster type on respawn.
@@ -144,6 +153,7 @@ export default function initGame(gameContainer, user) {
   function start() {
     respawn();
     onframe();
+    showAndHide();
   }
 
   start();
