@@ -3,7 +3,7 @@ module.exports = function highscore(highscores) {
   return `
   <div class="highscoreContainer highscoreContainer-js">
     <h2 class="headline headline--highscore">All Time High</h2>
-    <ol>
+    <ol class="highscore__list">
       ${highscores}
     </ol>
   </div>

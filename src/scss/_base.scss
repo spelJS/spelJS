@@ -63,10 +63,10 @@ a:not(.loginButton) {
     border-bottom: 2px solid $laika-white;
   }
 }
-
-* {
-  border: 1px solid yellow;
-}
+//
+// * {
+//   border: 1px solid yellow;
+// }
 
 .headline {
   text-shadow: $glow;
@@ -306,6 +306,48 @@ a:not(.loginButton) {
 
 .monster.three {
   background-position: 0px -100px;
+}
+
+/* -----------------------------------------------------------------------------
+  HIGHSCORE LIST
+------------------------------------------------------------------------------*/
+
+.highscore__list {
+  max-width: 250px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: left;
+  width: 60vw;
+
+  .highscore__list-item {
+    font-size: 3.5rem;
+    line-height: 0.7;
+
+    &:first-of-type {
+      list-style-image: url(img/first-place.svg);
+    }
+
+    &:nth-last-child(2) {
+      list-style-image: url(img/second-place.svg);
+    }
+
+    &:last-child {
+      list-style-image: url(img/third-place.svg);
+    }
+  }
+
+  .highscore__list-item .list-content {
+    font-size: 1.1rem;
+    position: relative;
+    bottom: 9px;
+    left: 5px;
+  }
+  .points {
+    padding-left: 5px;
+    font-size: 1.7rem;
+    color: $laika-blue;
+    font-family: $font-title;
+  }
 }
 
 /* -----------------------------------------------------------------------------

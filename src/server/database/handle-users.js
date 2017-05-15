@@ -159,9 +159,15 @@ exports.getFriendsScore = function (user) {
 
         for (let i = 0; i < numberOfHighscores; i += 1) {
           if (sortedScore[i]) {
-            html += `<li class="highscore-list">${friendsScore[i].name}: <span class="points">${friendsScore[i].highscore} points</span></li>`;
+            html += `
+              <li class="highscore__list-item">
+                <span class="list-content">${friendsScore[i].name}
+                  <span class="points">${friendsScore[i].highscore} P</span>
+                </span>
+              </li>
+            `;
           } else {
-            html += '<li></li>';
+            html += '<li class="highscore__list-item"></li>';
           }
         }
 
