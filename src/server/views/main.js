@@ -20,6 +20,7 @@ module.exports = function mainView(req) {
           :
           `
             ${userInfo(req)}
+            <div class="spacedust"></div>
             <div class="content content-js">
               ${gameContainer(req.user.highscore)}
             </div>

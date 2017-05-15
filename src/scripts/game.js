@@ -3,7 +3,6 @@ import { sendScore } from './socket';
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
-    spacedust = document.querySelector('.spacedust'),
     gameInstructions = document.querySelector('.gameInstructions-js'),
 
     // Size of the game plan
@@ -37,7 +36,6 @@ export default function initGame(gameContainer, user) {
    * Displays spacedust and fades out the game instructions when the game is started
    */
   function showAndHide() {
-    spacedust.classList.add('show');
     gameInstructions.classList.add('fadeOut');
   }
 
@@ -81,7 +79,7 @@ export default function initGame(gameContainer, user) {
 
   function collision() {
     player.element.classList.add('damage');
-    setTimeout(removeDamage, 150);
+    setTimeout(removeDamage, 1500);
     score = 0;
     scoreSpan.textContent = score;
     respawn();
