@@ -13,6 +13,11 @@ export default function router(container, data, game) {
     if (playGame && viewHighscore) {
       playGame.addEventListener('click', (e) => {
         e.preventDefault();
+
+        if (window.location.pathname === '/play') {
+          return;
+        }
+
         history.pushState(null, null, '/play');
         container.innerHTML = gameContainer(data.highscore);
         currentGame = initGame(container.firstElementChild, data);

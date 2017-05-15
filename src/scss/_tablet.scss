@@ -1,0 +1,25 @@
+.headline {
+  font-size: 3.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+  HIGHSCORE LIST
+------------------------------------------------------------------------------*/
+
+.highscore__list {
+  max-width: 350px;
+
+  .highscore__list-item {
+    font-size: 5rem;
+  }
+
+  .highscore__list-item .list-content {
+    font-size: 1.5rem;
+    bottom: 13px;
+    left: 10px;
+  }
+
+  .points {
+    font-size: 2.5rem;
+  }
+}

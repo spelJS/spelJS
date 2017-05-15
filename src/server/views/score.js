@@ -6,7 +6,7 @@ const highscore = require('./partials/highscore');
 const navigation = require('./partials/navigation');
 const footer = require('./partials/footer');
 
-module.exports = function mainView(req) {
+module.exports = function scoreView(req) {
   return `
       ${header()}
         ${!req.isAuthenticated() ?

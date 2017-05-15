@@ -1,13 +1,15 @@
 body {
   font-size: 1.3rem;
 }
+
 .rotateIconContainer {
   display: none;
 }
+
 .headline {
-  font-size: 48px;
   font-size: 4.8rem;
 }
+
 .user-info {
   .user-info__content {
     margin-right: 2rem;
@@ -17,6 +19,7 @@ body {
     height: 80px;
   }
 }
+
 .spacedust {
   top: 20%;
   animation: moveSpacedust 1.75s infinite linear;

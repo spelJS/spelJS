@@ -38,6 +38,7 @@ exports.addUser = function addUser(profile) {
         const friendsId = [];
 
         // Push all the user's friends Facebook Id's to an array
+        // FIXME: make sure to check that there is an array to check length of.
         for (let i = 0; i < userFriendList.length; i += 1) {
           friendsId.push(userFriendList[i].id);
         }
@@ -158,9 +159,15 @@ exports.getFriendsScore = function (user) {
 
         for (let i = 0; i < numberOfHighscores; i += 1) {
           if (sortedScore[i]) {
-            html += `<li class="highscore-list">${friendsScore[i].name}: <span class="points">${friendsScore[i].highscore} points</span></li>`;
+            html += `
+              <li class="highscore__list-item">
+                <span class="list-content">${friendsScore[i].name}
+                  <span class="points">${friendsScore[i].highscore} P</span>
+                </span>
+              </li>
+            `;
           } else {
-            html += '<li></li>';
+            html += '<li class="highscore__list-item"></li>';
           }
         }
 
