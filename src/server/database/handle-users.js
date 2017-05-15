@@ -99,6 +99,26 @@ exports.updateUserHighScore = function (data) {
 };
 
 /**
+ * Takes two arguments from highscore list and compare them. Returns listed
+ * sorted, sorted on highest to lowest.
+ * @param  {object} a One of the user's friends, with info about highscore.
+ * @param  {object} b Another one of the user's friends, with info about highscore.
+ * @return {array}    A list, sorted on highest to lowest.
+ */
+function sortHighscore(a, b) {
+  const highscoreA = a.highscore;
+  const highscoreB = b.highscore;
+
+  let comparison = 0;
+  if (highscoreA > highscoreB) {
+    comparison = -1;
+  } else if (highscoreA < highscoreB) {
+    comparison = 1;
+  }
+  return comparison;
+}
+
+/**
  * Get current user's friends' name and highscore.
  * @param  {object} user            Current user
  * @return {array}  friendsScore    A list of friends and
@@ -132,12 +152,19 @@ exports.getFriendsScore = function (user) {
           }
         }
 
-        if (friendsScore.length > 3) {
-          console.log('Det finns fler än 3 vänner i listan!');
-          // TODO: Make sure to only return a sorted list of top 3.
+        const sortedScore = friendsScore.sort(sortHighscore);
+        const numberOfHighscores = 3; // Only return top 3 highscore
+        let html = '';
+
+        for (let i = 0; i < numberOfHighscores; i += 1) {
+          if (sortedScore[i]) {
+            html += `<li class="highscore-list">${friendsScore[i].name}: <span class="points">${friendsScore[i].highscore} points</span></li>`;
+          } else {
+            html += '<li></li>';
+          }
         }
 
-        resolve(friendsScore);
+        resolve(html);
       }
     });
   });
