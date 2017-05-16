@@ -125,13 +125,12 @@ function sortHighscore(a, b) {
  * @return {array}  friendsScore    A list of friends and
  *                                  current user's highscore.
  */
-exports.getFriendsScore = function (user) {
+exports.getFriendsScore = function (currentUser) {
   return new Promise((resolve, reject) => {
     fs.readFile('src/server/database/users.json', function readFileCallback(error, dataBase) {
       if (error) {
         reject(error);
       } else {
-        const currentUser = user;
         const users = JSON.parse(dataBase);
         const friendsScore = [{
           name: currentUser.name,
@@ -139,16 +138,16 @@ exports.getFriendsScore = function (user) {
         }];
 
         // Loop through database to see who are friends with current user
-        for (let i = 0; i < users.length; i += 1) {
-          const usersFriends = users[i].friends;
+        for (const user of users) {
+          const userFriends = user.friends;
 
           // If friends, push their name and highscore to friendsScore.
-          if (typeof usersFriends !== 'undefined') {
-            for (let i = 0; i < usersFriends.length; i += 1) {
-              if (usersFriends[i].id === currentUser.id) {
+          if (Array.isArray(userFriends)) {
+            for (const friend of userFriends) {
+              if (friend.id === currentUser.id) {
                 friendsScore.push({
-                  name: users[i].name,
-                  highscore: users[i].highscore
+                  name: user.name,
+                  highscore: user.highscore
                 });
               }
             }

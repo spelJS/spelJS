@@ -127,8 +127,8 @@ app.get('/getuser', (req, res) => {
 app.get('/getscore', (req, res) => {
   if (req.isAuthenticated()) {
     getFriendsScore(req.user)
-    .then((json) => {
-      res.json(json);
+    .then((highscore) => {
+      res.json(highscore);
     });
   } else {
     res.redirect('/');
