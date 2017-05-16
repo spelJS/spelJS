@@ -4,13 +4,16 @@
   VARIABLES
 ------------------------------------------------------------------------------*/
 
-$font-stack: 'Lato', sans-serif;
-$font-title: 'Iceland', cursive;
+$box-shadow-small: 0 0 1px $laika-white, 0 0 5px $laika-white, 0 0 1px $laika-white, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 3px $laika-blue, 0 0 1px $laika-blue;
+$box-shadow-medium: 0 0 5px $laika-white, 0 0 10px $laika-white, 0 0 15px $laika-white, 0 0 20px $laika-blue, 0 0 35px $laika-blue, 0 0 40px $laika-blue, 0 0 50px $laika-blue, 0 0 75px $laika-blue;
+$box-shadow-transparent: 0 0 5px transparent, 0 0 10px transparent, 0 0 15px transparent, 0 0 20px transparent, 0 0 35px transparent, 0 0 40px transparent, 0 0 50px transparent, 0 0 75px transparent;
 $laika-purple: #390099;
 $laika-pink: #ff0099;
 $laika-white: #f8f8f8;
 $laika-black: #0C090D;
 $laika-blue: #228DFF;
+$font-stack: 'Lato', sans-serif;
+$font-title: 'Iceland', cursive;
 $glow: 0 0 10px $laika-white, 0 0 20px $laika-white, 0 0 30px $laika-white, 0 0 40px $laika-blue, 0 0 70px $laika-blue, 0 0 80px $laika-blue, 0 0 100px $laika-blue, 0 0 150px $laika-blue;
 
 /* -----------------------------------------------------------------------------
@@ -104,7 +107,7 @@ a:not(.loginButton) {
   z-index: 4;
 
   .loginButton {
-    box-shadow: 0 0 5px transparent, 0 0 10px transparent, 0 0 15px transparent, 0 0 20px transparent, 0 0 35px transparent, 0 0 40px transparent, 0 0 50px transparent, 0 0 75px transparent;
+    box-shadow: $box-shadow-transparent;
     align-items: center;
     background-color: $laika-pink;
     border-radius: 2px;
@@ -124,7 +127,7 @@ a:not(.loginButton) {
 
     &:hover {
       background-color: $laika-blue;
-      box-shadow: 0 0 5px $laika-white, 0 0 10px $laika-white, 0 0 15px $laika-white, 0 0 20px $laika-blue, 0 0 35px $laika-blue, 0 0 40px $laika-blue, 0 0 50px $laika-blue, 0 0 75px $laika-blue;
+      box-shadow: $box-shadow-medium;
     }
   }
 }
@@ -205,7 +208,7 @@ a:not(.loginButton) {
   }
 
   .photo__container {
-    box-shadow: 0 0 1px $laika-white, 0 0 5px $laika-white, 0 0 1px $laika-white, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 3px $laika-blue, 0 0 1px $laika-blue;
+    box-shadow: $box-shadow-small;
     width: 60px;
     height: 60px;
     overflow: hidden;
