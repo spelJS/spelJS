@@ -5,12 +5,14 @@ export default function initGame(gameContainer, user) {
     scoreSpan = document.querySelector('.scoreSpan-js'),
     gameInstructions = document.querySelector('.gameInstructions-js'),
     rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
+    highest = user.highscore;
 
-    // Size of the game plan
-    { width, height } = gameContainer.getBoundingClientRect(),
+  // Size of the game plan
+  let width = gameContainer.getBoundingClientRect().width,
+    height = gameContainer.getBoundingClientRect().height;
 
     // Variables connected to player and jump. X = gameContainers width * left 5%
-    player = {
+  const player = {
       element: document.querySelector('.player-js'),
       x: (width * 0.80) * -1,
       y: 0,
@@ -35,8 +37,19 @@ export default function initGame(gameContainer, user) {
     isJumping = false,
     takeoff,
     spawnTime,
-    score = 0,
-    highest = user.highscore;
+    score = 0;
+
+  /** Returns a function that will get the current width and height of the game container.
+    * The function will not be triggered as long as it continues to be invoked.
+    * The function will be called after it stops being called for
+    * 250 milliseconds.
+    */
+  var resizeGame = _.debounce(function () {
+    width = gameContainer.getBoundingClientRect().width;
+    height = gameContainer.getBoundingClientRect().height;
+  }, 250);
+
+  window.addEventListener('resize', resizeGame);
 
   /**
    * Displays spacedust and fades out the game instructions when the game is started
