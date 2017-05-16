@@ -140,8 +140,8 @@ export default function initGame(gameContainer, user) {
       // Update score
       score += 1;
 
-      // Make monster go faster
-      lifeTime -= 100;
+      // Make monster go randomly faster
+      lifeTime -= (Math.floor(Math.random() * 250) + 10);
 
       updateScore(scoreSpan, score);
 
