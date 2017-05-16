@@ -16,7 +16,8 @@ export default function initGame(gameContainer, user) {
       element: document.querySelector('.player-js'),
       x: (width * 0.80) * -1,
       y: 0,
-      width: 168
+      width: 168,
+      height: 135
     },
     jumpPower = 9,
     gravity = 0.275,
@@ -44,12 +45,11 @@ export default function initGame(gameContainer, user) {
     * The function will be called after it stops being called for
     * 250 milliseconds.
     */
-  var resizeGame = _.debounce(function () {
+  window.addEventListener('resize', _.debounce(() => {
     width = gameContainer.getBoundingClientRect().width;
     height = gameContainer.getBoundingClientRect().height;
-  }, 250);
-
-  window.addEventListener('resize', resizeGame);
+    player.x = (width * 0.80) * -1;
+  }, 250));
 
   /**
    * Displays spacedust and fades out the game instructions when the game is started
