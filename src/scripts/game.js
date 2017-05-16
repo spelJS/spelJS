@@ -1,4 +1,5 @@
 import { sendScore } from './socket';
+import { debounce } from './functions';
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
@@ -41,16 +42,18 @@ export default function initGame(gameContainer, user) {
     score = 0,
     highest = user.highscore;
 
+
   /** Returns a function that will get the current width and height of the game container.
-    * The function will not be triggered as long as it continues to be invoked.
-    * The function will be called after it stops being called for
-    * 250 milliseconds.
-    */
-  window.addEventListener('resize', _.debounce(() => {
+   * The function will not be triggered as long as it continues to be invoked.
+   * The function will be called after it stops being called for
+   * 250 milliseconds.
+  */
+  window.addEventListener('resize', debounce(() => {
     width = gameContainer.getBoundingClientRect().width;
     height = gameContainer.getBoundingClientRect().height;
     player.x = (width * 0.80) * -1;
   }, 250));
+
 
   /**
    * Displays spacedust and fades out the game instructions when the game is started
