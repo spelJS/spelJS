@@ -277,29 +277,30 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .player {
-  // FIXME: animation needs to be solved in another way.
-  // animation: flying 1s infinite;
-  width: 168px;
+  bottom: 0;
+  display: block;
   height: 135px;
   position: absolute;
   right: 0;
-  bottom: 0;
-  display: block;
+  width: 168px;
 
   .laika {
-    width: 100%;
     height: auto;
+    width: 100%;
   }
 }
 
 .player.onJump {
+
   .laika {
     transform: rotate(-12deg);
+
     .laikaFire {
       stroke: $fire;
       stroke-width: 80;
     }
   }
+
 }
 
 .player.damage {
@@ -315,28 +316,28 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .monster {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 50px;
-  height: 50px;
-  margin-bottom: 2%;
-  display: block;
   background-image: url("img/spritesheet.png");
   background-repeat:no-repeat;
   background-size: 100% auto;
-}
+  bottom: 0;
+  display: block;
+  height: 50px;
+  margin-bottom: 2%;
+  right: 0;
+  position: absolute;
+  width: 50px;
 
-.monster.one {
-  background-position: 0px 0px;
-}
+  &.one {
+    background-position: 0px 0px;
+  }
 
-.monster.two {
-  background-position: 0px -50px;
-}
+  &.two {
+    background-position: 0px -50px;
+  }
 
-.monster.three {
-  background-position: 0px -100px;
+  &.three {
+    background-position: 0px -100px;
+  }
 }
 
 /* -----------------------------------------------------------------------------
