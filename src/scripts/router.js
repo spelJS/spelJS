@@ -1,8 +1,6 @@
 import initGame from './game';
-
-// FIXME: Don't do both require and import.
-const highScoreContainer = require('../server/views/partials/highscore');
-const gameContainer = require('../server/views/partials/game-container');
+import highScoreContainer from '../server/views/partials/highscore';
+import gameContainer from '../server/views/partials/game-container';
 
 export default function router(container, data, game) {
   const playGame = document.querySelector('.play-js');

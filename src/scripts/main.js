@@ -1,7 +1,6 @@
 import { updateURL } from './functions';
 import router from './router';
 import initGame from './game';
-import { listenOnHighscore } from './socket';
 
 const dynamicContainer = document.querySelector('.content-js');
 const gameContainer = document.querySelector('.gameContainer-js');
@@ -27,6 +26,3 @@ if (scoreContainer) {
     })
     .catch(err => console.error(err));
 }
-
-
-listenOnHighscore();

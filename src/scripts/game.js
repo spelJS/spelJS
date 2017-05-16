@@ -4,8 +4,7 @@ export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     gameInstructions = document.querySelector('.gameInstructions-js'),
-    rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
-    highest = user.highscore;
+    rotateIconContainer = document.querySelector('.rotateIconContainer-js');
 
   // Size of the game plan
   let width = gameContainer.getBoundingClientRect().width,
@@ -39,7 +38,8 @@ export default function initGame(gameContainer, user) {
     takeoff,
     spawnTime,
     lifeTime = 2000,
-    score = 0;
+    score = 0,
+    highest = user.highscore;
 
   /** Returns a function that will get the current width and height of the game container.
     * The function will not be triggered as long as it continues to be invoked.
@@ -147,7 +147,8 @@ export default function initGame(gameContainer, user) {
 
       // Display new High Score
       if (score > highest) {
-        updateScore(highSpan, score);
+        highest = score;
+        updateScore(highSpan, highest);
         sendScore(user, highest); // Notify server about new highscore
       }
     } else {

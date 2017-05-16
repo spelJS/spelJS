@@ -155,7 +155,6 @@ exports.getFriendsScore = function (user) {
           }
         }
 
-
         const sortedScore = friendsScore.sort(sortHighscore);
         const top3 = sortedScore.filter((obj, index) => (index < 3));
 
