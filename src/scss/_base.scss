@@ -137,15 +137,7 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .backgroundVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: 1;
-  filter: brightness(40%);
+  display: none;
 }
 
 @keyframes stars {
