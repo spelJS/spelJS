@@ -12,7 +12,7 @@ $laika-pink: #ff0099;
 $laika-white: #f8f8f8;
 $laika-black: #0C090D;
 $laika-blue: #228DFF;
-$font-stack: 'Lato', sans-serif;
+$font-content: 'Lato', sans-serif;
 $font-title: 'Iceland', cursive;
 $glow: 0 0 10px $laika-white, 0 0 20px $laika-white, 0 0 30px $laika-white, 0 0 40px $laika-blue, 0 0 70px $laika-blue, 0 0 80px $laika-blue, 0 0 100px $laika-blue, 0 0 150px $laika-blue;
 
@@ -27,7 +27,7 @@ body {
   color: $laika-white;
   display: flex;
   flex-direction: column;
-  font-family: $font-stack;
+  font-family: $font-content;
   height: 100vh;
   justify-content: center;
   margin: 0;
