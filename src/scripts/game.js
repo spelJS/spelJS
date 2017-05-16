@@ -57,6 +57,15 @@ export default function initGame(gameContainer, user) {
     return randomClass;
   }
 
+  function updateScore(container, content) {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+
+    const scoreInfo = document.createTextNode(content);
+    container.appendChild(scoreInfo);
+  }
+
   /**
    * Move monster from left to right, and add a new random class to it.
    */
@@ -91,8 +100,7 @@ export default function initGame(gameContainer, user) {
     player.element.classList.add('damage');
     setTimeout(removeDamage, 500);
     score = 0;
-    scoreSpan.textContent = score;
-    // TODO: Modify child instead.
+    updateScore(scoreSpan, score);
     respawn();
   }
 
@@ -115,12 +123,11 @@ export default function initGame(gameContainer, user) {
 
       // Update score
       score += 1;
-      scoreSpan.textContent = score;
+      updateScore(scoreSpan, score);
 
       // Display new High Score
       if (score > highest) {
-        highSpan.textContent = score;
-        highest = score;
+        updateScore(highSpan, score);
         sendScore(user, highest); // Notify server about new highscore
       }
     } else {

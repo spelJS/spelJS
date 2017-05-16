@@ -7,7 +7,7 @@ module.exports = function loginView() {
   return `
     ${header()}
     ${logo()}
-      <h1 class="headline">Laika's Space<br>Adventure</h1>
+      <h1 class="headline headline--glow">Laika's Space<br>Adventure</h1>
       <div class="login">
         <a href="/login" class="loginButton">Sign in with Facebook ${icon()}</a>
       </div>

@@ -46,9 +46,6 @@ a {
 
 p,
 a:not(.loginButton) {
-  &:not(.gameInstructions) {
-    text-shadow: $glow;
-  }
   color: $laika-white;
   letter-spacing: 0.3em;
   margin: 0.2em 0;
@@ -69,13 +66,16 @@ a:not(.loginButton) {
 // }
 
 .headline, .rotateInstructions {
-  text-shadow: $glow;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
   margin: 0.2em;
   font-family: $font-title;
   font-size: 2rem;
+}
+
+.headline--glow {
+  text-shadow: $glow;
 }
 
 /* -----------------------------------------------------------------------------
@@ -199,7 +199,7 @@ a:not(.loginButton) {
   }
 
   .photo__container {
-    box-shadow: 0 0 2px $laika-white, 0 0 10px $laika-white, 0 0 2px $laika-white, 0 0 15px $laika-blue, 0 0 15px $laika-blue, 0 0 15px $laika-blue, 0 0 5px $laika-blue, 0 0 2px $laika-blue;
+    box-shadow: 0 0 1px $laika-white, 0 0 5px $laika-white, 0 0 1px $laika-white, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 3px $laika-blue, 0 0 1px $laika-blue;
     width: 60px;
     height: 60px;
     overflow: hidden;
@@ -243,7 +243,6 @@ a:not(.loginButton) {
   margin-top: 5%;
   width: 90vw;
   .scoreText {
-    text-shadow: $glow;
     letter-spacing: 0.3em;
   }
   p {
@@ -395,8 +394,6 @@ a:not(.loginButton) {
     .navigation__list-item:not(:last-of-type)::after {
       content: "|";
       margin: 1rem;
-      text-shadow: $glow;
-
     }
   }
 }
