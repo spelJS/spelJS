@@ -143,15 +143,18 @@ exports.getFriendsScore = function (user) {
           const usersFriends = users[i].friends;
 
           // If friends, push their name and highscore to friendsScore.
-          for (let i = 0; i < usersFriends.length; i += 1) {
-            if (usersFriends[i].id === currentUser.id) {
-              friendsScore.push({
-                name: users[i].name,
-                highscore: users[i].highscore
-              });
+          if (typeof usersFriends !== 'undefined') {
+            for (let i = 0; i < usersFriends.length; i += 1) {
+              if (usersFriends[i].id === currentUser.id) {
+                friendsScore.push({
+                  name: users[i].name,
+                  highscore: users[i].highscore
+                });
+              }
             }
           }
         }
+
 
         const sortedScore = friendsScore.sort(sortHighscore);
         const top3 = sortedScore.filter((obj, index) => (index < 3));
