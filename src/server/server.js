@@ -6,6 +6,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const scoreView = require('./views/score');
+const loginView = require('./views/login');
 
 // The functions for handling user database.
 const {
@@ -134,26 +135,37 @@ app.get('/getscore', (req, res) => {
   }
 });
 
-// Redirect to highscore page
-// FIXME: Do a redirect through /getscore
+// Direct user to highscore page if logged in
 app.get('/highscore', (req, res) => {
   if (req.isAuthenticated()) {
-    res.send(scoreView(req));
+    getFriendsScore(req.user)
+    .then((highscore) => {
+      const state = {
+        user: req.user,
+        highscore
+      };
+
+      return res.send(scoreView(state));
+    }, (err) => {
+      res.status(500);
+      res.send(err);
+    });
   } else {
-    res.redirect('/');
+    res.send(loginView());
   }
 });
 
-// Redirect to main page
+// Direct user to main page if logged in
 app.get('*', (req, res) => {
-  res.send(mainView(req));
+  if (req.isAuthenticated()) {
+    const state = {
+      user: req.user
+    }
+    res.send(mainView(state));
+  } else {
+    res.send(loginView());
+  }
 });
-
-// TODO: Figure out if you would like to handle 404, else remove.
-// If no other page is specified or found, 404 is shown.
-// app.get('*', (req, res) => {
-//   res.send(notFound(req));
-// });
 
 // Listen on http://localhost:3000/
 server.listen(3000);

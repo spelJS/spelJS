@@ -92,6 +92,7 @@ export default function initGame(gameContainer, user) {
     setTimeout(removeDamage, 500);
     score = 0;
     scoreSpan.textContent = score;
+    // TODO: Modify child instead.
     respawn();
   }
 

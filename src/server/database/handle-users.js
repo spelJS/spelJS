@@ -59,7 +59,7 @@ exports.addUser = function addUser(profile) {
           name: profile.displayName,
           photo: profile.photos[0].value,
           highscore: 0,
-          friends: profile._json.friends.data || [] // TODO: Is this correct?
+          friends: profile._json.friends.data || []
         };
 
         users.push(user); // Push user to list of users
@@ -154,24 +154,9 @@ exports.getFriendsScore = function (user) {
         }
 
         const sortedScore = friendsScore.sort(sortHighscore);
-        const numberOfHighscores = 3; // Only return top 3 highscore
-        let html = '';
+        const top3 = sortedScore.filter((obj, index) => (index < 3));
 
-        for (let i = 0; i < numberOfHighscores; i += 1) {
-          if (sortedScore[i]) {
-            html += `
-              <li class="highscore__list-item">
-                <span class="list-content">${friendsScore[i].name}
-                  <span class="points">${friendsScore[i].highscore} P</span>
-                </span>
-              </li>
-            `;
-          } else {
-            html += '<li class="highscore__list-item"></li>';
-          }
-        }
-
-        resolve(html);
+        resolve(top3);
       }
     });
   });
