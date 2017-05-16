@@ -137,7 +137,7 @@ a:not(.loginButton) {
   min-height: 100%;
   width: auto;
   height: auto;
-  z-index: -5;
+  z-index: 1;
   filter: brightness(40%);
 }
 
@@ -159,7 +159,7 @@ a:not(.loginButton) {
   background-size: 200%;
   animation: moveSpacedust 1s infinite linear;
   position: absolute;
-  z-index: -3;
+  z-index: 3;
 }
 
 .stars {
@@ -173,7 +173,7 @@ a:not(.loginButton) {
   width: 100vw;
   animation: stars 2s linear infinite;
   background: transparent url("img/stars.png") repeat top center;
-  z-index: -4;
+  z-index: 2;
 }
 
 /* -----------------------------------------------------------------------------
@@ -188,6 +188,7 @@ a:not(.loginButton) {
   display: flex;
   justify-content: flex-end;
   width: 90vw;
+  z-index: 4;
 
   .user-info__content {
     margin-right: 1rem;
@@ -216,7 +217,7 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 .rotateIconContainer {
   position:fixed;
-  z-index: 1;
+  z-index: 5;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.9);
@@ -231,6 +232,10 @@ a:not(.loginButton) {
   }
 }
 
+.content {
+  z-index: 4;
+}
+
 .gameContainer {
   margin-top: 0;
   position: relative;
@@ -243,6 +248,7 @@ a:not(.loginButton) {
   text-align: right;
   margin-top: 5%;
   width: 90vw;
+  z-index: 4;
   .scoreText {
     letter-spacing: 0.3em;
   }
@@ -273,7 +279,6 @@ a:not(.loginButton) {
   right: 0;
   bottom: 0;
   display: block;
-  z-index: -1;
 
   .laika {
     width: 100%;
@@ -383,6 +388,7 @@ a:not(.loginButton) {
   margin-bottom: 1rem;
   width: 100%;
   text-align: center;
+  z-index: 4;
 
   .navigation__list {
     list-style-type: none;
