@@ -87,7 +87,8 @@ export default function initGame(gameContainer, user) {
     monster.y = 0;
     monster.element.classList.remove(monster.type);
     monster.type = randomType(monsterClasses);
-    monster.element.classList.add(monster.type, 'monster');
+    monster.element.classList.add(monster.type);
+    monster.element.classList.add('monster');
     gameContainer.appendChild(monster.element);
     spawnTime = Date.now();
   }
