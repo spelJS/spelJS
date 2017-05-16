@@ -1,5 +1,29 @@
+body {
+  font-size: 1.3rem;
+}
+
 .headline {
   font-size: 3.5rem;
+}
+
+.gameContainer {
+  height: 50vh;
+}
+
+.spacedust {
+  top: 20%;
+}
+
+.player {
+  text-align: center;
+  .laika {
+    margin-top: auto;
+    width: 100%;
+  }
+}
+
+.navigation {
+  margin-bottom: 2rem;
 }
 
 /* -----------------------------------------------------------------------------
