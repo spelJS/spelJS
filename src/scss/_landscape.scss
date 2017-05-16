@@ -26,7 +26,17 @@
   margin-top: 0;
 }
 .gameContainer {
-  height: 40vh;
+  height: 75vh;
   position: relative;
   width: 100vw;
+}
+.player {
+  text-align: right;
+  .laika {
+    margin-top: 25%;
+    width: 70%;
+  }
+}
+.navigation {
+  margin-bottom: 0.1rem;
 }
