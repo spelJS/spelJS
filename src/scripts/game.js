@@ -38,6 +38,7 @@ export default function initGame(gameContainer, user) {
     isJumping = false,
     takeoff,
     spawnTime,
+    lifeTime = 2000,
     score = 0;
 
   /** Returns a function that will get the current width and height of the game container.
@@ -114,6 +115,7 @@ export default function initGame(gameContainer, user) {
     player.element.classList.add('damage');
     setTimeout(removeDamage, 500);
     score = 0;
+    lifeTime = 2000;
     updateScore(scoreSpan, score);
     respawn();
   }
@@ -130,13 +132,17 @@ export default function initGame(gameContainer, user) {
 
     requestAnimationFrame(onframe);
 
-    const monsterLifeSpan = (Date.now() - spawnTime) / 2000;
+    const monsterLifeSpan = (Date.now() - spawnTime) / lifeTime;
 
     if (monsterLifeSpan >= 1) {
       respawn();
 
       // Update score
       score += 1;
+
+      // Make monster go faster
+      lifeTime -= 100;
+
       updateScore(scoreSpan, score);
 
       // Display new High Score
