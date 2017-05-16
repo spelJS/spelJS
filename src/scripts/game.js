@@ -206,8 +206,8 @@ export default function initGame(gameContainer, user) {
   return {
     stop() {
       isActive = false;
-      score = 0; // TODO: Should this be here?
-      scoreSpan.textContent = score; // TODO: Should this be here?
+      score = 0;
+      updateScore(scoreSpan, score);
     }
   };
 }
