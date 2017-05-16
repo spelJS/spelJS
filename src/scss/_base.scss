@@ -66,6 +66,7 @@ a:not(.loginButton) {
 }
 
 .headline, .rotateInstructions {
+  z-index: 4;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
@@ -88,6 +89,7 @@ a:not(.loginButton) {
   filter: drop-shadow(3px 3px 5px $laika-blue);
   height: 18rem;
   width: 18rem;
+  z-index: 4;
   .detailsColor {
     fill: $laika-blue;
   }
@@ -99,6 +101,7 @@ a:not(.loginButton) {
 .login {
   margin-top: 2rem;
   margin-bottom: 1rem;
+  z-index: 4;
 
   .loginButton {
     align-items: center;
@@ -216,7 +219,6 @@ a:not(.loginButton) {
   GAME CONTAINER
 ------------------------------------------------------------------------------*/
 .rotateIconContainer {
-  position:fixed;
   z-index: 5;
   width: 100%;
   height: 100%;
