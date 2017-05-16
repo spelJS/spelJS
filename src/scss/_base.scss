@@ -7,6 +7,7 @@
 $box-shadow-small: 0 0 1px $laika-white, 0 0 5px $laika-white, 0 0 1px $laika-white, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 7px $laika-blue, 0 0 3px $laika-blue, 0 0 1px $laika-blue;
 $box-shadow-medium: 0 0 5px $laika-white, 0 0 10px $laika-white, 0 0 15px $laika-white, 0 0 20px $laika-blue, 0 0 35px $laika-blue, 0 0 40px $laika-blue, 0 0 50px $laika-blue, 0 0 75px $laika-blue;
 $box-shadow-transparent: 0 0 5px transparent, 0 0 10px transparent, 0 0 15px transparent, 0 0 20px transparent, 0 0 35px transparent, 0 0 40px transparent, 0 0 50px transparent, 0 0 75px transparent;
+$damage: rgb(170, 0, 0);
 $laika-purple: #390099;
 $laika-pink: #ff0099;
 $laika-white: #f8f8f8;
@@ -305,7 +306,7 @@ a:not(.loginButton) {
 .player.damage {
   .laika {
     path {
-      fill: rgb(170, 0, 0);
+      fill: $damage;
     }
   }
 }
