@@ -2,8 +2,6 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const FacebookStrategy = require('passport-facebook').Strategy;
-
-const { clientID, clientSecret, callbackURL } = require('./credentials');
 const mainView = require('./views/main');
 const scoreView = require('./views/score');
 const loginView = require('./views/login');
