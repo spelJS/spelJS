@@ -13,10 +13,13 @@ export default function initGame(gameContainer, user) {
   // Width of game plan
   let width = gameContainer.getBoundingClientRect().width;
 
-  // Variables connected to player and jump. X = gameContainers width * left 5%
+/* -----------------------------------------------------------------------------
+  PLAYER
+------------------------------------------------------------------------------*/
+
   const player = {
     element: document.querySelector('.player-js'),
-    x: (width * 0.80) * -1,
+    x: (width * 0.80) * -1, // x = game plan's width * left 20 %
     y: 0,
     width: 168,
     height: 135
@@ -25,44 +28,9 @@ export default function initGame(gameContainer, user) {
   // Once new game has started, show Laika
   player.element.style.opacity = '1';
 
-  // All the variables connected to monsters
-  const monster = {
-    x: width,
-    y: 0,
-    type: randomType(monsterClasses),
-    element: document.createElement('div'),
-    width: 50,
-    height: 50
-  };
-
-  // Updated frequently when game is active.
-  let isActive = true,
-    isJumping = false,
-    takeoff,
-    spawnTime,
-    lifeTime = 2000,
-    score = 0,
-    highest = user.highscore;
-
-
-  /** Returns a function that will get the current width and height of the game container.
-   * The function will not be triggered as long as it continues to be invoked.
-   * The function will be called after it stops being called for
-   * 250 milliseconds.
-  */
-  window.addEventListener('resize', debounce(() => {
-    width = gameContainer.getBoundingClientRect().width;
-    player.x = (width * 0.80) * -1;
-  }, 250));
-
-
-  /**
-   * Displays spacedust and fades out the game instructions when the game is started
-   */
-  function showAndHide() {
-    gameInstructions.classList.add('fadeOut');
-    rotateIconContainer.classList.add('fadeOut');
-  }
+/* -----------------------------------------------------------------------------
+  MONSTERS
+------------------------------------------------------------------------------*/
 
   /**
    * Get a random monster type on respawn.
@@ -75,6 +43,45 @@ export default function initGame(gameContainer, user) {
     return randomClass;
   }
 
+  // All the variables connected to monsters
+  const monster = {
+    x: width,
+    y: 0,
+    type: randomType(monsterClasses),
+    element: document.createElement('div'),
+    width: 50,
+    height: 50
+  };
+
+/* -----------------------------------------------------------------------------
+  TEMPORARY VARIABLES (UPDATED FREQUENTLY)
+------------------------------------------------------------------------------*/
+
+  let isActive = true,
+    isJumping = false,
+    takeoff,
+    spawnTime,
+    monsterSpeed = 2000,
+    score = 0,
+    highest = user.highscore;
+
+/* -----------------------------------------------------------------------------
+  GENERAL GAME FUNCTIONS
+------------------------------------------------------------------------------*/
+
+  /**
+   * Displays spacedust and fades out the game instructions when the game is started
+   */
+  function showAndHide() {
+    gameInstructions.classList.add('fadeOut');
+    rotateIconContainer.classList.add('fadeOut');
+  }
+
+  /**
+   * Update container with new information about score
+   * @param  {string} container The container to be updated
+   * @param  {string} content   The new content of the container
+   */
   function updateScore(container, content) {
     while (container.firstChild) {
       container.removeChild(container.firstChild);
@@ -111,18 +118,21 @@ export default function initGame(gameContainer, user) {
     takeoff = Date.now();
   }
 
-  function removeDamage() {
-    player.element.classList.remove('damage');
-  }
-
+  /**
+   * When player collides with monster, game starts over
+   */
   function collision() {
     player.element.classList.add('damage');
-    setTimeout(removeDamage, 500);
+    setTimeout(() => player.element.classList.remove('damage'), 500);
     score = 0;
-    lifeTime = 2000;
+    monsterSpeed = 2000; // Reset monster speed since game is starting over
     updateScore(scoreSpan, score);
     respawn();
   }
+
+/* -----------------------------------------------------------------------------
+  ON FRAME
+------------------------------------------------------------------------------*/
 
   /**
    * Move game forward on frame, using 'requestAnimationFrame'. If monster reaches
@@ -136,17 +146,16 @@ export default function initGame(gameContainer, user) {
 
     requestAnimationFrame(onframe);
 
-    const monsterLifeSpan = (Date.now() - spawnTime) / lifeTime;
+    const monsterLifeSpan = (Date.now() - spawnTime) / monsterSpeed;
 
+    // Create a new monster if player managed to avoid the current one
     if (monsterLifeSpan >= 1) {
       respawn();
 
-      // Update score
-      score += 1;
-
       // Make monster go randomly faster
-      lifeTime -= (Math.floor(Math.random() * 250) + 10);
+      monsterSpeed -= (Math.floor(Math.random() * 250) + 10);
 
+      score += 1;
       updateScore(scoreSpan, score);
 
       // Display new High Score
@@ -157,11 +166,18 @@ export default function initGame(gameContainer, user) {
       }
     } else {
       monster.x = ((width + monster.width) * monsterLifeSpan) * -1;
-      if ((monster.x < player.x) && (monster.x > (player.x - player.width)) && ((player.y * -1) < monster.height)) {
+
+      // if player and monster are on the same spot at the same time,
+      // collision will happen.
+      if (
+        (monster.x < player.x) &&
+        (monster.x > (player.x - player.width)) &&
+        ((player.y * -1) < monster.height)) {
         collision();
       }
     }
 
+    // Move player and and nice 'jump effect' when player jumps
     if (isJumping) {
       const airtime = 60 * ((Date.now() - takeoff) / 1000);
       const offset = Math.floor((airtime * jumpPower) - (0.5 * Math.pow(airtime, 2) * gravity));
@@ -180,6 +196,10 @@ export default function initGame(gameContainer, user) {
     monster.element.style.transform = `translate(${monster.x}px, ${monster.y}px)`;
     player.element.style.transform = `translate(${player.x}px, ${player.y}px)`;
   }
+
+/* -----------------------------------------------------------------------------
+  EVENT LISTENERS
+------------------------------------------------------------------------------*/
 
   // Makes the player jump by hitting 'space' or 'up arrow'
   document.addEventListener('keydown', (e) => {
@@ -200,6 +220,23 @@ export default function initGame(gameContainer, user) {
     jump();
   });
 
+  /** Returns a function that will get the current width and height of the game container.
+   * The function will not be triggered as long as it continues to be invoked.
+   * The function will be called after it stops being called for
+   * 250 milliseconds.
+   */
+  window.addEventListener('resize', debounce(() => {
+    width = gameContainer.getBoundingClientRect().width;
+    player.x = (width * 0.80) * -1;
+  }, 250));
+
+/* -----------------------------------------------------------------------------
+  START AND RETURN
+------------------------------------------------------------------------------*/
+
+  /**
+   * Place monster and hide instructions once game is started
+   */
   function start() {
     respawn();
     onframe();
