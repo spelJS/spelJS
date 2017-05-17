@@ -274,7 +274,9 @@ a:not(.loginButton) {
   height: 135px;
   position: absolute;
   right: 0;
+  opacity: 0;
   width: 168px;
+  transition: opacity 450ms ease;
 
   .laika {
     height: auto;

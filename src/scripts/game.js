@@ -5,33 +5,35 @@ export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
     gameInstructions = document.querySelector('.gameInstructions-js'),
-    rotateIconContainer = document.querySelector('.rotateIconContainer-js');
-
-  // Size of the game plan
-  let width = gameContainer.getBoundingClientRect().width,
-    height = gameContainer.getBoundingClientRect().height;
-
-    // Variables connected to player and jump. X = gameContainers width * left 5%
-  const player = {
-      element: document.querySelector('.player-js'),
-      x: (width * 0.80) * -1,
-      y: 0,
-      width: 168,
-      height: 135
-    },
+    rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
+    monsterClasses = ['one', 'two', 'three'], // Monster position and class
     jumpPower = 9,
-    gravity = 0.275,
+    gravity = 0.275;
 
-    // Monster position and class
-    monsterClasses = ['one', 'two', 'three'],
-    monster = {
-      x: width,
-      y: 0,
-      type: randomType(monsterClasses),
-      element: document.createElement('div'),
-      width: 50,
-      height: 50
-    };
+  // Width of game plan
+  let width = gameContainer.getBoundingClientRect().width;
+
+  // Variables connected to player and jump. X = gameContainers width * left 5%
+  const player = {
+    element: document.querySelector('.player-js'),
+    x: (width * 0.80) * -1,
+    y: 0,
+    width: 168,
+    height: 135
+  };
+
+  // Once new game has started, show Laika
+  player.element.style.opacity = '1';
+
+  // All the variables connected to monsters
+  const monster = {
+    x: width,
+    y: 0,
+    type: randomType(monsterClasses),
+    element: document.createElement('div'),
+    width: 50,
+    height: 50
+  };
 
   // Updated frequently when game is active.
   let isActive = true,
@@ -50,7 +52,6 @@ export default function initGame(gameContainer, user) {
   */
   window.addEventListener('resize', debounce(() => {
     width = gameContainer.getBoundingClientRect().width;
-    height = gameContainer.getBoundingClientRect().height;
     player.x = (width * 0.80) * -1;
   }, 250));
 
