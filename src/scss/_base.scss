@@ -35,11 +35,11 @@ body {
   font-family: $font-content;
   font-size: 0.9rem;
   height: 100vh;
-  justify-content: center;
+  justify-content: flex-start;
   line-height: 1.5;
   margin: 0;
+  padding-top: 4%;
   overflow: hidden;
-  // position: absolute;
   width: 100vw;
 }
 
@@ -181,12 +181,11 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .user-info {
+  border: 1px solid yellow;
   align-items: flex-start;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
-  position: absolute;
-  top: 4%;
   width: 90vw;
   z-index: 4;
 
@@ -240,8 +239,8 @@ a:not(.loginButton) {
 }
 
 .gameContainer {
-  // border: 1px solid yellow;
-  height: 55vh;
+  border: 1px solid yellow;
+  height: 45vh;
   margin-top: 0;
   overflow: hidden; // Prevents calculations when monsters are out of view
   position: relative;
@@ -249,18 +248,23 @@ a:not(.loginButton) {
 }
 
 .gameInfo {
-  margin-top: 5%;
+  border: 1px solid hotpink;
   text-align: right;
   width: 90vw;
   z-index: 4;
+
   .scoreText {
     letter-spacing: 0.3em;
   }
+
   p {
     margin-top: 0;
+
   }
+
   .gameInstructions {
     margin-bottom: 0;
+    border: 1px solid hotpink;
   }
 }
 
@@ -281,21 +285,27 @@ a:not(.loginButton) {
   .laika {
     height: auto;
     width: 100%;
+
     .laikaCostume {
       fill: $laika-pink;
     }
+
     .laikaFire {
       fill: $laika-fire;
     }
+
     .laikaRocket {
       fill: $laika-rocket;
     }
+
     .laikaSkin {
       fill: $laika-skin;
     }
+
     .laikaWingDark {
       fill: $laika-darkRed;
     }
+
     .laikaWingLight {
       fill: $laika-lightRed;
     }
@@ -315,6 +325,7 @@ a:not(.loginButton) {
 }
 
 .player.damage {
+
   .laika {
     path {
       fill: $laika-lightRed;
@@ -385,6 +396,7 @@ a:not(.loginButton) {
     left: 5px;
     position: relative;
   }
+
   .points {
     color: $blue;
     font-family: $font-title;
@@ -398,14 +410,12 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .navigation {
-  bottom: 0;
-  left: 0;
-  margin-bottom: 1rem;
-  position: absolute;
-  right: 0;
+  border: 1px solid blue;
   text-align: center;
-  width: 100%;
+  width: 100vw;
   z-index: 4;
+  bottom: 0;
+  position: absolute;
 
   .navigation__list {
     list-style-type: none;

@@ -24,24 +24,18 @@
 }
 
 .user-info {
-  margin-top: 0;
-  right: 2%;
+  position: absolute;
+  right: 4%;
   width: auto;
 }
 
 .gameInfo {
-  left: 2%;
-  margin-top: 0;
+  left: 4%;
   position: absolute;
   text-align: left;
-  top: 4%;
   width: auto;
 }
 
 .gameContainer {
   height: 75vh;
-}
-
-.navigation {
-  margin-bottom: 0.1rem;
 }
