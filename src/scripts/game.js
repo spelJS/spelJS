@@ -21,8 +21,7 @@ export default function initGame(gameContainer, user) {
     element: document.querySelector('.player-js'),
     x: (width * 0.80) * -1, // x = game plan's width * left 20 %
     y: 0,
-    width: 168,
-    height: 135
+    width: ((width > 1024) ? 175 : 100)
   };
 
   // Once new game has started, show Laika
@@ -49,8 +48,8 @@ export default function initGame(gameContainer, user) {
     y: 0,
     type: randomType(monsterClasses),
     element: document.createElement('div'),
-    width: 50,
-    height: 50
+    width: ((width > 1024) ? 75 : 50),
+    height: ((width > 1024) ? 75 : 50)
   };
 
 /* -----------------------------------------------------------------------------

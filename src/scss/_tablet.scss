@@ -23,10 +23,18 @@ body {
 }
 
 .player {
-  text-align: center;
-  .laika {
-    margin-top: auto;
-    width: 100%;
+  width: 175px;
+}
+
+.monster {
+  height: 75px;
+  width: 75px;
+  &.two {
+    background-position: 0px -75px;
+  }
+
+  &.three {
+    background-position: 0px -150px;
   }
 }
 

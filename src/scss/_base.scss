@@ -240,11 +240,12 @@ a:not(.loginButton) {
 }
 
 .gameContainer {
+  // border: 1px solid yellow;
   height: 55vh;
   margin-top: 0;
   overflow: hidden; // Prevents calculations when monsters are out of view
   position: relative;
-  width: 100vw;
+  width: 98vw;
 }
 
 .gameInfo {
@@ -270,11 +271,11 @@ a:not(.loginButton) {
 .player {
   bottom: 0;
   display: block;
-  height: 135px;
+  height: auto;
   position: absolute;
   right: 0;
   opacity: 0;
-  width: 168px;
+  width: 100px;
   transition: opacity 450ms ease;
 
   .laika {
