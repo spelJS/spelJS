@@ -4,7 +4,7 @@
  */
 // TODO: Before publishing, this needs to be updated!
 export function updateURL(href) {
-  if (href === 'https://laikas-space-adventure/play#_=_') {
+  if (href === 'https://laikas-space-adventure.herokuapp.com/play#_=_') {
     history.pushState(null, null, '/play');
   }
 }
