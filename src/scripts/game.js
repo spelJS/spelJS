@@ -10,7 +10,7 @@ export default function initGame(gameContainer, user) {
     jumpPower = 9,
     gravity = 0.275;
 
-  // Width of game plan
+  // Width of Game Plan
   let width = gameContainer.getBoundingClientRect().width;
 
 /* -----------------------------------------------------------------------------
