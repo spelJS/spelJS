@@ -136,14 +136,10 @@ a:not(.loginButton) {
   STARRY BACKGROUND WITH GRADIENT
 ------------------------------------------------------------------------------*/
 
-.backgroundVideo {
-  display: none;
-}
-
 @keyframes stars {
-  0% { opacity: 0.3; }
+  0% { opacity: 0.4; }
   50% { opacity: 1; }
-  100% { opacity: 0.3; }
+  100% { opacity: 0.4; }
 }
 
 @keyframes moveSpacedust {
