@@ -4,7 +4,7 @@
  */
 // TODO: Before publishing, this needs to be updated!
 export function updateURL(href) {
-  if (href === 'http://localhost:3000/play#_=_') {
+  if (href === 'https://laikas-space-adventure/play#_=_') {
     history.pushState(null, null, '/play');
   }
 }

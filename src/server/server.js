@@ -19,6 +19,9 @@ const {
 // Set up an instance of express
 const app = express();
 
+// process.env.PORT lets the port be set by Heroku
+const port = process.env.PORT || 3000;
+
 /*------------------------------------------------------------------------------
   SETUP OF WEBSOCKET USING SOCKET.IO
 ------------------------------------------------------------------------------*/
@@ -167,5 +170,4 @@ app.get('*', (req, res) => {
   }
 });
 
-// Listen on http://localhost:3000/
-server.listen(3000);
+server.listen(port);
