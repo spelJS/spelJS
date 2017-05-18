@@ -13,6 +13,7 @@ module.exports = function mainView(state) {
       ${rotateIcon()}
       <p class="rotateInstructions">Rotate</p>
     </div>
+    <p class="headline instructions gameInstructions-js"></p>
     <div class="flexbox">
       ${userInfo(state.user)}
         <div class="content content-js">

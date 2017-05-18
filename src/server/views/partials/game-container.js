@@ -5,6 +5,5 @@ module.exports = function gameContainer() {
   <div class="gameContainer gameContainer-js">
     <div class="player player-js">${player()}</div>
   </div>
-  <p class="headline instructions gameInstructions-js"></p>
   `;
 };
