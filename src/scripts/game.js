@@ -144,10 +144,10 @@ export default function initGame(gameContainer, user) {
       respawn();
 
       // Make monster go randomly faster
-      monsterSpeed -= (Math.floor(Math.random() * 250) + 10);
+      monsterSpeed -= 75;
 
       // Make Laika jump faster when game increases speed.
-      laikaSpeed -= 100;
+      laikaSpeed -= 75;
 
       score += 1;
       updateScore(scoreSpan, score);
