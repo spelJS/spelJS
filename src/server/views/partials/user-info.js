@@ -13,7 +13,6 @@ module.exports = function userInfo(user) {
     <div class="highscore"></div>
     <p class="scoreText">Your High Score: <span class="highSpan-js">${user.highscore}</span></p>
     <p class="scoreText">Score: <span class="scoreSpan-js">0</span></p>
-    <p class="gameInstructions gameInstructions-js">Space/arrow up to jump</p>
   </div>
   `;
 };
