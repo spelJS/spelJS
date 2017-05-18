@@ -1,30 +1,3 @@
 [
-  {
-    "id": "1724164587600591",
-    "name": "Tuukka Teriö",
-    "photo": "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/16195887_1598525903497794_8429117151700178686_n.jpg?oh=da2fca328d79538ce881365d6df10e49&oe=59BFAF44",
-    "highscore": 4,
-    "friends": [
-      {
-        "name": "Alice Langerth",
-        "id": "10154680044295847"
-      },
-      {
-        "name": "Jessica Niemi",
-        "id": "10155154240871977"
-      },
-      {
-        "name": "Carl Törnqvist",
-        "id": "10155252009391549"
-      },
-      {
-        "name": "Alexandra Sommar",
-        "id": "10154600342602006"
-      },
-      {
-        "name": "Katarina Ljungdahl",
-        "id": "10155074836146224"
-      }
-    ]
-  }
+
 ]

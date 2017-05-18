@@ -13,7 +13,7 @@ module.exports = function mainView(state) {
       ${rotateIcon()}
       <p class="rotateInstructions">Rotate</p>
     </div>
-    <div class="flexbox mainpage">
+    <div class="flexbox">
       ${userInfo(state.user)}
         <div class="content content-js">
           ${gameContainer(state.user.highscore)}
