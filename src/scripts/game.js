@@ -7,8 +7,8 @@ export default function initGame(gameContainer, user) {
     gameInstructions = document.querySelector('.gameInstructions-js'),
     rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
     monsterClasses = ['one', 'two', 'three'], // Monster position and class
-    jumpPower = 8,
-    gravity = 0.3;
+    jumpPower = 9,
+    gravity = 0.25;
 
   // Width of Game Plan
   let width = gameContainer.getBoundingClientRect().width;

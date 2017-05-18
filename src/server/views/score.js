@@ -9,7 +9,7 @@ module.exports = function scoreView(state) {
     ${header()}
     ${userInfo(state.user)}
       <div class="spacedust"></div>
-      <div class="content content-js">
+      <div class="content highscore content-js">
         ${highscore(state.highscore)}
       </div>
     ${navigation()}

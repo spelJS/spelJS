@@ -26,21 +26,32 @@ $laika-skin: #551606;
 ------------------------------------------------------------------------------*/
 
 body {
-  align-items: center;
   background-color: $black;
-  box-sizing: border-box;
   color: $white;
-  display: flex;
-  flex-direction: column;
   font-family: $font-content;
   font-size: 0.9rem;
   height: 100vh;
-  justify-content: flex-start;
   line-height: 1.5;
   margin: 0;
-  padding-top: 4%;
   overflow: hidden;
   width: 100vw;
+}
+
+.flexbox, .content.highscore {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-start;
+  width: 100vw;
+}
+
+.startpage {
+  justify-content: center;
+}
+
+.mainpage, .content.highscore {
+  padding-top: 4%;
 }
 
 /* -----------------------------------------------------------------------------
@@ -187,7 +198,7 @@ a:not(.loginButton) {
   display: flex;
   justify-content: flex-end;
   width: 90vw;
-  z-index: 4;
+  z-index: 5;
 
   .user-info__content {
     height: 100%;
@@ -226,7 +237,7 @@ a:not(.loginButton) {
   position: absolute;
   top: 0;
   width: 100vw;
-  z-index: 5;
+  z-index: 6;
 
   .svgRotate {
     fill: $white;
@@ -366,6 +377,12 @@ a:not(.loginButton) {
   HIGHSCORE LIST
 ------------------------------------------------------------------------------*/
 
+.highscoreContainer {
+  border: 1px solid yellow;
+  margin: 0 auto;
+  width: 90vw;
+}
+
 .highscore__list {
   max-width: 250px;
   margin: 0 auto;
@@ -430,11 +447,6 @@ a:not(.loginButton) {
       margin: 1rem;
     }
   }
-}
-
-.highscoreContainer {
-  margin: 0 auto;
-  width: 90vw;
 }
 
 /* -----------------------------------------------------------------------------
