@@ -41,6 +41,10 @@ body {
   }
 }
 
+.gameContainer {
+  height: 65vh;
+}
+
 .navigation {
   margin-bottom: 2rem;
 }
@@ -48,6 +52,10 @@ body {
 /* -----------------------------------------------------------------------------
   HIGHSCORE LIST
 ------------------------------------------------------------------------------*/
+
+.highscoreContainer {
+  margin-top: 5%;
+}
 
 .highscore__list {
   max-width: 350px;

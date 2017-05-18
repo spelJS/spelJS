@@ -6,7 +6,7 @@ const footer = require('./partials/footer');
 module.exports = function loginView() {
   return `
     ${header()}
-    <div class="flexbox startpage">
+    <div class="flexbox">
       ${logo()}
         <h1 class="headline headline--glow">Laika's Space<br>Adventure</h1>
         <div class="login">

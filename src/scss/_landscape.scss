@@ -33,9 +33,18 @@
   left: 4%;
   position: absolute;
   text-align: left;
+  top: 4%;
   width: auto;
 }
 
 .gameContainer {
   height: 75vh;
+}
+
+/* -----------------------------------------------------------------------------
+  HIGHSCORE LIST
+------------------------------------------------------------------------------*/
+
+.highscoreContainer {
+  bottom: 0;
 }

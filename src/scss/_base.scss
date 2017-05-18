@@ -37,21 +37,13 @@ body {
   width: 100vw;
 }
 
-.flexbox, .content.highscore {
+.flexbox {
   align-items: center;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: flex-start;
-  width: 100vw;
-}
-
-.startpage {
   justify-content: center;
-}
-
-.mainpage, .content.highscore {
-  padding-top: 4%;
+  width: 100vw;
 }
 
 /* -----------------------------------------------------------------------------
@@ -192,11 +184,12 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .user-info {
-  border: 1px solid yellow;
   align-items: flex-start;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+  top: 4%;
   width: 90vw;
   z-index: 5;
 
@@ -250,7 +243,6 @@ a:not(.loginButton) {
 }
 
 .gameContainer {
-  border: 1px solid yellow;
   height: 45vh;
   margin-top: 0;
   overflow: hidden; // Prevents calculations when monsters are out of view
@@ -259,7 +251,7 @@ a:not(.loginButton) {
 }
 
 .gameInfo {
-  border: 1px solid hotpink;
+  position: relative;
   text-align: right;
   width: 90vw;
   z-index: 4;
@@ -275,7 +267,6 @@ a:not(.loginButton) {
 
   .gameInstructions {
     margin-bottom: 0;
-    border: 1px solid hotpink;
   }
 }
 
@@ -378,14 +369,14 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .highscoreContainer {
-  border: 1px solid yellow;
-  margin: 0 auto;
-  width: 90vw;
+  margin-top: 15%;
+  position: relative;
+  width: 100vw;
 }
 
 .highscore__list {
   max-width: 250px;
-  margin: 0 auto;
+  margin: 0.2em auto;
   padding: 0;
   text-align: left;
   width: 60vw;
@@ -427,7 +418,6 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .navigation {
-  border: 1px solid blue;
   text-align: center;
   width: 100vw;
   z-index: 4;
