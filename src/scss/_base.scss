@@ -262,12 +262,22 @@ a:not(.loginButton) {
 
   p {
     margin-top: 0;
-
   }
 
-  .gameInstructions {
-    margin-bottom: 0;
-  }
+}
+
+.instructions {
+  box-sizing: border-box;
+  text-shadow: $glow;
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  top: 30%;
+  z-index: 3;
+}
+
+.instructions::after {
+  content: "Touch Screen to Jump";
 }
 
 /* -----------------------------------------------------------------------------
