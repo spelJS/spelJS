@@ -79,8 +79,11 @@ a:not(.loginButton) {
   margin: 0.2em;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: $glow;
   z-index: 4;
+}
+
+.headline:not(.rotateInstructions) {
+  text-shadow: $glow;
 }
 
 /* -----------------------------------------------------------------------------
