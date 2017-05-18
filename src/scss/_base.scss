@@ -266,15 +266,19 @@ a:not(.loginButton) {
 
 }
 
+/* -----------------------------------------------------------------------------
+  GAME INSTRUCTIONS
+------------------------------------------------------------------------------*/
+
 .instructions {
   box-sizing: border-box;
   text-shadow: $glow;
   margin: 0 auto;
   width: 100%;
   position: absolute;
-  top: 30%;
+  top: 43%;
   left: 0;
-  padding: 0 1rem;
+  padding: 0 3rem;
 }
 
 .instructions::after {

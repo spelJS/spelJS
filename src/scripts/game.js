@@ -70,18 +70,16 @@ export default function initGame(gameContainer, user) {
 ------------------------------------------------------------------------------*/
 
   /**
-   * Handle rotate instructions
-   */
-  function showAndHide() {
-    setTimeout(() => rotateIconContainer.classList.add('fadeOut'), 4000);
-  }
-
-  /**
    * Game instructions are removed once user has pressed game keys
    */
   function removeInstructions() {
-    if (!gameInstructions.classList.contains('fadeOut')) {
-      gameInstructions.classList.add('fadeOut');
+    if (gameInstructions) {
+      if (!gameInstructions.classList.contains('fadeOut')) {
+        gameInstructions.classList.add('fadeOut');
+        addEventListener('animationend', () => {
+          gameInstructions.remove();
+        });
+      }
     }
   }
 
@@ -255,7 +253,6 @@ export default function initGame(gameContainer, user) {
   function start() {
     respawn();
     onframe();
-    showAndHide();
   }
 
   start();

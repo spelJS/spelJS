@@ -66,6 +66,10 @@ body {
   }
 }
 
+.instructions {
+  top: 30%;
+}
+
 .instructions::after {
   content: "Use Space or Arrow Up to jump";
 }
