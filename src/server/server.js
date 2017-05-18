@@ -11,7 +11,7 @@ const clientID = process.env.clientID;
 const clientSecret = process.env.clientSecret;
 const callbackURL = process.env.callbackURL;
 
-// The functions for handling user database.
+// The functions for handling user database
 const {
   getUserById,
   addUser,
