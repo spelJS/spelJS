@@ -1,6 +1,7 @@
 import initGame from './game';
 import highScoreContainer from '../server/views/partials/highscore';
 import gameContainer from '../server/views/partials/game-container';
+import { removeInstructions } from './functions';
 
 export default function router(container, data, game) {
   const playGame = document.querySelector('.play-js');
@@ -24,6 +25,7 @@ export default function router(container, data, game) {
 
       viewHighscore.addEventListener('click', (e) => {
         currentGame.stop();
+        removeInstructions();
         e.preventDefault();
         history.pushState(null, null, '/highscore');
 

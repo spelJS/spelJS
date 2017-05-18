@@ -1,11 +1,9 @@
 import { sendScore } from './socket';
-import { debounce } from './functions';
+import { debounce, removeInstructions } from './functions';
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
     scoreSpan = document.querySelector('.scoreSpan-js'),
-    gameInstructions = document.querySelector('.gameInstructions-js'),
-    rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
     monsterClasses = ['one', 'two', 'three'], // Monster position and class
     jumpPower = 9,
     gravity = 0.25;
@@ -68,20 +66,6 @@ export default function initGame(gameContainer, user) {
 /* -----------------------------------------------------------------------------
   GENERAL GAME FUNCTIONS
 ------------------------------------------------------------------------------*/
-
-  /**
-   * Game instructions are removed once user has pressed game keys
-   */
-  function removeInstructions() {
-    if (gameInstructions) {
-      if (!gameInstructions.classList.contains('fadeOut')) {
-        gameInstructions.classList.add('fadeOut');
-        addEventListener('animationend', () => {
-          gameInstructions.remove();
-        });
-      }
-    }
-  }
 
   /**
    * Update container with new information about score
