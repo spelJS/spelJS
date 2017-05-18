@@ -131,7 +131,7 @@ export default function initGame(gameContainer, user) {
 
       // Make Laika and monsters go faster when user gets more points
       monsterSpeed -= 50;
-      laikaSpeed -= 50;
+      laikaSpeed -= 25;
 
       score += 1;
       scoreSpan.innerText = score;
