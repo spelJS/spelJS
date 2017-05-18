@@ -50,12 +50,15 @@ export default function initGame(gameContainer, user) {
     height: ((width > 1024) ? 75 : 50)
   };
 
+  gameContainer.appendChild(monster.element);
+
 /* -----------------------------------------------------------------------------
   TEMPORARY VARIABLES (UPDATED FREQUENTLY)
 ------------------------------------------------------------------------------*/
 
   let isActive = true,
     isJumping = false,
+    instructionsShown = false,
     takeoff,
     spawnTime,
     monsterSpeed = 2000,
@@ -68,20 +71,6 @@ export default function initGame(gameContainer, user) {
 ------------------------------------------------------------------------------*/
 
   /**
-   * Update container with new information about score
-   * @param  {string} container The container to be updated
-   * @param  {string} content   The new content of the container
-   */
-  function updateScore(container, content) {
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-
-    const scoreInfo = document.createTextNode(content);
-    container.appendChild(scoreInfo);
-  }
-
-  /**
    * Move monster from left to right, and add a new random class to it.
    */
   function respawn() {
@@ -91,7 +80,6 @@ export default function initGame(gameContainer, user) {
     monster.type = randomType(monsterClasses);
     monster.element.classList.add(monster.type);
     monster.element.classList.add('monster');
-    gameContainer.appendChild(monster.element);
     spawnTime = Date.now();
   }
 
@@ -105,7 +93,6 @@ export default function initGame(gameContainer, user) {
 
     isJumping = true;
     takeoff = Date.now();
-    player.element.style.animation = 'none';
   }
 
   /**
@@ -117,7 +104,7 @@ export default function initGame(gameContainer, user) {
     score = 0;
     monsterSpeed = 2000; // Reset monster speed since game is starting over
     laikaSpeed = 1000;
-    updateScore(scoreSpan, score);
+    scoreSpan.innerText = score;
     respawn();
   }
 
@@ -143,19 +130,17 @@ export default function initGame(gameContainer, user) {
     if (monsterLifeSpan >= 1) {
       respawn();
 
-      // Make monster go randomly faster
-      monsterSpeed -= (Math.floor(Math.random() * 250) + 10);
-
-      // Make Laika jump faster when game increases speed.
-      laikaSpeed -= 100;
+      // Make Laika and monsters go faster when user gets more points
+      monsterSpeed -= 50;
+      laikaSpeed -= 50;
 
       score += 1;
-      updateScore(scoreSpan, score);
+      scoreSpan.innerText = score;
 
       // Display new High Score
       if (score > highest) {
         highest = score;
-        updateScore(highSpan, highest);
+        highSpan.innerText = highest;
         sendScore(user, highest); // Notify server about new highscore
       }
     } else {
@@ -182,7 +167,6 @@ export default function initGame(gameContainer, user) {
         isJumping = false;
         player.y = 0;
         player.element.classList.remove('onJump');
-        player.element.style.animation = '';
       } else {
         player.y = offset * -1;
       }
@@ -203,8 +187,16 @@ export default function initGame(gameContainer, user) {
     }
     if ((e.keyCode === 32 || e.keyCode === 38)) {
       e.preventDefault();
-      jump();
-      removeInstructions();
+
+      // Only trigger jump when not jumping
+      if (!isJumping) {
+        jump();
+      }
+
+      if (!instructionsShown) {
+        removeInstructions();
+        instructionsShown = true;
+      }
     }
   });
 
@@ -213,8 +205,12 @@ export default function initGame(gameContainer, user) {
     if (!isActive) {
       return;
     }
-    jump();
-    removeInstructions();
+    if (!isJumping) { jump(); }
+
+    if (!instructionsShown) {
+      removeInstructions();
+      instructionsShown = true;
+    }
   });
 
   /** Returns a function that will get the current width and height of the game container.
@@ -245,7 +241,7 @@ export default function initGame(gameContainer, user) {
     stop() {
       isActive = false;
       score = 0;
-      updateScore(scoreSpan, score);
+      scoreSpan.innerText = score;
     }
   };
 }

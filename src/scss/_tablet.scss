@@ -19,12 +19,15 @@ body {
 ------------------------------------------------------------------------------*/
 
 .player {
+  bottom: 0;
   width: 175px;
 }
 
 .monster {
+  bottom: 0;
   height: 75px;
   width: 75px;
+
   &.two {
     background-position: 0px -75px;
   }
@@ -42,7 +45,7 @@ body {
 }
 
 .gameContainer {
-  height: 65vh;
+  height: 70vh;
 }
 
 .navigation {
@@ -54,7 +57,7 @@ body {
 ------------------------------------------------------------------------------*/
 
 .highscoreContainer {
-  margin-top: 5%;
+  top: 10%;
 }
 
 .highscore__list {

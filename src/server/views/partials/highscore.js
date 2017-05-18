@@ -7,7 +7,7 @@ module.exports = function highscore(highscore) {
 
   return `
   <div class="highscoreContainer highscoreContainer-js">
-    <h2 class="headline">All Time High</h2>
+    <h2 class="headline glow">All Time High</h2>
     <ol class="highscore__list">
       ${highscore.map(score => `
         <li class="highscore__list-item">
