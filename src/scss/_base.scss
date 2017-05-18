@@ -242,11 +242,12 @@ a:not(.loginButton) {
 }
 
 .gameContainer {
-  height: 45vh;
-  margin-top: 0;
+  height: 55vh;
   overflow: hidden; // Prevents calculations when monsters are out of view
-  position: relative;
-  width: 98vw;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100vw;
 }
 
 .gameInfo {
@@ -382,8 +383,12 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .highscoreContainer {
+  height: 55vh;
   margin-top: 15%;
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100vw;
 }
 
 .highscore__list {
