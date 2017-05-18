@@ -371,38 +371,19 @@ a:not(.loginButton) {
 .highscoreContainer {
   margin-top: 15%;
   position: relative;
-  width: 100vw;
 }
 
 .highscore__list {
-  max-width: 250px;
+  list-style: none;
   margin: 0.2em auto;
   padding: 0;
-  text-align: left;
-  width: 60vw;
+  text-align: center;
+  width: 100%;
 
   .highscore__list-item {
-    font-size: 3.5rem;
-    line-height: 0.7;
-
-    &:first-of-type {
-      list-style-image: url(img/first-place.svg);
-    }
-
-    &:nth-last-child(2) {
-      list-style-image: url(img/second-place.svg);
-    }
-
-    &:last-child {
-      list-style-image: url(img/third-place.svg);
-    }
-  }
-
-  .highscore__list-item .list-content {
-    bottom: 9px;
     font-size: 1.1rem;
-    left: 5px;
-    position: relative;
+    line-height: 0.7;
+    margin: 1% auto;
   }
 
   .points {

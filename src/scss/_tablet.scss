@@ -58,19 +58,10 @@ body {
 }
 
 .highscore__list {
-  max-width: 350px;
-
   .highscore__list-item {
-    font-size: 5rem;
+    font-size: 1.6rem;
   }
-
-  .highscore__list-item .list-content {
-    bottom: 13px;
-    font-size: 1.5rem;
-    left: 10px;
-  }
-
   .points {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 }
