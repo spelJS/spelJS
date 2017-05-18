@@ -139,21 +139,22 @@ exports.getFriendsScore = function (currentUser) {
 
         // Loop through database to see who are friends with current user
         for (const user of users) {
-          const userFriends = user.friends;
-
           // If friends, push their name and highscore to friendsScore.
-          if (Array.isArray(userFriends)) {
-            for (const friend of userFriends) {
+          if (Array.isArray(user.friends)) {
+            for (const friend of user.friends) {
               if (friend.id === currentUser.id) {
-                friendsScore.push({
-                  name: user.name,
-                  highscore: user.highscore
-                });
+                // Make sure friend is not already on list
+                if (!friendsScore.find(item => item.id === user.id)) {
+                  friendsScore.push({
+                    name: user.name,
+                    id: user.id,
+                    highscore: user.highscore
+                  });
+                }
               }
             }
           }
         }
-
         const sortedScore = friendsScore.sort(sortHighscore);
         const top3 = sortedScore.filter((obj, index) => (index < 3));
 
