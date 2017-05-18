@@ -26,3 +26,19 @@ export function debounce(fn, time = 200) {
     }, time);
   };
 }
+
+/**
+ * Game instructions are removed once user has pressed game keys
+ */
+export function removeInstructions() {
+  const gameInstructions = document.querySelector('.gameInstructions-js');
+
+  if (gameInstructions) {
+    if (!gameInstructions.classList.contains('fadeOut')) {
+      gameInstructions.classList.add('fadeOut');
+      addEventListener('animationend', () => {
+        gameInstructions.remove();
+      });
+    }
+  }
+}
