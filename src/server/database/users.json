@@ -1,5 +1,57 @@
 [
   {
+    "id": "10155252009391549",
+    "name": "Tuukka Teriö",
+    "photo": "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/13557863_10154173523141224_483851345872887807_n.jpg?oh=c3a79b9ab90fcdbb369c4056b377b6a2&oe=59A8BEA6",
+    "highscore": 1,
+    "friends": [
+      {
+        "name": "Jessica Niemi",
+        "id": "10155154240871977"
+      },
+      {
+        "name": "Carl Törnqvist",
+        "id": "10155252009391549"
+      },
+      {
+        "name": "Alexandra Sommar",
+        "id": "10154600342602006"
+      },
+      {
+        "name": "Katarina Ljungdahl",
+        "id": "10155074836146224"
+      }
+    ]
+  },
+  {
+    "id": "10154680044295847",
+    "name": "Alice Langerth",
+    "photo": "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/13557863_10154173523141224_483851345872887807_n.jpg?oh=c3a79b9ab90fcdbb369c4056b377b6a2&oe=59A8BEA6",
+    "highscore": 15,
+    "friends": [
+      {
+        "name": "Jessica Niemi",
+        "id": "10155154240871977"
+      },
+      {
+        "name": "Carl Törnqvist",
+        "id": "10155252009391549"
+      },
+      {
+        "name": "Alexandra Sommar",
+        "id": "10154600342602006"
+      },
+      {
+        "name": "Tuukka Teriö",
+        "id": "1724164587600591"
+      },
+      {
+        "name": "Katarina Ljungdahl",
+        "id": "10155074836146224"
+      }
+    ]
+  },
+  {
     "id": "10155074836146224",
     "name": "Katarina Ljungdahl",
     "photo": "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/13557863_10154173523141224_483851345872887807_n.jpg?oh=c3a79b9ab90fcdbb369c4056b377b6a2&oe=59A8BEA6",

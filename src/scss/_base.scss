@@ -79,11 +79,8 @@ a:not(.loginButton) {
   margin: 0.2em;
   text-align: center;
   text-transform: uppercase;
-  z-index: 4;
-}
-
-.headline--glow {
   text-shadow: $glow;
+  z-index: 4;
 }
 
 /* -----------------------------------------------------------------------------
@@ -272,7 +269,6 @@ a:not(.loginButton) {
 
 .instructions {
   box-sizing: border-box;
-  text-shadow: $glow;
   margin: 0 auto;
   width: 100%;
   position: absolute;
@@ -397,8 +393,7 @@ a:not(.loginButton) {
 
   .highscore__list-item {
     font-size: 1.1rem;
-    line-height: 0.7;
-    margin: 1% auto;
+    line-height: 1.2;
   }
 
   .points {
