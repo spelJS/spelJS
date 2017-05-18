@@ -1,5 +1,5 @@
 import { sendScore } from './socket';
-import { debounce, removeInstructions } from './functions';
+import { debounce, removeInstructions, vh, vw } from './functions';
 
 export default function initGame(gameContainer, user) {
   const highSpan = document.querySelector('.highSpan-js'),
@@ -8,8 +8,8 @@ export default function initGame(gameContainer, user) {
     jumpPower = 9,
     gravity = 0.25;
 
-  // Width of Game Plan
-  let width = gameContainer.getBoundingClientRect().width;
+  let width = gameContainer.getBoundingClientRect().width,
+    isActive = true;
 
 /* -----------------------------------------------------------------------------
   PLAYER
@@ -56,8 +56,7 @@ export default function initGame(gameContainer, user) {
   TEMPORARY VARIABLES (UPDATED FREQUENTLY)
 ------------------------------------------------------------------------------*/
 
-  let isActive = true,
-    isJumping = false,
+  let isJumping = false,
     instructionsShown = false,
     takeoff,
     spawnTime,
@@ -213,6 +212,24 @@ export default function initGame(gameContainer, user) {
     }
   });
 
+  /**
+   * Place monster and hide instructions once game is started
+   */
+  function start() {
+    isActive = true;
+    respawn();
+    onframe();
+  }
+
+  /**
+   * Once called, game and score counting stops
+   */
+  function stop() {
+    isActive = false;
+    score = 0;
+    scoreSpan.innerText = score;
+  }
+
   /** Returns a function that will get the current width and height of the game container.
    * The function will not be triggered as long as it continues to be invoked.
    * The function will be called after it stops being called for
@@ -220,6 +237,14 @@ export default function initGame(gameContainer, user) {
    */
   window.addEventListener('resize', debounce(() => {
     width = gameContainer.getBoundingClientRect().width;
+
+    // Only start game if landscape mode
+    if ((vw() / vh()) > 1) {
+      start();
+    } else {
+      stop();
+    }
+
     player.x = (width * 0.80) * -1;
   }, 250));
 
@@ -227,21 +252,10 @@ export default function initGame(gameContainer, user) {
   START AND RETURN
 ------------------------------------------------------------------------------*/
 
-  /**
-   * Place monster and hide instructions once game is started
-   */
-  function start() {
-    respawn();
-    onframe();
+  // Only start game if landscape mode
+  if ((vw() / vh()) > 1) {
+    start();
   }
 
-  start();
-
-  return {
-    stop() {
-      isActive = false;
-      score = 0;
-      scoreSpan.innerText = score;
-    }
-  };
+  return { stop };
 }

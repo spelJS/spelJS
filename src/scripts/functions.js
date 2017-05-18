@@ -42,3 +42,19 @@ export function removeInstructions() {
     }
   }
 }
+
+/**
+ * Get viewport width
+ * @return {Number}
+ */
+export function vw() {
+  return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+}
+
+/**
+ * Get viewport height
+ * @return {Number}
+ */
+export function vh() {
+  return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+};
