@@ -18,6 +18,14 @@ body {
   MAIN PAGE
 ------------------------------------------------------------------------------*/
 
+.instructions {
+  top: 30%;
+}
+
+.instructions::after {
+  content: "Use Space or Arrow Up to jump";
+}
+
 .player {
   bottom: 0;
   width: 175px;
@@ -39,8 +47,8 @@ body {
 
 .user-info {
   .photo__container {
-    width: 80px;
     height: 80px;
+    width: 80px;
   }
 }
 
@@ -67,12 +75,4 @@ body {
   .points {
     font-size: 2.2rem;
   }
-}
-
-.instructions {
-  top: 30%;
-}
-
-.instructions::after {
-  content: "Use Space or Arrow Up to jump";
 }

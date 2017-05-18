@@ -269,12 +269,12 @@ a:not(.loginButton) {
 
 .instructions {
   box-sizing: border-box;
+  left: 0;
   margin: 0 auto;
-  width: 100%;
+  padding: 0 3rem;
   position: absolute;
   top: 43%;
-  left: 0;
-  padding: 0 3rem;
+  width: 100%;
 }
 
 .instructions::after {
@@ -289,11 +289,11 @@ a:not(.loginButton) {
   bottom: 3rem;
   display: block;
   height: auto;
+  opacity: 0;
   position: absolute;
   right: 0;
-  opacity: 0;
-  width: 100px;
   transition: opacity 450ms ease;
+  width: 100px;
 
   .laika {
     height: auto;
@@ -413,11 +413,11 @@ a:not(.loginButton) {
 ------------------------------------------------------------------------------*/
 
 .navigation {
-  text-align: center;
-  width: 100vw;
-  z-index: 4;
   bottom: 0;
   position: absolute;
+  text-align: center;
+  z-index: 4;
+  width: 100vw;
 
   .navigation__list {
     list-style-type: none;
