@@ -8,16 +8,18 @@ const footer = require('./partials/footer');
 module.exports = function mainView(state) {
   return `
     ${header()}
-    ${userInfo(state.user)}
-      <div class="spacedust"></div>
-      <div class="rotateIconContainer rotateIconContainer-js">
-        ${rotateIcon()}
-        <p class="rotateInstructions">Rotate</p>
-      </div>
-      <div class="content content-js">
-        ${gameContainer(state.user.highscore)}
-      </div>
-    ${navigation()}
+    <div class="spacedust"></div>
+    <div class="rotateIconContainer rotateIconContainer-js">
+      ${rotateIcon()}
+      <p class="rotateInstructions">Rotate</p>
+    </div>
+    <div class="flexbox mainpage">
+      ${userInfo(state.user)}
+        <div class="content content-js">
+          ${gameContainer(state.user.highscore)}
+        </div>
+      ${navigation()}
+    </div>
     ${footer()}
   `;
 };
