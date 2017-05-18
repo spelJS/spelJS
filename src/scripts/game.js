@@ -104,8 +104,8 @@ export default function initGame(gameContainer, user) {
     }
 
     isJumping = true;
-    player.element.style.animation = 'none';
     takeoff = Date.now();
+    player.element.style.animation = 'none';
   }
 
   /**

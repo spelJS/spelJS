@@ -7,9 +7,11 @@ const scoreView = require('./views/score');
 const loginView = require('./views/login');
 
 // Secret variables stored on Heroku
-const clientID = process.env.clientID;
-const clientSecret = process.env.clientSecret;
-const callbackURL = process.env.callbackURL;
+// const clientID = process.env.clientID;
+// const clientSecret = process.env.clientSecret;
+// const callbackURL = process.env.callbackURL;
+
+const { clientID, clientSecret, callbackURL } = require('./credentials');
 
 // The functions for handling user database.
 const {
