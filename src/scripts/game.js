@@ -70,12 +70,10 @@ export default function initGame(gameContainer, user) {
 ------------------------------------------------------------------------------*/
 
   /**
-   * Displays spacedust and fades out the game instructions when the game is started
+   * Handle rotate instructions
    */
   function showAndHide() {
-    if (rotateIconContainer) {
-      rotateIconContainer.classList.add('fadeOut');
-    }
+    setTimeout(() => rotateIconContainer.classList.add('fadeOut'), 4000);
   }
 
   /**
