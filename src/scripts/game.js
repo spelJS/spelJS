@@ -73,8 +73,18 @@ export default function initGame(gameContainer, user) {
    * Displays spacedust and fades out the game instructions when the game is started
    */
   function showAndHide() {
-    gameInstructions.classList.add('fadeOut');
-    rotateIconContainer.classList.add('fadeOut');
+    if (rotateIconContainer) {
+      rotateIconContainer.classList.add('fadeOut');
+    }
+  }
+
+  /**
+   * Game instructions are removed once user has pressed game keys
+   */
+  function removeInstructions() {
+    if (!gameInstructions.classList.contains('fadeOut')) {
+      gameInstructions.classList.add('fadeOut');
+    }
   }
 
   /**
@@ -214,6 +224,7 @@ export default function initGame(gameContainer, user) {
     if ((e.keyCode === 32 || e.keyCode === 38)) {
       e.preventDefault();
       jump();
+      removeInstructions();
     }
   });
 
@@ -223,6 +234,7 @@ export default function initGame(gameContainer, user) {
       return;
     }
     jump();
+    removeInstructions();
   });
 
   /** Returns a function that will get the current width and height of the game container.
