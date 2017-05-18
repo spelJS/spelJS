@@ -8,7 +8,7 @@ export default function initGame(gameContainer, user) {
     rotateIconContainer = document.querySelector('.rotateIconContainer-js'),
     monsterClasses = ['one', 'two', 'three'], // Monster position and class
     jumpPower = 9,
-    gravity = 0.275;
+    gravity = 0.25;
 
   // Width of Game Plan
   let width = gameContainer.getBoundingClientRect().width;
@@ -61,6 +61,7 @@ export default function initGame(gameContainer, user) {
     takeoff,
     spawnTime,
     monsterSpeed = 2000,
+    laikaSpeed = 1000,
     score = 0,
     highest = user.highscore;
 
@@ -125,6 +126,7 @@ export default function initGame(gameContainer, user) {
     setTimeout(() => player.element.classList.remove('damage'), 500);
     score = 0;
     monsterSpeed = 2000; // Reset monster speed since game is starting over
+    laikaSpeed = 1000;
     updateScore(scoreSpan, score);
     respawn();
   }
@@ -154,6 +156,9 @@ export default function initGame(gameContainer, user) {
       // Make monster go randomly faster
       monsterSpeed -= (Math.floor(Math.random() * 250) + 10);
 
+      // Make Laika jump faster when game increases speed.
+      laikaSpeed -= 100;
+
       score += 1;
       updateScore(scoreSpan, score);
 
@@ -176,15 +181,16 @@ export default function initGame(gameContainer, user) {
       }
     }
 
-    // Move player and and nice 'jump effect' when player jumps
+    // Move player and add nice 'jump effect' when player jumps
     if (isJumping) {
-      const airtime = 60 * ((Date.now() - takeoff) / 1000);
-      const offset = Math.floor((airtime * jumpPower) - (0.5 * Math.pow(airtime, 2) * gravity));
+      const airtime = 60 * ((Date.now() - takeoff) / laikaSpeed),
+        offset = Math.floor((airtime * jumpPower) - (0.5 * (airtime * airtime) * gravity));
+
       player.element.classList.add('onJump');
 
       if (offset <= 0) {
-        player.y = 0;
         isJumping = false;
+        player.y = 0;
         player.element.classList.remove('onJump');
         player.element.style.animation = '';
       } else {
