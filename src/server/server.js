@@ -15,10 +15,10 @@ const { clientID, clientSecret, callbackURL } = require('./credentials');
 
 // The functions for handling user database
 const {
-  getUserById,
   addUser,
-  updateUserHighScore,
-  getFriendsScore
+  getUserById,
+  getFriendsScore,
+  updateUserHighScore
 } = require('./database/handle-users');
 
 // Set up an instance of express
@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
   // When recieving information about new high score, update database
   socket.on('on-highscore', function (data) {
     updateUserHighScore(data).then(() => {
-      // Sent to everyone BUT sender
+      // Send message about new highscore to everyone BUT sender
       socket.broadcast.emit('new-highscore', data);
     });
   });
@@ -61,14 +61,12 @@ app.use(session({
 /**
  * In order to restore authentication state across HTTP requests,
  * Passport needs to serialize users into and deserialize users out of the session.
- * Explaination: https://github.com/passport/express-4.x-facebook-example/blob/master/server.js
  */
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => getUserById(id).then(user => done(null, user), done));
 
 /**
- * Configure a new Facebook strategy. clientID, clientSecret and callbackURL
- * are all found in credentials.js.
+ * Configure a new Facebook strategy.
  */
 passport.use(new FacebookStrategy({
   clientID,
@@ -84,8 +82,6 @@ passport.use(new FacebookStrategy({
           .then(user => done(null, user))
           .catch(error => done(error));
       } else {
-        // TODO: Update user information
-        // (check if profile pic needs to be updated)
         done(null, result);
       }
     })
@@ -102,10 +98,10 @@ app.use(passport.session());
   REDIRECTS HANDLED BY EXPRESS
 ------------------------------------------------------------------------------*/
 
-// When visiting '/login', user is redirected to Facebook
+// Let Facebook handle login procedure
 app.get('/login', passport.authenticate('facebook', { scope: 'user_friends' }));
 
-// If authentication is successful, user is redirected home.
+// On successful authentication, send user to game
 app.get('/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
@@ -119,10 +115,10 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-// Use folder 'build' for static files.
+// Use folder 'build' for static files
 app.use(express.static('build'));
 
-// Used for getting information about user when logging in.
+// Get information about user when logging in
 app.get('/getuser', (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
@@ -131,7 +127,7 @@ app.get('/getuser', (req, res) => {
   }
 });
 
-// Used for getting information about highscore.
+// Get information about highscore
 app.get('/getscore', (req, res) => {
   if (req.isAuthenticated()) {
     getFriendsScore(req.user)

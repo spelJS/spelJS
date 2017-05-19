@@ -7,14 +7,14 @@ const footer = require('./partials/footer');
 module.exports = function scoreView(state) {
   return `
     ${header()}
-    <div class="spacedust"></div>
-    <div class="flexbox">
-      ${userInfo(state.user)}
-        <div class="content content-js">
-          ${highscore(state.highscore)}
-        </div>
-      ${navigation()}
-    </div>
+      <div class="spacedust"></div>
+      <div class="flexbox">
+        ${userInfo(state.user)}
+          <div class="content content-js">
+            ${highscore(state.highscore)}
+          </div>
+        ${navigation()}
+      </div>
     ${footer()}
   `;
 };
