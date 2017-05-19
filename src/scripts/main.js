@@ -1,12 +1,12 @@
 import { updateURL } from './functions';
-import router from './router';
 import initGame from './game';
+import router from './router';
 
-const dynamicContainer = document.querySelector('.content-js');
-const gameContainer = document.querySelector('.gameContainer-js');
-const scoreContainer = document.querySelector('.highscoreContainer-js');
+const gameContainer = document.querySelector('.gameContainer-js'),
+  dynamicContainer = document.querySelector('.content-js'),
+  scoreContainer = document.querySelector('.highscoreContainer-js');
 
-// Updated URL and initialize game when user is logged in
+// Updates URL and initialize game when user logs in
 if (gameContainer) {
   updateURL(window.location.href);
   fetch('/getuser', { credentials: 'include', headers: { accept: 'application/json' } })
@@ -18,6 +18,7 @@ if (gameContainer) {
     .catch(err => console.error(err));
 }
 
+// Fetch highscores from database when user is visiting highscore page
 if (scoreContainer) {
   fetch('/getscore', { credentials: 'include', headers: { accept: 'application/json' } })
   .then(body => body.json())

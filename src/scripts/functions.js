@@ -1,14 +1,12 @@
 /**
- * Remove weird URL ending added by Facebook.
- * @param  {string} hash The current URL.
+ * Removes weird URL ending added by Facebook.
+ * @param  {string} href  The current URL.
  */
-// TODO: Before publishing, this needs to be updated!
 export function updateURL(href) {
   if (href === 'https://laikas-space-adventure.herokuapp.com/play#_=_') {
     history.pushState(null, null, '/play');
   }
 }
-
 
 /**
 * Ensures that given function only executes once during a given interval.
@@ -28,7 +26,7 @@ export function debounce(fn, time = 200) {
 }
 
 /**
- * Game instructions are removed once user has pressed game keys
+ * Removes game instructions once user has pressed game keys
  */
 export function removeInstructions() {
   const gameInstructions = document.querySelector('.gameInstructions-js');
@@ -57,4 +55,4 @@ export function vw() {
  */
 export function vh() {
   return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-};
+}
