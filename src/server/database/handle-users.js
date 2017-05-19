@@ -33,9 +33,9 @@ exports.addUser = function addUser(profile) {
       if (error) {
         reject(error);
       } else {
+        const friendsId = [];
         const users = JSON.parse(data); // Save users in variable
         const userFriendList = profile._json.friends.data;
-        const friendsId = [];
 
         // Push all the user's friends Facebook Id's to an array
         if (Array.isArray(userFriendList)) {
@@ -53,7 +53,10 @@ exports.addUser = function addUser(profile) {
           }
         }
 
-        // Create the user based on information from Facebook
+        /*
+         * Create the new user
+         * based on information from Facebook
+         */
         const user = {
           id: profile.id,
           name: profile.displayName,
@@ -62,7 +65,7 @@ exports.addUser = function addUser(profile) {
           friends: profile._json.friends.data || []
         };
 
-        users.push(user); // Push user to list of users
+        users.push(user); // Push new user to list of users
         const json = JSON.stringify(users, null, 2); // Convert list to json
 
         // Update database
@@ -76,6 +79,7 @@ exports.addUser = function addUser(profile) {
 
 /**
  * Takes information about user and high score and then updates database.
+ *
  * @param  {object} data Information about current user and highscore
  * @return {object} user The that just was updated.
  */
@@ -100,8 +104,9 @@ exports.updateUserHighScore = function (data) {
 };
 
 /**
- * Takes two arguments from highscore list and compare them. Returns listed
- * sorted, sorted on highest to lowest.
+ * Takes two arguments from a list and compare them.
+ * Returns the list sorted on highest to lowest.
+ *
  * @param  {object} a One of the user's friends, with info about highscore.
  * @param  {object} b Another one of the user's friends, with info about highscore.
  * @return {array}    A list, sorted on highest to lowest.
@@ -132,6 +137,7 @@ exports.getFriendsScore = function (currentUser) {
         reject(error);
       } else {
         const users = JSON.parse(dataBase);
+
         const friendsScore = [{
           name: currentUser.name,
           highscore: currentUser.highscore
