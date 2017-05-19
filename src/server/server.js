@@ -7,11 +7,9 @@ const scoreView = require('./views/score');
 const loginView = require('./views/login');
 
 // Secret variables stored on Heroku
-// const clientID = process.env.clientID;
-// const clientSecret = process.env.clientSecret;
-// const callbackURL = process.env.callbackURL;
-
-const { clientID, clientSecret, callbackURL } = require('./credentials');
+const clientID = process.env.clientID;
+const clientSecret = process.env.clientSecret;
+const callbackURL = process.env.callbackURL;
 
 // The functions for handling user database
 const {
@@ -49,7 +47,7 @@ io.on('connection', (socket) => {
 ------------------------------------------------------------------------------*/
 
 app.use(session({
-  secret: 'cool dino friend',
+  secret: process.env.sessionSecret,
   resave: false,
   saveUninitialized: false
 }));
@@ -164,7 +162,7 @@ app.get('*', (req, res) => {
   if (req.isAuthenticated()) {
     const state = {
       user: req.user
-    }
+    };
     res.send(mainView(state));
   } else {
     res.send(loginView());
